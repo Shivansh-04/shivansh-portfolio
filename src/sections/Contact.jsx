@@ -330,7 +330,7 @@ export default function Contact() {
           DESIGNED & BUILT BY SHIVANSH · 2026
         </span>
         <span className="font-manga text-white opacity-30" style={{ fontSize: 10, letterSpacing: '0.2em' }}>
-          RKGIT · GHAZIABAD
+          SHIVANSH · WORLD
         </span>
       </div>
     </div>
