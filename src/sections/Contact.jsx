@@ -4,11 +4,11 @@ import { Mail, CheckCircle, Loader, Link } from 'lucide-react'
 import { SiGithub, SiLeetcode, SiCodechef } from 'react-icons/si'
 
 const SOCIAL_LINKS = [
-  { Icon: SiGithub, href: 'https://github.com/shivansh', label: 'GitHub' },
-  { Icon: Link, href: 'https://linkedin.com/in/shivansh', label: 'LinkedIn' },
-  { Icon: Mail, href: 'mailto:shivansh@email.com', label: 'Email' },
+  { Icon: SiGithub, href: 'https://github.com/Shivansh-04', label: 'GitHub' },
+  { Icon: Link, href: 'https://www.linkedin.com/in/gupta-shivansh/', label: 'LinkedIn' },
+  { Icon: Mail, href: 'mailto:shivanshgupta0987@gmail.com', label: 'Email' },
   { Icon: SiLeetcode, href: 'https://leetcode.com/shivansh', label: 'LeetCode' },
-  { Icon: SiCodechef, href: 'https://codechef.com/users/shivansh', label: 'CodeChef' },
+  { Icon: SiCodechef, href: 'https://www.codechef.com/users/its_dev_04', label: 'CodeChef' },
 ]
 
 function FloatingLabelInput({ label, type = 'text', multiline = false, value, onChange }) {
