@@ -427,7 +427,7 @@ export default function Hero() {
               VIEW WORK
             </button>
             <a
-              href="./Shivansh-Resume.pdf"
+              href="./Shivansh_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="font-manga w-full py-3 text-[#0d0d0f] text-center transition-all duration-150 active:scale-95 block"

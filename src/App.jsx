@@ -16,7 +16,7 @@ export default function App() {
       <div id="scroll-progress" />
       <CustomCursor />
       <ScrollProgress />
-      <Navbar />
+      {/* <Navbar /> */}
 
       <AnimatePresence>
         <main>
