@@ -16,9 +16,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      setVisible(window.scrollY > window.innerHeight * 0.8)
-
-      // Active section detection
+      setVisible(window.scrollY > window.innerHeight * 0.6)
       const sections = NAV_LINKS.map(l => l.href.replace('#', ''))
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i])
@@ -46,35 +44,55 @@ export default function Navbar() {
             initial={{ y: -60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -60, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="fixed top-0 left-0 right-0 z-[9990] flex items-center justify-between px-8 md:px-12 h-[60px]"
-            style={{ background: 'rgba(10,10,10,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+            transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="fixed top-0 left-0 right-0 z-[9990] flex items-center justify-between"
+            style={{
+              background: '#f0ebe0',
+              borderBottom: '3px solid #0d0d0f',
+              height: 52,
+            }}
           >
             {/* Logo */}
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="font-display text-white text-lg font-bold tracking-tight hover:opacity-70 transition-opacity"
+              className="font-manga text-[#0d0d0f] flex items-center h-full px-6"
+              style={{
+                fontSize: 16,
+                letterSpacing: '0.12em',
+                borderRight: '3px solid #0d0d0f',
+                cursor: 'none',
+                background: '#0d0d0f',
+                color: 'white',
+              }}
             >
               S.
             </button>
 
             {/* Desktop Links */}
-            <div className="hidden md:flex items-center gap-8">
-              {NAV_LINKS.map((link) => {
+            <div className="hidden md:flex items-center h-full flex-1">
+              {NAV_LINKS.map((link, i) => {
                 const id = link.href.replace('#', '')
                 const isActive = active === id
                 return (
                   <button
                     key={link.label}
                     onClick={() => handleNav(link.href)}
-                    className="relative text-[13px] uppercase tracking-[0.1em] transition-all duration-200 hover:tracking-[0.15em]"
-                    style={{ color: isActive ? 'white' : 'var(--muted)', fontFamily: 'Inter, sans-serif', fontWeight: 500 }}
+                    className="relative h-full flex items-center px-5 font-manga transition-all duration-150"
+                    style={{
+                      fontSize: 11,
+                      letterSpacing: '0.18em',
+                      borderRight: '1px solid rgba(13,13,15,0.1)',
+                      background: isActive ? '#0d0d0f' : 'transparent',
+                      color: isActive ? 'white' : 'rgba(13,13,15,0.5)',
+                      cursor: 'none',
+                    }}
                   >
-                    {link.label}
+                    {link.label.toUpperCase()}
                     {isActive && (
-                      <motion.span
-                        layoutId="nav-underline"
-                        className="absolute -bottom-1 left-0 right-0 h-px bg-white"
+                      <motion.div
+                        layoutId="nav-active"
+                        className="absolute bottom-0 left-0 right-0 h-0.5"
+                        style={{ background: 'white' }}
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                       />
                     )}
@@ -83,67 +101,131 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* CV Button */}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:flex btn-sweep items-center gap-2 px-4 py-2 text-[12px] uppercase tracking-[0.12em] font-medium text-white border border-white/20 rounded-sm"
-              style={{ fontFamily: 'Inter, sans-serif' }}
-            >
-              Download CV
-            </a>
+            {/* Right side — CV + chapter indicator */}
+            <div className="hidden md:flex items-center h-full">
+              {/* Current chapter indicator */}
+              <div
+                className="h-full flex items-center px-4"
+                style={{ borderLeft: '1px solid rgba(13,13,15,0.1)' }}
+              >
+                <span
+                  className="font-manga text-[#0d0d0f] opacity-25"
+                  style={{ fontSize: 10, letterSpacing: '0.2em' }}
+                >
+                  VOL.01
+                </span>
+              </div>
 
-            {/* Mobile Hamburger */}
+              {/* CV button */}
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-manga h-full flex items-center px-6 text-white transition-all duration-150"
+                style={{
+                  fontSize: 11,
+                  letterSpacing: '0.18em',
+                  borderLeft: '3px solid #0d0d0f',
+                  background: '#0d0d0f',
+                  cursor: 'none',
+                  boxShadow: 'inset -3px 0 0 rgba(255,255,255,0.05)',
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = '#1a1a1a'}
+                onMouseLeave={e => e.currentTarget.style.background = '#0d0d0f'}
+              >
+                DOWNLOAD CV
+              </a>
+            </div>
+
+            {/* Mobile hamburger */}
             <button
-              className="md:hidden flex flex-col gap-[5px] p-2"
+              className="md:hidden flex flex-col gap-[5px] p-4 h-full items-center justify-center"
+              style={{ borderLeft: '3px solid #0d0d0f', cursor: 'none' }}
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle menu"
             >
               <motion.span
                 animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                className="block w-5 h-px bg-white origin-center"
-                transition={{ duration: 0.25 }}
+                className="block w-5 h-0.5 bg-[#0d0d0f] origin-center"
+                transition={{ duration: 0.2 }}
               />
               <motion.span
                 animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="block w-5 h-px bg-white"
-                transition={{ duration: 0.25 }}
+                className="block w-5 h-0.5 bg-[#0d0d0f]"
+                transition={{ duration: 0.2 }}
               />
               <motion.span
                 animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                className="block w-5 h-px bg-white origin-center"
-                transition={{ duration: 0.25 }}
+                className="block w-5 h-0.5 bg-[#0d0d0f] origin-center"
+                transition={{ duration: 0.2 }}
               />
             </button>
           </motion.nav>
         )}
       </AnimatePresence>
 
-      {/* Mobile Full-Screen Menu */}
+      {/* Mobile full-screen menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[9989] flex flex-col items-center justify-center"
-            style={{ background: 'rgba(10,10,10,0.98)', backdropFilter: 'blur(20px)' }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[9989] flex flex-col"
+            style={{ background: '#f0ebe0', borderTop: '3px solid #0d0d0f' }}
           >
             {NAV_LINKS.map((link, i) => (
               <motion.button
                 key={link.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: i * 0.06, duration: 0.3 }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ delay: i * 0.05, duration: 0.25 }}
                 onClick={() => handleNav(link.href)}
-                className="font-display text-4xl font-bold text-white mb-6 hover:opacity-50 transition-opacity"
+                className="font-manga text-[#0d0d0f] text-left px-10 py-6 flex items-center justify-between"
+                style={{
+                  fontSize: 'clamp(28px, 5vw, 40px)',
+                  letterSpacing: '0.06em',
+                  borderBottom: '2px solid rgba(13,13,15,0.1)',
+                  cursor: 'none',
+                }}
               >
-                {link.label}
+                <span>{link.label.toUpperCase()}</span>
+                <span
+                  className="font-manga opacity-20"
+                  style={{ fontSize: 13 }}
+                >
+                  0{i + 1}
+                </span>
               </motion.button>
             ))}
+
+            {/* Mobile footer */}
+            <div
+              className="mt-auto px-10 py-6 flex items-center justify-between"
+              style={{ borderTop: '2px solid rgba(13,13,15,0.1)' }}
+            >
+              <span className="font-manga text-[#0d0d0f] opacity-25" style={{ fontSize: 10, letterSpacing: '0.2em' }}>
+                VOL.01 · SHIVANSH
+              </span>
+              <a
+                href="./Shivansh_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-manga px-4 py-2 text-white"
+                style={{
+                  fontSize: 11,
+                  letterSpacing: '0.18em',
+                  background: '#0d0d0f',
+                  border: '2px solid #0d0d0f',
+                  boxShadow: '3px 3px 0px rgba(13,13,15,0.2)',
+                  cursor: 'none',
+                }}
+              >
+                DOWNLOAD CV
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

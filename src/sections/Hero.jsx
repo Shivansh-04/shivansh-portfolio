@@ -1,264 +1,491 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
-const TAGLINES = [
-  "MERN Stack Developer building scalable apps.",
-  "DSA-focused problem solver.",
-  "Turning ideas into real-world products.",
-  "Focused on performance, logic, and clean code.",
-];
-
-const letterVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 0.4 + i * 0.05,
-      duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94],
-    },
-  }),
-};
+const PHOTO_SRC = "/hero-avatar-alt.png";
 
 export default function Hero() {
-  const [taglineIndex, setTaglineIndex] = useState(0);
-  const [taglineVisible, setTaglineVisible] = useState(true);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTaglineVisible(false);
-      setTimeout(() => {
-        setTaglineIndex((i) => (i + 1) % TAGLINES.length);
-        setTaglineVisible(true);
-      }, 400);
-    }, 2900);
-    return () => clearInterval(interval);
-  }, []);
   const { scrollY } = useScroll();
-  const glowY = useTransform(scrollY, [0, 500], ["50%", "80%"]);
-
-  const name = "Shivansh";
+  const avatarY = useTransform(scrollY, [0, 500], [0, 40]);
 
   return (
     <section
-      className="relative w-full min-h-screen flex items-center overflow-hidden"
-      style={{ background: "var(--bg)" }}
+      className="relative w-full min-h-screen paper-bg overflow-hidden"
+      style={{ borderBottom: "3px solid #0d0d0f" }}
     >
-      {/* Subtle radial gradient */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
+      {/* ── Halftone dot texture ── */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40"
         style={{
-          background: `radial-gradient(ellipse 80% 60% at 60% 50%, rgba(80,60,255,0.06) 0%, transparent 70%)`,
-          backgroundPositionY: glowY,
+          backgroundImage:
+            "radial-gradient(circle, #0d0d0f 1px, transparent 1px)",
+          backgroundSize: "16px 16px",
         }}
       />
 
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-12 md:gap-0">
-        {/* Left — Text */}
-        <div className="flex-1 flex flex-col">
-          {/* Label */}
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="section-label mb-4"
-          >
-            Full Stack Developer
-          </motion.span>
+      {/* ── Outer panel border ── */}
+      <div
+        className="absolute inset-3 md:inset-6 pointer-events-none z-10"
+        style={{ border: "3px solid #0d0d0f" }}
+      />
 
-          {/* Name — character by character */}
-          <h1
-            className="font-display font-black text-white leading-none mb-4 overflow-hidden"
-            style={{ fontSize: "clamp(56px, 9vw, 96px)" }}
+      {/* ── TOP BAR — volume info ── */}
+      <div
+        className="absolute top-3 md:top-6 left-3 md:left-6 right-3 md:right-6 z-30 flex items-center justify-between px-6 py-3"
+        style={{ borderBottom: "2px solid #0d0d0f", background: "#f0ebe0" }}
+      >
+        <div className="flex items-center gap-4">
+          <span
+            className="font-manga text-[#0d0d0f]"
+            style={{ fontSize: 11, letterSpacing: "0.25em", opacity: 0.5 }}
           >
-            {name.split("").map((char, i) => (
-              <motion.span
-                key={i}
-                custom={i}
-                variants={letterVariants}
-                initial="hidden"
-                animate="visible"
-                className="inline-block"
-              >
-                {char}
-              </motion.span>
-            ))}
-          </h1>
+            VOL.01
+          </span>
+          <span
+            className="w-px h-3 inline-block"
+            style={{ background: "#0d0d0f", opacity: 0.2 }}
+          />
+          <span
+            className="font-manga text-[#0d0d0f]"
+            style={{ fontSize: 11, letterSpacing: "0.25em", opacity: 0.5 }}
+          >
+            CHAPTER 01
+          </span>
+        </div>
 
-          {/* Rotating tagline */}
-          <div className="h-8 mb-8 overflow-hidden">
-            <motion.p
-              key={taglineIndex}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{
-                opacity: taglineVisible ? 1 : 0,
-                y: taglineVisible ? 0 : -8,
+        {/* Availability pill */}
+        <div
+          className="inline-flex items-center gap-2 px-3 py-1"
+          style={{ border: "2px solid #0d0d0f", background: "#0d0d0f" }}
+        >
+          <span
+            className="w-1.5 h-1.5 rounded-full animate-pulse-dot"
+            style={{ background: "#4ade80" }}
+          />
+          <span
+            className="font-manga text-white"
+            style={{ fontSize: 10, letterSpacing: "0.2em" }}
+          >
+            AVAILABLE
+          </span>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <span
+            className="font-manga text-[#0d0d0f]"
+            style={{ fontSize: 11, letterSpacing: "0.25em", opacity: 0.5 }}
+          >
+            SHIVANSH
+          </span>
+          <span
+            className="w-px h-3 inline-block"
+            style={{ background: "#0d0d0f", opacity: 0.2 }}
+          />
+          <span
+            className="font-manga text-[#0d0d0f]"
+            style={{ fontSize: 11, letterSpacing: "0.25em", opacity: 0.5 }}
+          >
+            PORTFOLIO
+          </span>
+        </div>
+      </div>
+
+      {/* ── MAIN LAYOUT — 3 panel grid like manga page ── */}
+      <div
+        className="relative z-20 w-full min-h-screen pt-20 pb-8 px-6 md:px-12 grid gap-0"
+        style={{
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gridTemplateRows: "auto auto",
+          paddingTop: "80px",
+        }}
+      >
+        {/* PANEL 1 — Top left: Name + genre (spans 2 cols) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.7 }}
+          className="relative flex flex-col justify-between p-6 md:p-10"
+          style={{
+            gridColumn: "1 / 3",
+            gridRow: "1",
+            border: "3px solid #0d0d0f",
+            borderRight: "1.5px solid #0d0d0f",
+            background: "#f8f4ec",
+            minHeight: "280px",
+          }}
+        >
+          {/* Panel label */}
+          <div className="flex items-center justify-between mb-4">
+            <div
+              style={{
+                border: "1.5px solid #0d0d0f",
+                padding: "2px 10px",
+                background: "#0d0d0f",
+                display: "inline-block",
               }}
-              transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="text-lg font-body font-light"
-              style={{ color: "var(--muted)", letterSpacing: "0.02em" }}
             >
-              {TAGLINES[taglineIndex]}
-            </motion.p>
+              <span
+                className="font-manga text-white"
+                style={{ fontSize: 10, letterSpacing: "0.15em" }}
+              >
+                PANEL A
+              </span>
+            </div>
+            <div className="px-3 py-1" style={{ background: "#0d0d0f" }}>
+              <span
+                className="font-manga text-white"
+                style={{ fontSize: 10, letterSpacing: "0.18em" }}
+              >
+                FULL STACK · OPEN SOURCE
+              </span>
+            </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.05, duration: 0.5 }}
-            className="flex items-center gap-6 mb-8"
+          {/* SHIVANSH — full manga title */}
+          <div className="flex-1 flex flex-col justify-center">
+            <motion.h1
+              initial={{ x: -60, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{
+                delay: 0.4,
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="font-manga text-[#0d0d0f] leading-none"
+              style={{
+                fontSize: "clamp(60px, 9vw, 130px)",
+                letterSpacing: "0.04em",
+                WebkitTextStroke: "2px #0d0d0f",
+                textShadow: "4px 4px 0px rgba(0,0,0,0.15)",
+                lineHeight: 0.9,
+              }}
+            >
+              SHIVANSH
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.div
+              initial={{ x: -30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.7, duration: 0.5 }}
+              className="mt-3 flex items-center gap-3"
+            >
+              <div
+                className="h-px flex-shrink-0 w-8"
+                style={{ background: "#0d0d0f" }}
+              />
+              <span
+                className="font-display italic"
+                style={{
+                  fontSize: "clamp(13px, 1.6vw, 18px)",
+                  color: "rgba(13,13,15,0.4)",
+                  letterSpacing: "0.02em",
+                }}
+              >
+                The Developer Chronicles
+              </span>
+            </motion.div>
+          </div>
+
+          {/* Bottom — tagline */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9, duration: 0.5 }}
+            className="font-body mt-4"
+            style={{
+              fontSize: 14,
+              color: "rgba(13,13,15,0.55)",
+              lineHeight: 1.8,
+              maxWidth: 420,
+            }}
           >
-            {[
-              { value: "3+", label: "Projects Shipped" },
-              { value: "250+", label: "DSA Problems" },
-              { value: "MERN", label: "Core Stack" },
-            ].map((stat, i) => (
-              <div key={i} className="flex flex-col">
-                <span
-                  className="font-display font-bold text-white"
-                  style={{ fontSize: 20, lineHeight: 1 }}
-                >
-                  {stat.value}
-                </span>
-                <span
-                  className="font-body text-[10px] uppercase tracking-wider mt-0.5"
-                  style={{ color: "var(--muted)" }}
-                >
-                  {stat.label}
-                </span>
-              </div>
-            ))}
+            Building full-stack products that solve real problems — from
+            AI-powered platforms to clean, fast web apps.
+          </motion.p>
+        </motion.div>
+
+        {/* PANEL 2 — Top right: Character image */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="relative overflow-hidden flex items-end justify-center"
+          style={{
+            gridColumn: "3",
+            gridRow: "1 / 3",
+            border: "3px solid #0d0d0f",
+            borderLeft: "1.5px solid #0d0d0f",
+            background: "#f0ebe0",
+            minHeight: "100vh",
+          }}
+        >
+          {/* Panel label */}
+          <div
+            className="absolute top-4 left-4 z-10"
+            style={{
+              border: "1.5px solid #0d0d0f",
+              padding: "2px 10px",
+              background: "#0d0d0f",
+            }}
+          >
+            <span
+              className="font-manga text-white"
+              style={{ fontSize: 10, letterSpacing: "0.15em" }}
+            >
+              PANEL B
+            </span>
+          </div>
+
+          {/* Halftone behind character */}
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle, #0d0d0f 1px, transparent 1px)",
+              backgroundSize: "10px 10px",
+            }}
+          />
+
+          {/* Speed lines */}
+          <div className="absolute inset-0 speed-lines opacity-30" />
+
+          {/* BUILDING!! action word */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, rotate: -15 }}
+            animate={{ opacity: 1, scale: 1, rotate: -10 }}
+            transition={{
+              delay: 1.2,
+              duration: 0.5,
+              type: "spring",
+              stiffness: 200,
+            }}
+            className="absolute top-6 right-4 z-20"
+          >
+            <span
+              className="font-manga text-[#0d0d0f] block"
+              style={{
+                fontSize: "clamp(20px, 3vw, 32px)",
+                WebkitTextStroke: "1.5px #0d0d0f",
+                textShadow: "2px 2px 0px rgba(0,0,0,0.2)",
+                letterSpacing: "0.06em",
+              }}
+            >
+              BUILDING!!
+            </span>
           </motion.div>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
+          {/* Character */}
+          <motion.img
+            src={PHOTO_SRC}
+            alt="Shivansh manga avatar"
+            className="relative z-10"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0, duration: 0.5 }}
-            className="flex items-center gap-4"
+            transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              y: avatarY,
+              willChange: "transform",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center bottom",
+              position: "absolute",
+              inset: 0,
+            }}
+          />
+
+          {/* Bottom metadata */}
+          <div className="absolute bottom-3 right-4 z-20 flex flex-col items-end gap-0.5">
+            <span
+              className="font-manga text-[#0d0d0f] opacity-20"
+              style={{ fontSize: 9, letterSpacing: "0.15em" }}
+            >
+              Shivansh · WORLD
+            </span>
+          </div>
+        </motion.div>
+
+        {/* PANEL 3 — Bottom left: Stats table */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="relative"
+          style={{
+            gridColumn: "1",
+            gridRow: "2",
+            border: "3px solid #0d0d0f",
+            borderRight: "1.5px solid #0d0d0f",
+            borderTop: "1.5px solid #0d0d0f",
+            background: "#f8f4ec",
+          }}
+        >
+          {/* Panel label */}
+          <div
+            className="absolute top-3 left-3"
+            style={{
+              border: "1.5px solid #0d0d0f",
+              padding: "2px 10px",
+              background: "#0d0d0f",
+            }}
           >
+            <span
+              className="font-manga text-white"
+              style={{ fontSize: 10, letterSpacing: "0.15em" }}
+            >
+              PANEL C
+            </span>
+          </div>
+
+          <div className="pt-10">
+            {[
+              { label: "CLASS", value: "Full Stack Dev" },
+              { label: "STACK", value: "MERN" },
+              { label: "DSA", value: "200+ Problems" },
+              { label: "STATUS", value: "Open to Work" },
+            ].map((row, i) => (
+              <div
+                key={i}
+                className="flex items-center"
+                style={{ borderTop: "1px solid rgba(13,13,15,0.1)" }}
+              >
+                <div
+                  className="px-4 py-3 flex-shrink-0"
+                  style={{
+                    borderRight: "1px solid rgba(13,13,15,0.1)",
+                    width: 80,
+                    background: "rgba(13,13,15,0.04)",
+                  }}
+                >
+                  <span
+                    className="font-manga text-[#0d0d0f] opacity-50"
+                    style={{ fontSize: 10, letterSpacing: "0.12em" }}
+                  >
+                    {row.label}
+                  </span>
+                </div>
+                <div className="px-4 py-3">
+                  <span
+                    className="font-manga text-[#0d0d0f]"
+                    style={{ fontSize: 12, letterSpacing: "0.08em" }}
+                  >
+                    {row.value}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* PANEL 4 — Bottom middle: CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.65, duration: 0.6 }}
+          className="relative flex flex-col items-start justify-center gap-4 p-6 md:p-8"
+          style={{
+            gridColumn: "2",
+            gridRow: "2",
+            border: "3px solid #0d0d0f",
+            borderLeft: "1.5px solid #0d0d0f",
+            borderRight: "1.5px solid #0d0d0f",
+            borderTop: "1.5px solid #0d0d0f",
+            background: "#f8f4ec",
+          }}
+        >
+          {/* Panel label */}
+          <div
+            className="absolute top-3 left-3"
+            style={{
+              border: "1.5px solid #0d0d0f",
+              padding: "2px 10px",
+              background: "#0d0d0f",
+            }}
+          >
+            <span
+              className="font-manga text-white"
+              style={{ fontSize: 10, letterSpacing: "0.15em" }}
+            >
+              PANEL D
+            </span>
+          </div>
+
+          <div className="pt-6 flex flex-col gap-3 w-full">
             <button
               onClick={() =>
                 document
                   .getElementById("projects")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
-              className="btn-sweep px-7 py-3 text-[13px] uppercase tracking-[0.12em] font-medium bg-white text-black rounded-sm font-body"
-            >
-              View Work
-            </button>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-sweep px-7 py-3 text-[13px] uppercase tracking-[0.12em] font-medium text-white rounded-sm font-body"
-              style={{ border: "1px solid rgba(255,255,255,0.3)" }}
-            >
-              Download Resume
-            </a>
-          </motion.div>
-        </div>
-
-        {/* Right — Photo */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{
-            delay: 0.6,
-            duration: 0.8,
-            ease: [0.25, 0.46, 0.45, 0.94],
-          }}
-          style={{ willChange: "transform" }}
-          className="flex-shrink-0 flex items-center justify-center"
-        >
-          <div className="animate-floatee" style={{ willChange: "transform" }}>
-            <div
-              className="relative overflow-hidden"
+              className="font-manga w-full py-3 text-white bg-[#0d0d0f] transition-all duration-150 active:scale-95"
               style={{
-                width: "clamp(240px, 30vw, 340px)",
-                height: "clamp(280px, 36vw, 400px)",
-                borderRadius: "16px",
-                border: "1px solid rgba(255,255,255,0.12)",
-                background: "rgba(255,255,255,0.03)",
-                transform: "translateZ(0)", // ✅ important
-                backfaceVisibility: "hidden",
+                fontSize: 14,
+                letterSpacing: "0.15em",
+                border: "2.5px solid #0d0d0f",
+                boxShadow: "4px 4px 0px #0d0d0f",
               }}
             >
-              {/* Placeholder — replace src with real photo */}
+              VIEW WORK
+            </button>
+            <a
+              href="./Shivansh-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-manga w-full py-3 text-[#0d0d0f] text-center transition-all duration-150 active:scale-95 block"
+              style={{
+                fontSize: 14,
+                letterSpacing: "0.15em",
+                border: "2.5px solid #0d0d0f",
+                boxShadow: "4px 4px 0px rgba(13,13,15,0.3)",
+                background: "transparent",
+              }}
+            >
+              RESUME
+            </a>
+
+            {/* Scroll cue */}
+            <div className="flex items-center gap-2 mt-2">
               <div
-                className="w-full h-full flex flex-col items-center justify-center gap-3"
-                style={{ color: "var(--muted)" }}
+                className="flex-1 h-px"
+                style={{ background: "#0d0d0f", opacity: 0.15 }}
+              />
+              <span
+                className="font-manga text-[#0d0d0f] opacity-30"
+                style={{ fontSize: 9, letterSpacing: "0.2em" }}
               >
-                <img
-                  src="/src/assets/Shivansh.png"
-                  alt="Shivansh"
-                  className="w-full h-full object-cover"
-                  style={{
-                    transform: "translateZ(0)", // ✅ prevents flicker
-                  }}
-                />
-                {/* Corner detail — adds editorial magazine feel */}
-                <div
-                  className="absolute bottom-0 left-0 right-0 px-4 py-3 flex items-center justify-between"
-                  style={{
-                    background:
-                      "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)",
-                  }}
-                >
-                  <span
-                    className="font-body text-[10px] uppercase tracking-widest"
-                    style={{ color: "rgba(255,255,255,0.4)" }}
-                  >
-                    Ghaziabad, IN
-                  </span>
-                  <span
-                    className="font-body text-[10px] uppercase tracking-widest"
-                    style={{ color: "rgba(255,255,255,0.25)" }}
-                  >
-                    © 2025
-                  </span>
-                </div>
-              </div>
+                NEXT PAGE ↓
+              </span>
+              <div
+                className="flex-1 h-px"
+                style={{ background: "#0d0d0f", opacity: 0.15 }}
+              />
             </div>
           </div>
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.6 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <span
-          className="text-[10px] uppercase tracking-[0.2em] font-body"
-          style={{ color: "var(--muted)" }}
-        >
-          scroll
-        </span>
-        <div
-          className="relative w-px h-10 overflow-hidden"
-          style={{ background: "rgba(255,255,255,0.1)" }}
-        >
-          <div
-            className="absolute top-0 left-0 w-full bg-white"
-            style={{
-              height: "40%",
-              // animation: "scrollLine 1.5s ease-in-out infinite",
-            }}
-          />
-        </div>
-      </motion.div>
-
       <style>{`
-        @keyframes scrollLine {
-          0% { transform: translateY(-100%); opacity: 0; }
-          30% { opacity: 1; }
-          100% { transform: translateY(250%); opacity: 0; }
+        .paper-bg {
+          background-color: #f0ebe0;
+          color: #0d0d0f;
+        }
+        .speed-lines {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cg stroke='rgba(13,13,15,0.08)' stroke-width='1'%3E%3Cline x1='300' y1='300' x2='0' y2='0'/%3E%3Cline x1='300' y1='300' x2='150' y2='0'/%3E%3Cline x1='300' y1='300' x2='300' y2='0'/%3E%3Cline x1='300' y1='300' x2='450' y2='0'/%3E%3Cline x1='300' y1='300' x2='600' y2='0'/%3E%3Cline x1='300' y1='300' x2='600' y2='150'/%3E%3Cline x1='300' y1='300' x2='600' y2='300'/%3E%3Cline x1='300' y1='300' x2='600' y2='450'/%3E%3Cline x1='300' y1='300' x2='600' y2='600'/%3E%3Cline x1='300' y1='300' x2='450' y2='600'/%3E%3Cline x1='300' y1='300' x2='300' y2='600'/%3E%3Cline x1='300' y1='300' x2='150' y2='600'/%3E%3Cline x1='300' y1='300' x2='0' y2='600'/%3E%3Cline x1='300' y1='300' x2='0' y2='450'/%3E%3Cline x1='300' y1='300' x2='0' y2='300'/%3E%3Cline x1='300' y1='300' x2='0' y2='150'/%3E%3C/g%3E%3C/svg%3E");
+          background-size: cover;
+          background-position: center;
+        }
+        .font-manga { font-family: 'Bangers', cursive; letter-spacing: 0.05em; }
+        .manga-action {
+          font-family: 'Bangers', cursive;
+          letter-spacing: 0.08em;
+          -webkit-text-stroke: 2px #0d0d0f;
+          text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+        }
+        .animate-pulse-dot {
+          animation: pulseDot 2s ease-in-out infinite;
+        }
+        @keyframes pulseDot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.8); }
         }
       `}</style>
     </section>

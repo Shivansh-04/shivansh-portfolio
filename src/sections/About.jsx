@@ -1,15 +1,6 @@
 import { motion } from 'framer-motion'
 import SectionWrapper from '../components/SectionWrapper'
 
-const CODE_SYMBOLS = [
-  { symbol: '{ }', top: '10%', left: '5%', duration: 9 },
-  { symbol: '</ >', top: '20%', right: '8%', duration: 12 },
-  { symbol: '[ ]', bottom: '25%', left: '3%', duration: 10 },
-  { symbol: '=>', top: '60%', right: '5%', duration: 14 },
-  { symbol: '( )', bottom: '10%', right: '15%', duration: 11 },
-  { symbol: '&&', top: '40%', left: '1%', duration: 8 },
-]
-
 const FUN_FACTS = [
   { icon: '⚡', label: 'Competitive Programmer' },
   { icon: '🌿', label: 'Spiritual Traveler' },
@@ -19,77 +10,207 @@ const FUN_FACTS = [
 
 export default function About() {
   return (
-    <div className="relative w-full overflow-hidden">
-      {/* Floating code symbols */}
-      {CODE_SYMBOLS.map((s, i) => (
-        <motion.span
-          key={i}
-          className="code-symbol hidden md:block"
-          style={{ top: s.top, left: s.left, right: s.right, bottom: s.bottom }}
-          animate={{ y: [0, -18, 0] }}
-          transition={{ duration: s.duration, repeat: Infinity, ease: 'easeInOut', delay: i * 1.2 }}
+    <div
+      className="relative w-full paper-bg"
+      style={{ borderTop: '3px solid #0d0d0f', borderBottom: '3px solid #0d0d0f' }}
+    >
+      {/* Chapter title card */}
+      <div
+        className="w-full flex items-center gap-0 overflow-hidden"
+        style={{ borderBottom: '3px solid #0d0d0f' }}
+      >
+        <div
+          className="px-8 py-4 flex items-center gap-4"
+          style={{ borderRight: '3px solid #0d0d0f', background: '#0d0d0f', minWidth: 'fit-content' }}
         >
-          {s.symbol}
-        </motion.span>
-      ))}
+          <span className="font-manga text-white tracking-widest" style={{ fontSize: 13 }}>
+            CHAPTER 02
+          </span>
+        </div>
+        <div className="flex-1 px-8 py-4 overflow-hidden">
+          <motion.h2
+            initial={{ x: -40, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="font-manga tracking-wide"
+            style={{ fontSize: 'clamp(24px, 4vw, 42px)', color: '#0d0d0f', whiteSpace: 'nowrap' }}
+          >
+            THE DEVELOPER
+          </motion.h2>
+        </div>
+      </div>
 
-      <SectionWrapper id="about">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+      {/* Two-panel manga layout */}
+      <div className="flex flex-col md:flex-row" style={{ minHeight: '70vh' }}>
 
-          {/* Left — Bio */}
-          <div>
-            <span className="section-label">001 — About</span>
-            <h2 className="section-heading">Building things<br />that matter.</h2>
-
-            <p className="font-body text-base leading-relaxed mb-5" style={{ color: 'rgba(240,240,240,0.7)', lineHeight: '1.85' }}>
-              I'm Shivansh, a Full Stack Developer and CS student at RKGIT, Ghaziabad. I build production-grade web applications with the MERN stack and actively contribute to open source.
-            </p>
-            <p className="font-body text-base leading-relaxed" style={{ color: 'rgba(240,240,240,0.5)', lineHeight: '1.85' }}>
-              Currently preparing for GSoC while sharpening my competitive programming skills on LeetCode and CodeChef.
-            </p>
+        {/* Panel 1 — Image */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="relative flex-shrink-0 flex items-end justify-center overflow-hidden"
+          style={{
+            width: '100%',
+            maxWidth: '420px',
+            borderRight: '3px solid #0d0d0f',
+            background: '#f8f4ec',
+            minHeight: '420px',
+          }}
+        >
+          {/* Panel label */}
+          <div
+            className="absolute top-4 left-4 z-10"
+            style={{
+              border: '1.5px solid #0d0d0f',
+              padding: '2px 10px',
+              background: '#0d0d0f',
+            }}
+          >
+            <span className="font-manga text-white" style={{ fontSize: 10, letterSpacing: '0.15em' }}>
+              PANEL A
+            </span>
           </div>
 
-          {/* Right — Card + Fun Facts */}
-          <div className="flex flex-col gap-6">
-            {/* Currently working on */}
-            <div className="card">
-              <span className="section-label mb-3">Currently working on</span>
+          {/* Halftone dot bg */}
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{
+              backgroundImage: 'radial-gradient(circle, #0d0d0f 1px, transparent 1px)',
+              backgroundSize: '12px 12px',
+            }}
+          />
+
+          {/* Character image */}
+          <img
+            src="/about-character.png"
+            alt="About — manga character"
+            className="relative z-10 w-full h-full object-contain object-bottom"
+            style={{ maxHeight: '480px' }}
+          />
+
+          {/* Speech bubble — positioned top right of image */}
+          <div className="absolute top-8 right-4 z-20">
+            <div className="speech-bubble" style={{ maxWidth: 160 }}>
+              <p className="font-manga text-[#0d0d0f]" style={{ fontSize: 13, lineHeight: 1.4 }}>
+                Let's build something.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Panel 2 — Text content */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="relative flex-1 flex flex-col justify-between p-8 md:p-12"
+          style={{ background: '#f0ebe0' }}
+        >
+          {/* Panel label */}
+          <div
+            className="absolute top-4 left-4 z-10"
+            style={{
+              border: '1.5px solid #0d0d0f',
+              padding: '2px 10px',
+              background: '#0d0d0f',
+            }}
+          >
+            <span className="font-manga text-white" style={{ fontSize: 10, letterSpacing: '0.15em' }}>
+              PANEL B
+            </span>
+          </div>
+
+          <div className="flex flex-col gap-8 pt-8">
+
+            {/* Section label */}
+            <div>
+              <span
+                className="font-manga text-[#0d0d0f] opacity-30"
+                style={{ fontSize: 11, letterSpacing: '0.2em' }}
+              >
+                001 — ABOUT
+              </span>
+            </div>
+
+            {/* Bio */}
+            <div className="flex flex-col gap-4">
+              <p
+                className="font-body"
+                style={{ color: 'rgba(13,13,15,0.75)', lineHeight: 1.85, fontSize: 15 }}
+              >
+                I'm Shivansh, a Full Stack Developer and CS student at RKGIT, Ghaziabad.
+                I build production-grade web applications with the MERN stack and actively
+                contribute to open source.
+              </p>
+              <p
+                className="font-body"
+                style={{ color: 'rgba(13,13,15,0.5)', lineHeight: 1.85, fontSize: 15 }}
+              >
+                Currently preparing for GSoC while sharpening my competitive programming
+                skills on LeetCode and CodeChef.
+              </p>
+            </div>
+
+            {/* Currently working on — ink panel style */}
+            <div
+              className="ink-panel p-5"
+              style={{ background: '#0d0d0f' }}
+            >
+              <span
+                className="font-manga text-white opacity-50 block mb-2"
+                style={{ fontSize: 10, letterSpacing: '0.2em' }}
+              >
+                CURRENTLY WORKING ON
+              </span>
               <div className="flex items-center gap-3">
                 <span
-                  className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse-do8t"
+                  className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse-dot"
                   style={{ background: '#4ade80' }}
                 />
-                <p className="font-body text-white text-[15px] leading-snug">
+                <p className="font-body text-white text-[14px] leading-snug">
                   SurakshaSetu — AI-powered crime reporting platform
                 </p>
               </div>
             </div>
 
-            {/* Fun Fact Chips */}
-            <div className="flex flex-wrap gap-3">
+            {/* Fun fact chips */}
+            <div className="flex flex-wrap gap-2">
               {FUN_FACTS.map((fact, i) => (
                 <motion.span
                   key={i}
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.85 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.08, duration: 0.3 }}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full font-body text-[13px]"
+                  transition={{ delay: i * 0.07 }}
+                  whileHover={{ y: -2 }}
+                  className="flex items-center gap-2 px-3 py-1.5 font-body text-[12px]"
                   style={{
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    background: 'rgba(255,255,255,0.03)',
-                    color: 'rgba(240,240,240,0.7)',
-                    letterSpacing: '0.02em'
+                    border: '1.5px solid #0d0d0f',
+                    background: 'white',
+                    color: '#0d0d0f',
+                    boxShadow: '2px 2px 0px #0d0d0f',
+                    cursor: 'default',
                   }}
                 >
                   <span>{fact.icon}</span>
-                  <span>{fact.label}</span>
+                  <span className="font-medium">{fact.label}</span>
                 </motion.span>
               ))}
             </div>
           </div>
-        </div>
-      </SectionWrapper>
+
+          {/* Bottom-right panel decoration */}
+          <div
+            className="absolute bottom-4 right-4 font-manga opacity-10"
+            style={{ fontSize: 11, color: '#0d0d0f', letterSpacing: '0.1em' }}
+          >
+            PANEL B · 02
+          </div>
+        </motion.div>
+      </div>
     </div>
   )
 }

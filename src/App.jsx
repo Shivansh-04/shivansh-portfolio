@@ -13,8 +13,6 @@ import Contact from './sections/Contact'
 export default function App() {
   return (
     <>
-      <div id="cursor-dot" />
-      <div id="cursor-ring" />
       <div id="scroll-progress" />
       <CustomCursor />
       <ScrollProgress />
@@ -23,13 +21,13 @@ export default function App() {
       <AnimatePresence>
         <main>
           <Hero />
-          <ScrollMarquee direction={1} />
+          {/* <ScrollMarquee direction={1} /> */}
           <div className="flex flex-col items-center w-full">
             <About />
-            <ScrollMarquee direction={-1} />
+            {/* <ScrollMarquee direction={-1} /> */}
             <Skills />
             <Projects />
-            <ScrollMarquee direction={1} />
+            {/* <ScrollMarquee direction={1} /> */}
             <OpenSource />
             <Contact />
           </div>
