@@ -199,7 +199,7 @@ export default function Hero() {
             }}
           >
             Building full-stack products that solve real problems — from
-            AI-powered platforms to clean, fast web apps.
+            Complex Problems to clean, fast web apps.
           </motion.p>
         </motion.div>
 
