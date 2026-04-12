@@ -185,6 +185,34 @@ export default function Hero() {
             </motion.div>
           </div>
 
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="flex items-center gap-6 mb-4 mt-4"
+          >
+            {[
+              { value: "3+", label: "Projects" },
+              { value: "200+", label: "DSA" },
+              { value: "MERN", label: "Stack" },
+            ].map((stat, i) => (
+              <div key={i} className="flex flex-col">
+                <span
+                  className="font-manga text-[#0d0d0f]"
+                  style={{ fontSize: 22, lineHeight: 1 }}
+                >
+                  {stat.value}
+                </span>
+                <span
+                  className="font-manga text-[#0d0d0f] opacity-40"
+                  style={{ fontSize: 9, letterSpacing: "0.15em" }}
+                >
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+
           {/* Bottom — tagline */}
           <motion.p
             initial={{ opacity: 0 }}
@@ -198,8 +226,8 @@ export default function Hero() {
               maxWidth: 420,
             }}
           >
-            Building full-stack products that solve real problems — from
-            Complex Problems to clean, fast web apps.
+            Building full-stack products that solve real problems — from Complex
+            Problems to clean, fast web apps.
           </motion.p>
         </motion.div>
 
@@ -313,6 +341,7 @@ export default function Hero() {
           style={{
             gridColumn: "1",
             gridRow: "2",
+            minHeight: '200px',
             border: "3px solid #0d0d0f",
             borderRight: "1.5px solid #0d0d0f",
             borderTop: "1.5px solid #0d0d0f",
@@ -385,6 +414,7 @@ export default function Hero() {
           style={{
             gridColumn: "2",
             gridRow: "2",
+            minHeight: '200px',
             border: "3px solid #0d0d0f",
             borderLeft: "1.5px solid #0d0d0f",
             borderRight: "1.5px solid #0d0d0f",

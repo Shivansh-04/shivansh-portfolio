@@ -2,10 +2,10 @@ import { motion } from 'framer-motion'
 import SectionWrapper from '../components/SectionWrapper'
 
 const FUN_FACTS = [
-  { icon: '⚡', label: 'Competitive Programmer' },
-  { icon: '🌿', label: 'Spiritual Traveler' },
-  { icon: '☕', label: 'Chai over Coffee' },
-  { icon: '🎯', label: 'GSoC Aspirant' },
+  { icon: '★', label: 'Competitive Programmer' },
+  { icon: '◈', label: 'Spiritual Traveler' },
+  { icon: '◉', label: 'Chai over Coffee' },
+  { icon: '◎', label: 'GSoC Aspirant' },
 ]
 
 export default function About() {
@@ -86,13 +86,13 @@ export default function About() {
           <img
             src="/about-character.png"
             alt="About — manga character"
-            className="relative z-10 w-full h-full object-contain object-bottom"
-            style={{ maxHeight: '480px' }}
+            className="relative z-10 w-full object-contain object-bottom"
+            style={{ maxHeight: '100%', minHeight: '400px' }}
           />
 
           {/* Speech bubble — positioned top right of image */}
-          <div className="absolute top-8 right-4 z-20">
-            <div className="speech-bubble" style={{ maxWidth: 160 }}>
+          <div className="absolute top-4 right-3 z-20">
+            <div className="speech-bubble" style={{ maxWidth: 140 }}>
               <p className="font-manga text-[#0d0d0f]" style={{ fontSize: 13, lineHeight: 1.4 }}>
                 Let's build something.
               </p>
@@ -106,8 +106,8 @@ export default function About() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="relative flex-1 flex flex-col justify-between p-8 md:p-12"
-          style={{ background: '#f0ebe0' }}
+          className="relative flex-1 flex flex-col p-8 md:p-12"
+          style={{ background: '#f0ebe0' , gap: 24 }}
         >
           {/* Panel label */}
           <div
@@ -136,7 +136,7 @@ export default function About() {
             </div>
 
             {/* Bio */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4" style={{ maxWidth: 520 }}>
               <p
                 className="font-body"
                 style={{ color: 'rgba(13,13,15,0.75)', lineHeight: 1.85, fontSize: 15 }}
