@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#0d0d0f" stroke="#0d0d0f" stroke-width="1"/>
+  
+  <!-- Speed lines radiating from center -->
+  <g stroke="rgba(255,255,255,0.15)" stroke-width="0.5">
+    <line x1="16" y1="16" x2="1" y2="1"/>
+    <line x1="16" y1="16" x2="16" y2="0"/>
+    <line x1="16" y1="16" x2="31" y2="1"/>
+    <line x1="16" y1="16" x2="32" y2="16"/>
+    <line x1="16" y1="16" x2="31" y2="31"/>
+    <line x1="16" y1="16" x2="16" y2="32"/>
+    <line x1="16" y1="16" x2="1" y2="31"/>
+    <line x1="16" y1="16" x2="0" y2="16"/>
+  </g>
+
+  <!-- Outer ink ring -->
+  <circle cx="16" cy="16" r="14" fill="none" stroke="white" stroke-width="1.5"/>
+
+  <!-- S letter — manga stamp style -->
+  <text
+    x="16"
+    y="22"
+    text-anchor="middle"
+    font-family="serif"
+    font-weight="900"
+    font-size="18"
+    fill="white"
+    letter-spacing="-1"
+  >S</text>
+
+  <!-- Small dot below S — like a manga period -->
+  <circle cx="16" cy="26" r="1.2" fill="white" opacity="0.6"/>
+</svg>
