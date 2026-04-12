@@ -100,7 +100,7 @@ export default function Projects() {
             </motion.h2>
 
             {/* projects-action.png decorative */}
-            <div className="relative flex-shrink-0 hidden md:block" style={{ height: 80, width: 80 }}>
+            <div className="relative flex-shrink-0 hidden md:block" style={{ height: 110, width: 110 }}>
               <img
                 src="/projects-action.png"
                 alt=""

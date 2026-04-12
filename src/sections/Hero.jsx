@@ -123,7 +123,7 @@ export default function Hero() {
               }}
             >
               <span
-                className="font-manga text-white"
+                className="font-manga  text-white"
                 style={{ fontSize: 10, letterSpacing: "0.15em" }}
               >
                 PANEL A
@@ -256,7 +256,7 @@ export default function Hero() {
             }}
           >
             <span
-              className="font-manga text-white"
+              className="font-manga  text-white"
               style={{ fontSize: 10, letterSpacing: "0.15em" }}
             >
               PANEL B
