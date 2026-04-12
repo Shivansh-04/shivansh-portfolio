@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1200px;
+      height: 630px;
+      background: #f0ebe0;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      font-family: 'Bangers', cursive;
+    }
+
+    /* Halftone dots */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, #0d0d0f 1px, transparent 1px);
+      background-size: 16px 16px;
+      opacity: 0.15;
+    }
+
+    /* Outer border */
+    .border {
+      position: absolute;
+      inset: 12px;
+      border: 3px solid #0d0d0f;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Left panel */
+    .left {
+      width: 580px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px;
+      border-right: 3px solid #0d0d0f;
+      position: relative;
+      z-index: 2;
+    }
+
+    .vol-label {
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      color: rgba(13,13,15,0.4);
+      margin-bottom: 16px;
+    }
+
+    .name {
+      font-size: 110px;
+      color: #0d0d0f;
+      line-height: 0.9;
+      -webkit-text-stroke: 2px #0d0d0f;
+      text-shadow: 5px 5px 0px rgba(0,0,0,0.15);
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: rgba(13,13,15,0.4);
+      margin-bottom: 32px;
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      border: 2px solid #0d0d0f;
+      padding: 4px 12px;
+      background: white;
+      box-shadow: 2px 2px 0px #0d0d0f;
+      color: #0d0d0f;
+    }
+
+    .url {
+      position: absolute;
+      bottom: 40px;
+      left: 60px;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      color: rgba(13,13,15,0.5);
+    }
+
+    /* Right panel */
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Speed lines SVG */
+    .speed-lines {
+      position: absolute;
+      inset: 0;
+      opacity: 0.12;
+    }
+
+    .building {
+      font-size: 64px;
+      color: #0d0d0f;
+      -webkit-text-stroke: 1.5px #0d0d0f;
+      text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+      transform: rotate(-8deg);
+      position: absolute;
+      top: 60px;
+      right: 40px;
+      z-index: 3;
+    }
+
+    .panel-label {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      border: 1.5px solid #0d0d0f;
+      padding: 3px 10px;
+      background: #0d0d0f;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: white;
+      z-index: 3;
+    }
+
+    .chapter-label {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: rgba(13,13,15,0.25);
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+  <div class="border"></div>
+
+  <!-- Left panel -->
+  <div class="left">
+    <div class="vol-label">VOL.01 · PORTFOLIO</div>
+    <div class="name">SHIVANSH</div>
+    <div class="subtitle">— The Developer Chronicles</div>
+    <div class="tags">
+      <span class="tag">FULL STACK</span>
+      <span class="tag">MERN</span>
+      <span class="tag">OPEN SOURCE</span>
+      <span class="tag">GSoC</span>
+    </div>
+    <div class="url">iamshivansh.in</div>
+  </div>
+
+  <!-- Right panel -->
+  <div class="right">
+    <svg class="speed-lines" viewBox="0 0 620 630" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#0d0d0f" stroke-width="1">
+        <line x1="310" y1="315" x2="0" y2="0"/>
+        <line x1="310" y1="315" x2="100" y2="0"/>
+        <line x1="310" y1="315" x2="200" y2="0"/>
+        <line x1="310" y1="315" x2="310" y2="0"/>
+        <line x1="310" y1="315" x2="420" y2="0"/>
+        <line x1="310" y1="315" x2="520" y2="0"/>
+        <line x1="310" y1="315" x2="620" y2="0"/>
+        <line x1="310" y1="315" x2="620" y2="100"/>
+        <line x1="310" y1="315" x2="620" y2="200"/>
+        <line x1="310" y1="315" x2="620" y2="315"/>
+        <line x1="310" y1="315" x2="620" y2="420"/>
+        <line x1="310" y1="315" x2="620" y2="530"/>
+        <line x1="310" y1="315" x2="620" y2="630"/>
+        <line x1="310" y1="315" x2="520" y2="630"/>
+        <line x1="310" y1="315" x2="420" y2="630"/>
+        <line x1="310" y1="315" x2="310" y2="630"/>
+        <line x1="310" y1="315" x2="200" y2="630"/>
+        <line x1="310" y1="315" x2="100" y2="630"/>
+        <line x1="310" y1="315" x2="0" y2="630"/>
+        <line x1="310" y1="315" x2="0" y2="530"/>
+        <line x1="310" y1="315" x2="0" y2="420"/>
+        <line x1="310" y1="315" x2="0" y2="315"/>
+        <line x1="310" y1="315" x2="0" y2="200"/>
+        <line x1="310" y1="315" x2="0" y2="100"/>
+      </g>
+    </svg>
+
+    <div class="panel-label">PANEL B</div>
+    <div class="building">BUILDING!!</div>
+
+    <!-- Character placeholder — replace with your hero-avatar-alt.png -->
+    <img
+      src="hero-avatar-alt.png"
+      style="height: 500px; width: auto; object-fit: contain; mix-blend-mode: multiply; position: relative; z-index: 2;"
+    />
+
+    <div class="chapter-label">Shivansh · World</div>
+  </div>
+</body>
+</html>

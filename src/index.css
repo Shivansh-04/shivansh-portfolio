@@ -223,3 +223,67 @@ body.cursor-hover #cursor-ring { width: 48px; height: 48px; opacity: 0.25; }
   border-top: 12px solid white;
   z-index: 1;
 }
+
+/* ── Dark Mode Theme ── */
+[data-theme="dark"] {
+  --paper-bg: #0d0d0f;
+  --paper-bg-2: #111113;
+  --ink: #f0ebe0;
+  --ink-muted: rgba(240,235,224,0.5);
+  --ink-border: rgba(240,235,224,0.15);
+  --ink-shadow: rgba(240,235,224,0.1);
+}
+
+[data-theme="paper"] {
+  --paper-bg: #f0ebe0;
+  --paper-bg-2: #f8f4ec;
+  --ink: #0d0d0f;
+  --ink-muted: rgba(13,13,15,0.5);
+  --ink-border: rgba(13,13,15,0.15);
+  --ink-shadow: rgba(13,13,15,0.1);
+}
+
+/* Apply to paper sections */
+[data-theme="dark"] .paper-bg {
+  background-color: #0d0d0f !important;
+  color: #f0ebe0 !important;
+}
+
+[data-theme="dark"] .paper-bg * {
+  border-color: rgba(240,235,224,0.15) !important;
+}
+
+/* Ink borders flip */
+[data-theme="dark"] [style*="border: 3px solid #0d0d0f"],
+[data-theme="dark"] [style*="border: 2px solid #0d0d0f"],
+[data-theme="dark"] [style*="border: 1.5px solid #0d0d0f"],
+[data-theme="dark"] [style*="borderBottom: '3px solid #0d0d0f'"] {
+  border-color: rgba(240,235,224,0.2) !important;
+}
+
+/* Text color flip */
+[data-theme="dark"] .font-manga:not(.text-white):not([style*="color: white"]) {
+  color: #f0ebe0 !important;
+}
+
+/* Chapter title bars flip */
+[data-theme="dark"] [style*="background: '#0d0d0f'"] {
+  background: #f0ebe0 !important;
+  color: #0d0d0f !important;
+}
+
+/* Cards on paper flip */
+[data-theme="dark"] [style*="background: '#f8f4ec'"],
+[data-theme="dark"] [style*="background: '#f0ebe0'"] {
+  background: #141416 !important;
+}
+
+/* Halftone dots flip */
+[data-theme="dark"] [style*="radial-gradient(circle, #0d0d0f"] {
+  filter: invert(1);
+}
+
+/* Transition everything smoothly */
+* {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease !important;
+}
