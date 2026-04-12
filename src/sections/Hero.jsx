@@ -1,10 +1,63 @@
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { animate, stagger, createTimeline } from "animejs";
 
 const PHOTO_SRC = "/hero-avatar-alt.png";
 
 export default function Hero() {
   const { scrollY } = useScroll();
   const avatarY = useTransform(scrollY, [0, 500], [0, 40]);
+
+  const speedLinesRef = useRef(null);
+  const titleRef = useRef(null);
+  const panelBorderRef = useRef(null);
+  const panelBorderTopRef = useRef(null);
+  const panelBorderRightRef = useRef(null);
+
+  useEffect(() => {
+  const timeout = setTimeout(() => {
+
+    // ── 1. Speed lines draw outward ──
+    if (speedLinesRef.current) {
+      const lines = Array.from(speedLinesRef.current.querySelectorAll('line'))
+      if (lines.length > 0) {
+        animate(lines, {
+          strokeDashoffset: [1000, 0],
+          ease: 'easeOutExpo',
+          duration: 800,
+          delay: stagger(20, { start: 200 }),
+        })
+      }
+    }
+
+    // ── 2. SHIVANSH letter ink-stamp ──
+    if (titleRef.current) {
+      const letters = Array.from(titleRef.current.querySelectorAll('.manga-letter'))
+      if (letters.length > 0) {
+        animate(letters, {
+          scale: [1.4, 1],
+          opacity: [0, 1],
+          ease: 'easeOutElastic(1, .5)',
+          duration: 600,
+          delay: stagger(60, { start: 400 }),
+        })
+      }
+    }
+
+    // ── 3. Panel border draw-on ──
+    if (panelBorderRef.current) {
+      animate(panelBorderRef.current, {
+        clipPath: ['inset(0 100% 0 0)', 'inset(0 0% 0 0)'],
+        ease: 'easeInOutExpo',
+        duration: 900,
+        delay: 300,
+      })
+    }
+
+  }, 100) // wait for DOM to fully render
+
+  return () => clearTimeout(timeout)
+}, [])
 
   return (
     <section
@@ -23,8 +76,12 @@ export default function Hero() {
 
       {/* ── Outer panel border ── */}
       <div
+        ref={panelBorderRef}
         className="absolute inset-3 md:inset-6 pointer-events-none z-10"
-        style={{ border: "3px solid #0d0d0f" }}
+        style={{
+          border: "3px solid #0d0d0f",
+          clipPath: "inset(0 100% 0 0)",
+        }}
       />
 
       {/* ── TOP BAR — volume info ── */}
@@ -141,14 +198,8 @@ export default function Hero() {
 
           {/* SHIVANSH — full manga title */}
           <div className="flex-1 flex flex-col justify-center">
-            <motion.h1
-              initial={{ x: -60, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{
-                delay: 0.4,
-                duration: 0.8,
-                ease: [0.16, 1, 0.3, 1],
-              }}
+            <h1
+              ref={titleRef}
               className="font-manga text-[#0d0d0f] leading-none"
               style={{
                 fontSize: "clamp(60px, 9vw, 130px)",
@@ -158,8 +209,16 @@ export default function Hero() {
                 lineHeight: 0.9,
               }}
             >
-              SHIVANSH
-            </motion.h1>
+              {"SHIVANSH".split("").map((char, i) => (
+                <span
+                  key={i}
+                  className="manga-letter inline-block"
+                  style={{ opacity: 0 }}
+                >
+                  {char}
+                </span>
+              ))}
+            </h1>
 
             {/* Subtitle */}
             <motion.div
@@ -274,7 +333,39 @@ export default function Hero() {
           />
 
           {/* Speed lines */}
-          <div className="absolute inset-0 speed-lines opacity-30" />
+          <div
+            className="absolute inset-0 opacity-60 pointer-events-none"
+            ref={speedLinesRef}
+          >
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 1440 900"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ position: "absolute", inset: 0 }}
+            >
+              {Array.from({ length: 32 }).map((_, i) => {
+                const angle = (i / 32) * 360;
+                const rad = (angle * Math.PI) / 180;
+                const cx = 1080;
+                const cy = 450;
+                const len = 1200;
+                return (
+                  <line
+                    key={i}
+                    x1={cx}
+                    y1={cy}
+                    x2={cx + Math.cos(rad) * len}
+                    y2={cy + Math.sin(rad) * len}
+                    stroke="rgba(13,13,15,0.06)"
+                    strokeWidth="1"
+                    strokeDasharray="1000"
+                    strokeDashoffset="1000"
+                  />
+                );
+              })}
+            </svg>
+          </div>
 
           {/* BUILDING!! action word */}
           <motion.div
