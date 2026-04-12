@@ -58,7 +58,7 @@ const PROJECTS = [
   },
 ]
 
-const FILTERS = ['All', 'Full Stack', 'Visualizer']
+const FILTERS = ['All', 'Full Stack', 'Visualizer', 'Backend']
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('All')
