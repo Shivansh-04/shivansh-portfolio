@@ -162,6 +162,7 @@ export default function Skills() {
 
   return (
     <div
+      id="skills"
       className="relative w-full paper-bg"
       style={{ borderBottom: "3px solid #0d0d0f" }}
     >

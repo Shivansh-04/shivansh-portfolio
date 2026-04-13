@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CustomCursor from "./components/CustomCursor";
 import ScrollProgress from "./components/ScrollProgress";
-import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Skills from "./sections/Skills";
@@ -13,6 +12,7 @@ import ToBeContinued from "./components/ToBeContinued";
 import IntroAnimation from "./components/IntroAnimation";
 import ThemeToggle from "./components/ThemeToggle";
 import MangaProgress from "./components/MangaProgress";
+import TimeAware from './components/TimeAware'
 
 export default function App() {
   const [introComplete, setIntroComplete] = useState(false);
@@ -44,9 +44,9 @@ export default function App() {
         <div id="scroll-progress" />
         <CustomCursor />
         <ScrollProgress />
-        {/* <Navbar />
-        <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
-        <MangaProgress /> */}
+        {/* <ThemeToggle isDark={isDark} onToggle={toggleTheme} /> */}
+        <MangaProgress />
+        <TimeAware />
 
         <AnimatePresence>
           <main>

@@ -15,52 +15,55 @@ export default function Hero() {
   const panelBorderRightRef = useRef(null);
 
   useEffect(() => {
-  const timeout = setTimeout(() => {
-
-    // ── 1. Speed lines draw outward ──
-    if (speedLinesRef.current) {
-      const lines = Array.from(speedLinesRef.current.querySelectorAll('line'))
-      if (lines.length > 0) {
-        animate(lines, {
-          strokeDashoffset: [1000, 0],
-          ease: 'easeOutExpo',
-          duration: 800,
-          delay: stagger(20, { start: 200 }),
-        })
+    const timeout = setTimeout(() => {
+      // ── 1. Speed lines draw outward ──
+      if (speedLinesRef.current) {
+        const lines = Array.from(
+          speedLinesRef.current.querySelectorAll("line"),
+        );
+        if (lines.length > 0) {
+          animate(lines, {
+            strokeDashoffset: [1000, 0],
+            ease: "easeOutExpo",
+            duration: 800,
+            delay: stagger(20, { start: 200 }),
+          });
+        }
       }
-    }
 
-    // ── 2. SHIVANSH letter ink-stamp ──
-    if (titleRef.current) {
-      const letters = Array.from(titleRef.current.querySelectorAll('.manga-letter'))
-      if (letters.length > 0) {
-        animate(letters, {
-          scale: [1.4, 1],
-          opacity: [0, 1],
-          ease: 'easeOutElastic(1, .5)',
-          duration: 600,
-          delay: stagger(60, { start: 400 }),
-        })
+      // ── 2. SHIVANSH letter ink-stamp ──
+      if (titleRef.current) {
+        const letters = Array.from(
+          titleRef.current.querySelectorAll(".manga-letter"),
+        );
+        if (letters.length > 0) {
+          animate(letters, {
+            scale: [1.4, 1],
+            opacity: [0, 1],
+            ease: "easeOutElastic(1, .5)",
+            duration: 600,
+            delay: stagger(60, { start: 400 }),
+          });
+        }
       }
-    }
 
-    // ── 3. Panel border draw-on ──
-    if (panelBorderRef.current) {
-      animate(panelBorderRef.current, {
-        clipPath: ['inset(0 100% 0 0)', 'inset(0 0% 0 0)'],
-        ease: 'easeInOutExpo',
-        duration: 900,
-        delay: 300,
-      })
-    }
+      // ── 3. Panel border draw-on ──
+      if (panelBorderRef.current) {
+        animate(panelBorderRef.current, {
+          clipPath: ["inset(0 100% 0 0)", "inset(0 0% 0 0)"],
+          ease: "easeInOutExpo",
+          duration: 900,
+          delay: 300,
+        });
+      }
+    }, 100); // wait for DOM to fully render
 
-  }, 100) // wait for DOM to fully render
-
-  return () => clearTimeout(timeout)
-}, [])
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <section
+      id="hero"
       className="relative w-full min-h-screen paper-bg overflow-hidden"
       style={{ borderBottom: "3px solid #0d0d0f" }}
     >
@@ -432,7 +435,7 @@ export default function Hero() {
           style={{
             gridColumn: "1",
             gridRow: "2",
-            minHeight: '200px',
+            minHeight: "200px",
             border: "3px solid #0d0d0f",
             borderRight: "1.5px solid #0d0d0f",
             borderTop: "1.5px solid #0d0d0f",
@@ -505,7 +508,7 @@ export default function Hero() {
           style={{
             gridColumn: "2",
             gridRow: "2",
-            minHeight: '200px',
+            minHeight: "200px",
             border: "3px solid #0d0d0f",
             borderLeft: "1.5px solid #0d0d0f",
             borderRight: "1.5px solid #0d0d0f",
