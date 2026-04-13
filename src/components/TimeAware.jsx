@@ -175,7 +175,7 @@ export default function TimeAware() {
                       {[
                         { label: 'ACTIVITY', value: ctx.activity },
                         { label: 'MOOD', value: ctx.mood },
-                        { label: 'TIMEZONE', value: 'IST · GHAZIABAD' },
+                        { label: 'TIMEZONE', value: 'IST · DELHI' },
                       ].map((row, i) => (
                         <div
                           key={i}
