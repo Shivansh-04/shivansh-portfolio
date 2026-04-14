@@ -7,6 +7,8 @@ const PHOTO_SRC = "/hero-avatar-alt.png";
 export default function Hero() {
   const { scrollY } = useScroll();
   const avatarY = useTransform(scrollY, [0, 500], [0, 40]);
+  const buildingY = useTransform(scrollY, [0, 500], [0, -30])
+const halftoneY = useTransform(scrollY, [0, 500], [0, 20])
 
   const speedLinesRef = useRef(null);
   const titleRef = useRef(null);
@@ -68,14 +70,14 @@ export default function Hero() {
       style={{ borderBottom: "3px solid #0d0d0f" }}
     >
       {/* ── Halftone dot texture ── */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-40"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, #0d0d0f 1px, transparent 1px)",
-          backgroundSize: "16px 16px",
-        }}
-      />
+      <motion.div
+  className="absolute inset-0 opacity-20"
+  style={{
+    backgroundImage: 'radial-gradient(circle, #0d0d0f 1px, transparent 1px)',
+    backgroundSize: '10px 10px',
+    y: halftoneY,
+  }}
+/>
 
       {/* ── Outer panel border ── */}
       <div
@@ -372,16 +374,12 @@ export default function Hero() {
 
           {/* BUILDING!! action word */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.5, rotate: -15 }}
-            animate={{ opacity: 1, scale: 1, rotate: -10 }}
-            transition={{
-              delay: 1.2,
-              duration: 0.5,
-              type: "spring",
-              stiffness: 200,
-            }}
-            className="absolute top-6 right-4 z-20"
-          >
+  initial={{ opacity: 0, scale: 0.5, rotate: -15 }}
+  animate={{ opacity: 1, scale: 1, rotate: -10 }}
+  style={{ y: buildingY }}
+  transition={{ delay: 1.2, duration: 0.5, type: 'spring', stiffness: 200 }}
+  className="absolute top-6 right-4 z-20"
+>
             <span
               className="font-manga text-[#0d0d0f] block"
               style={{

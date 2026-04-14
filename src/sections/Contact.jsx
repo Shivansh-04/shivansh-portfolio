@@ -34,7 +34,7 @@ function FloatingLabelInput({
   const lifted = focused || value.length > 0;
 
   return (
-    <div className="relative" id="contact">
+    <div className="relative">
       <motion.label
         animate={
           lifted
@@ -112,6 +112,7 @@ export default function Contact() {
 
   return (
     <div
+      id="contact"
       className="relative w-full paper-bg"
       style={{ borderBottom: "3px solid #0d0d0f" }}
     >

@@ -84,7 +84,7 @@ export default function Projects() {
         className="relative w-full paper-bg"
         style={{ borderBottom: "3px solid #0d0d0f" }}
       >
-        {/* ── Chapter title bar ── */}
+        {/* Chapter title bar */}
         <div
           className="w-full flex items-center overflow-hidden"
           style={{ borderBottom: "3px solid #0d0d0f" }}
@@ -112,7 +112,6 @@ export default function Projects() {
               THINGS I'VE BUILT
             </motion.h2>
 
-            {/* projects-action.png decorative */}
             <div
               className="relative flex-shrink-0 hidden md:block"
               style={{ height: 110, width: 110 }}
@@ -127,12 +126,12 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* ── Filter tabs ── */}
+        {/* Filter tabs */}
         <div
           className="flex items-center"
           style={{ borderBottom: "3px solid #0d0d0f" }}
         >
-          {FILTERS.map((f, i) => (
+          {FILTERS.map((f) => (
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
@@ -169,7 +168,7 @@ export default function Projects() {
           </span>
         </div>
 
-        {/* ── Project panels grid ── */}
+        {/* Project panels grid */}
         <div className="p-0">
           <motion.div layout className="grid grid-cols-1 md:grid-cols-2">
             <AnimatePresence mode="popLayout">
@@ -181,7 +180,11 @@ export default function Projects() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ delay: i * 0.08, duration: 0.35 }}
-                  className={`relative group cursor-none ${project.featured && filtered.length === PROJECTS.length ? "md:col-span-2" : ""}`}
+                  className={`relative group cursor-none ${
+                    project.featured && filtered.length === PROJECTS.length
+                      ? "md:col-span-2"
+                      : ""
+                  }`}
                   style={{
                     border: "1.5px solid #0d0d0f",
                     borderTop: "none",
@@ -192,7 +195,6 @@ export default function Projects() {
                   whileHover={{ background: "#ede8dc" }}
                   onClick={() => setSelectedProject(project)}
                 >
-                  {/* Panel label */}
                   <div
                     className="absolute top-4 left-4 z-10"
                     style={{
@@ -209,7 +211,6 @@ export default function Projects() {
                     </span>
                   </div>
 
-                  {/* Featured stamp */}
                   {project.featured && (
                     <div
                       className="absolute top-4 right-4 z-10"
@@ -230,7 +231,6 @@ export default function Projects() {
                   )}
 
                   <div className="p-6 pt-12">
-                    {/* Project name */}
                     <h3
                       className="font-manga text-[#0d0d0f] mb-1 leading-tight"
                       style={{
@@ -241,7 +241,6 @@ export default function Projects() {
                       {project.name}
                     </h3>
 
-                    {/* Divider line */}
                     <div className="flex items-center gap-3 mb-4">
                       <div
                         className="flex-1 h-px"
@@ -249,7 +248,6 @@ export default function Projects() {
                       />
                     </div>
 
-                    {/* Tagline */}
                     <p
                       className="font-body mb-6"
                       style={{
@@ -261,7 +259,6 @@ export default function Projects() {
                       {project.tagline}
                     </p>
 
-                    {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-6">
                       {project.tags.map((tag) => (
                         <span
@@ -282,7 +279,6 @@ export default function Projects() {
                       ))}
                     </div>
 
-                    {/* Bottom row — links + read more */}
                     <div className="flex items-center justify-between">
                       <div
                         className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
@@ -330,7 +326,6 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  {/* Bottom panel number */}
                   <div
                     className="absolute bottom-3 right-4 font-manga"
                     style={{
@@ -349,7 +344,6 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* ── Project Modal ── */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -375,7 +369,6 @@ export default function Projects() {
               }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Modal top bar */}
               <div
                 className="flex items-center justify-between px-6 py-3"
                 style={{
@@ -399,7 +392,6 @@ export default function Projects() {
               </div>
 
               <div className="p-8">
-                {/* Name */}
                 <div className="flex items-start justify-between mb-2 gap-4">
                   <h3
                     className="font-manga text-[#0d0d0f] leading-tight"
@@ -457,7 +449,6 @@ export default function Projects() {
                   {selectedProject.description}
                 </p>
 
-                {/* Challenge box */}
                 <div
                   className="mb-6 p-4"
                   style={{
@@ -480,7 +471,6 @@ export default function Projects() {
                   </p>
                 </div>
 
-                {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-8">
                   {selectedProject.tags.map((tag) => (
                     <span
@@ -501,7 +491,6 @@ export default function Projects() {
                   ))}
                 </div>
 
-                {/* CTA row */}
                 <div className="flex gap-3">
                   <a
                     href={selectedProject.github}

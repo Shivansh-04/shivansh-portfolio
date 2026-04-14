@@ -38,13 +38,13 @@ function StatCard({ label, value, suffix, sub, panel, index }) {
 
   return (
     <motion.div
+    
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       className="relative flex flex-col"
-      id="opensource"
       style={{
         border: "2px solid #0d0d0f",
         borderRight: index < 2 ? "1px solid #0d0d0f" : "2px solid #0d0d0f",
@@ -159,6 +159,7 @@ function StatCard({ label, value, suffix, sub, panel, index }) {
 export default function OpenSource() {
   return (
     <div
+      id="opensource"
       className="relative w-full paper-bg"
       style={{ borderBottom: "3px solid #0d0d0f" }}
     >
