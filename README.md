@@ -1,208 +1,194 @@
-# ░░ SHIVANSH — THE DEVELOPER CHRONICLES ░░
-### `VOL.01` · `FULL STACK` · `OPEN SOURCE`
+# SHIVANSH: THE DEVELOPER CHRONICLES
+
+`VOL.01` · `MANGA PORTFOLIO` · `REACT + VITE`
 
 ---
 
-```
-╔══════════════════════════════════════════════════════════════╗
-║                                                              ║
-║    ██████╗ ██╗  ██╗██╗██╗   ██╗ █████╗ ███╗  ██╗███████╗     ║
-║   ██╔════╝ ██║  ██║██║██║   ██║██╔══██╗████╗ ██║██╔════╝     ║
-║   ╚══███╗  ███████║██║╚██╗ ██╔╝███████║██╔██╗██║███████╗     ║
-║      ███╗  ██╔══██║██║ ╚████╔╝ ██╔══██║██║╚████║╚════██║     ║
-║   ██████╔╝ ██║  ██║██║  ╚██╔╝  ██║  ██║██║ ╚███║███████║     ║
-║   ╚═════╝  ╚═╝  ╚═╝╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚══╝╚══════╝     ║
-║                                                              ║
-║              !! THE DEVELOPER CHRONICLES !!                  ║
-╚══════════════════════════════════════════════════════════════╝
-```
-
-> *"Building full-stack products that solve real problems —*  
-> *from complex algorithms to clean, fast web apps."*
-
----
-
-## ◼ PANEL A — CHARACTER FILE
-
-| ATTRIBUTE | VALUE |
-|-----------|-------|
-| `CLASS` | Full Stack Developer |
-| `STACK` | MERN (MongoDB · Express · React · Node) |
-| `COLLEGE` | RKGIT, Ghaziabad |
-| `STATUS` | 🟢 Open to Work |
-| `DSA` | 200+ Problems Solved |
-| `QUEST` | GSoC 2026 Aspirant |
-| `TIMEZONE` | IST · Delhi, India |
-
----
-
-## ◼ PANEL B — ABILITY SCORES
-
-```
-LANGUAGES   ████████████████████░░░  JavaScript · Java · C++ · Python
-FRONTEND    █████████████████████░░  React · HTML5 · CSS3 · Tailwind · Framer
-BACKEND     ████████████████████░░░  Node.js · Express · MongoDB
-TOOLS       ████████████████████░░░  Git · GitHub · Postman · Figma
-
-                                              OVERALL RANK: A+
+```text
++--------------------------------------------------------------+
+|                                                              |
+|   ######  ##   ## #### ##    ##    ###    ##    ##  ######   |
+|  ##       ##   ##  ##  ##    ##   ## ##   ###   ## ##        |
+|   #####   #######  ##  ##    ##  ##   ##  ####  ##  #####    |
+|       ##  ##   ##  ##   ##  ##   #######  ## ## ##      ##   |
+|  ######   ##   ## ####   ####    ##   ##  ##  #### ######    |
+|                                                              |
+|              THE DEVELOPER CHRONICLES: PORTFOLIO             |
++--------------------------------------------------------------+
 ```
 
----
+A cinematic developer portfolio built like a manga chapter release. The site mixes bold panel-based layouts, chapter navigation, scroll-driven storytelling, and layered animations so the whole experience feels more like reading a stylized issue than browsing a standard portfolio.
 
-## ◼ PANEL C — THINGS I'VE BUILT
+Live portfolio: [iamshivansh.in](https://iamshivansh.in)
 
-### `PANEL C-1` · MindSpace ★ FEATURED
-> AI-driven mental health support platform
+## Chapter Hook
 
-An anonymous, AI-powered mental health platform with mood tracking, real-time support, and privacy-first architecture.
+This project is designed around one idea:
 
-**Stack:** `React` `Node.js` `MongoDB` `Express` `AI`  
-**Challenge:** Real-time AI interactions with strict data privacy.
+> a portfolio should feel memorable before it feels conventional.
 
-🔗 [Live Demo](https://mental-health-beta.vercel.app/) · [GitHub](https://github.com/Shivansh-04/mental-health.git)
+So instead of a plain hero-plus-projects layout, this build leans into:
 
----
+- manga issue framing
+- chapter-based section navigation
+- ink, burst, stamp, and reveal motion
+- interactive hidden details
+- a mobile experience that still feels intentional
 
-### `PANEL C-2` · SurakshaSetu ★ FEATURED
-> AI-powered crime reporting system
+## Main Arcs
 
-Classifies crime reports using AI, routes them to authorities, and provides real-time location-based tracking.
+### 1. Story-first portfolio structure
 
-**Stack:** `MERN` `AI` `Maps API` `Socket.io`  
-**Challenge:** Multi-API integration with reliable real-time pipeline.
+Each section behaves like a chapter in a comic issue:
 
-🔗 [GitHub](https://github.com/Shivansh-04)
+- `Hero` opens with a bold cover-page vibe
+- `About` reads like a character dossier
+- `Skills` uses upgraded stat-bar style animation
+- `Projects` and `Open Source` continue the story arc
+- `Achievement Wall` acts like an unlock board
+- `Contact` closes the issue before the final `To Be Continued`
 
----
+### 2. Motion system with Anime.js + Framer Motion
 
-### `PANEL C-3` · Sorting Visualizer
-> Interactive algorithm visualization tool
+The experience combines layout animation and impact animation:
 
-Step-by-step animations for Bubble, Merge, Quick Sort with performance comparison.
+- Framer Motion for section transitions and staged entrances
+- Anime.js for unlock effects, impact bursts, line reveals, and stat energy
+- reusable interaction hooks added through component-level triggers
 
-**Stack:** `JavaScript` `React` `CSS`
+### 3. Advanced interactive details
 
-🔗 [Live Demo](https://sortingvisualizer-zeta.vercel.app/) · [GitHub](https://github.com/Shivansh-04/sort-scape-animations.git)
+This build now includes some less-common touches that make it stand out:
 
----
+- `ContextAwareFX` for section-aware hover labels and click impact bursts
+- `SecretTerminal` hidden command console for power-user interaction
+- `AchievementWall` unlock-chain animation and badge reveal styling
+- `PlotTwist` impact trigger for manga-style shock moments
+- `MobileChapterDock` for cleaner small-screen chapter navigation
 
-### `PANEL C-4` · Image Upload & Storage Service
-> Backend service for file uploads using ImageKit
+## Feature Panels
 
-Express + Multer based service for image processing and secure cloud storage.
+| Panel | What it does |
+| --- | --- |
+| `IntroAnimation` | Opens the portfolio like a cover reveal |
+| `MangaProgress` | Desktop chapter navigation styled like manga progress |
+| `MobileChapterDock` | Quick mobile navigation with chapter shortcuts |
+| `TimeAware` | Time-based context layer for the page mood |
+| `PlotTwist` | Surprise manga-panel interaction moment |
+| `AchievementWall` | Badge wall with unlock energy and stat-card framing |
+| `ContextAwareFX` | Global hover/click feedback tied to nearby sections |
+| `SecretTerminal` | Hidden terminal with commands like `help`, `goto`, and `plottwist` |
+| `ToBeContinued` | Closing panel that ends the issue cleanly |
 
-**Stack:** `Node.js` `Express` `Multer` `ImageKit API`
+## Secret Terminal
 
-🔗 [GitHub](https://github.com/Shivansh-04)
+There is a hidden terminal built into the portfolio.
 
----
+Open it with:
 
-## ◼ PANEL D — ACHIEVEMENT UNLOCKED
+- `` ` `` (backtick)
+- `Ctrl/Cmd + K`
 
-```
-★ DSA FOCUS        200+   Problems across LeetCode & CodeChef
-★ FULL STACK        3x    Production-grade MERN projects shipped  
-★ AI INTEGRATION    2x    Projects with real AI/ML pipelines
-```
+Available commands include:
 
-### HACKATHON ARC
-| EVENT | YEAR | ROLE |
-|-------|------|------|
-| Smart India Hackathon | 2024 | Built & Presented |
-| Binary Hacks 2.0 | 2024 | Competed |
+- `help`
+- `chapters`
+- `goto hero`
+- `goto skills`
+- `goto achievements`
+- `plottwist`
+- `time`
+- `clear`
+- `close`
 
-### ACTIVE QUEST
-```
-[████░░░░░░░░░░░░] 4/8 MILESTONES
+## Tech Stack
 
->> Google Summer of Code 2026
-   Reading codebases, filing issues, building context
-   in web & AI open source orgs.
-```
+| Tool | Purpose |
+| --- | --- |
+| `React 19` | Component architecture |
+| `Vite` | Fast development and production builds |
+| `Tailwind CSS` | Utility-first styling |
+| `Framer Motion` | Motion choreography |
+| `Anime.js` | High-impact custom animations |
+| `Lucide React` | Icon system |
+| `React Icons` | Supplemental iconography |
 
----
-
-## ◼ PANEL E — CONTACT TRANSMISSION
-
-```
-┌─────────────────────────────────────────────┐
-│                                             │
-│   LET'S BUILD SOMETHING.                   │
-│   Open to internships, freelance,           │
-│   and GSoC collaborations.                  │
-│                                             │
-└─────────────────────────────────────────────┘
-```
-
-| CHANNEL | LINK |
-|---------|------|
-| 📧 Email | [shivanshgupta0987@gmail.com](mailto:shivanshgupta0987@gmail.com) |
-| 💼 LinkedIn | [gupta-shivansh](https://www.linkedin.com/in/gupta-shivansh/) |
-| 🐙 GitHub | [@Shivansh-04](https://github.com/Shivansh-04) |
-| 🧩 LeetCode | [shivansh](https://leetcode.com/shivansh) |
-| 🍴 CodeChef | [its_dev_04](https://www.codechef.com/users/its_dev_04) |
-| 🌐 Portfolio | [iamshivansh.in](https://iamshivansh.in) |
-
----
-
-## ◼ PANEL F — TECH STACK MANIFEST
-
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Framer](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-
----
-
-## ◼ PANEL G — PORTFOLIO SETUP (V2)
-
-> This portfolio is built with a manga/comic-book aesthetic. Every section is a chapter.
+## Local Setup
 
 ```bash
-# Clone the repository
 git clone https://github.com/Shivansh-04/shivansh-portfolio.git
-
-# Navigate into it
 cd shivansh-portfolio
-
-# Install dependencies
 npm install
-
-# Start dev server
 npm run dev
+```
 
-# Build for production
+Production build:
+
+```bash
 npm run build
 ```
 
-### Stack
-| Tool | Purpose |
-|------|---------|
-| `Vite` | Build tool & dev server |
-| `React 19` | UI framework |
-| `Tailwind CSS v3` | Utility-first styling |
-| `Framer Motion` | Page & component animations |
-| `Anime.js v4` | SVG speed lines, stamp effects, stat bars |
-| `Bangers` (Google Font) | Manga display font |
-| `Playfair Display` | Serif accent font |
+## Project Structure
+
+```text
+src/
+  components/
+    AchievementWall.jsx
+    ContextAwareFX.jsx
+    MangaProgress.jsx
+    MobileChapterDock.jsx
+    PlotTwist.jsx
+    SecretTerminal.jsx
+    ToBeContinued.jsx
+  sections/
+    About.jsx
+    Contact.jsx
+    Hero.jsx
+    OpenSource.jsx
+    Projects.jsx
+    Skills.jsx
+  App.jsx
+```
+
+## Design Notes
+
+This portfolio intentionally avoids the default "clean SaaS card grid" look.
+
+It is built around:
+
+- expressive typography
+- paper-like contrast and manga framing
+- strong section identity
+- playful hidden interactions
+- desktop drama without breaking mobile usability
+
+## Recent Upgrades
+
+- refined mobile chapter navigation for smaller screens
+- upgraded achievement wall presentation and badge alignment
+- added context-aware hover labels and click-burst feedback
+- added hidden command terminal
+- restored a cleaner classic `To Be Continued` ending
+
+## Build Status
+
+Latest production verification completed successfully on `April 14, 2026` with:
+
+```bash
+npm run build
+```
+
+## Contact
+
+- Portfolio: [iamshivansh.in](https://iamshivansh.in)
+- GitHub: [@Shivansh-04](https://github.com/Shivansh-04)
+- LinkedIn: [gupta-shivansh](https://www.linkedin.com/in/gupta-shivansh/)
+- Email: [shivanshgupta0987@gmail.com](mailto:shivanshgupta0987@gmail.com)
 
 ---
 
-## ◼ PANEL H — GITHUB STATS
-
+```text
+[ NEXT ISSUE PREVIEW ]
+More interaction. More motion. More story.
+The portfolio is meant to feel alive, and this chapter keeps evolving.
 ```
-╔═══════════════════════════════════════════╗
-║                                           ║
-║        ▸▸▸  TO BE CONTINUED  ◂◂◂         ║
-║                                           ║
-║   The Developer Chronicles will return.   ║
-║   NEXT: V3 · 3D EDITION · COMING SOON    ║
-║                                           ║
-╚═══════════════════════════════════════════╝
-```
-
-*VOL.01 · FIN · DESIGNED & BUILT BY SHIVANSH · 2026*

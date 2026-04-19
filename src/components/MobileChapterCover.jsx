@@ -7,8 +7,9 @@ const CHAPTERS = [
   { id: 'skills', number: '03', title: 'STATS', sub: 'Character Sheet' },
   { id: 'projects', number: '04', title: 'PROJECTS', sub: 'Things Built' },
   { id: 'opensource', number: '05', title: 'BEYOND', sub: 'Open Source' },
-  { id: 'github', number: '06', title: 'ACTIVITY', sub: 'Battle Record' },
-  { id: 'contact', number: '07', title: 'CONTACT', sub: 'Final Chapter' },
+  { id: 'achievements', number: '06', title: 'BADGES', sub: 'Unlock Wall' },
+  { id: 'github', number: '07', title: 'ACTIVITY', sub: 'Battle Record' },
+  { id: 'contact', number: '08', title: 'CONTACT', sub: 'Final Chapter' },
 ]
 
 export default function MobileChapterCover() {

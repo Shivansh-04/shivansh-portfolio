@@ -69,43 +69,21 @@ const RANK_COLORS = {
   B: { bg: "#f0ebe0", text: "#0d0d0f" },
 };
 
-function StatBar({ level, delay, barRef }) {
-  return (
-    <div
-      className="relative h-2 w-full overflow-hidden"
-      style={{
-        background: "rgba(13,13,15,0.12)",
-        border: "1px solid rgba(13,13,15,0.2)",
-      }}
-    >
-      <div
-        ref={barRef}
-        className="absolute top-0 left-0 h-full"
-        style={{ width: "0%", background: "#0d0d0f" }}
-      />
-    </div>
-  );
-}
-
 export default function Skills() {
   const [activeCategory, setActiveCategory] = useState(0);
-  const [prevCategory, setPrevCategory] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const sectionRef = useRef(null);
+  const burstRef = useRef(null);
   const contentRef = useRef(null);
-  const barRefs = useRef([]);
-  const badgeRefs = useRef([]);
 
   const active = STATS[activeCategory];
-
-  // ── Animate bars + badges when category changes ──
-  useEffect(() => {
-    barRefs.current = [];
-    badgeRefs.current = [];
-  }, [activeCategory]);
 
   const animateBars = () => {
     const bars = contentRef.current?.querySelectorAll(".stat-bar-fill");
     const badges = contentRef.current?.querySelectorAll(".rank-badge");
+    const rows = contentRef.current?.querySelectorAll(".skill-row");
+    const icons = contentRef.current?.querySelectorAll(".skill-icon-box");
+    const numbers = contentRef.current?.querySelectorAll(".skill-level-number");
 
     if (bars?.length) {
       animate(Array.from(bars), {
@@ -125,20 +103,83 @@ export default function Skills() {
         delay: stagger(60, { start: 100 }),
       });
     }
+
+    if (rows?.length) {
+      animate(Array.from(rows), {
+        translateX: [-20, 0],
+        opacity: [0, 1],
+        ease: "easeOutExpo",
+        duration: 380,
+        delay: stagger(70, { start: 100 }),
+      });
+    }
+
+    if (icons?.length) {
+      animate(Array.from(icons), {
+        scale: [0.84, 1],
+        opacity: [0, 1],
+        ease: "easeOutBack",
+        duration: 420,
+        delay: stagger(60, { start: 180 }),
+      });
+    }
+
+    if (numbers?.length) {
+      Array.from(numbers).forEach((el, index) => {
+        const target = Number(el.dataset.level || 0);
+        const counter = { value: 0 };
+        el.textContent = "0/100";
+        animate(counter, {
+          value: target,
+          round: 1,
+          ease: "easeOutExpo",
+          duration: 850,
+          delay: 220 + index * 80,
+          update: () => {
+            el.textContent = `${counter.value}/100`;
+          },
+        });
+      });
+    }
   };
 
-  // Trigger on mount
   useEffect(() => {
     const timeout = setTimeout(animateBars, 300);
     return () => clearTimeout(timeout);
   }, []);
 
-  // ── Panel wipe transition on tab switch ──
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+
+        const lines = Array.from(burstRef.current?.querySelectorAll("line") || []);
+        if (lines.length) {
+          animate(lines, {
+            strokeDashoffset: [480, 0],
+            opacity: [0.55, 0],
+            ease: "easeOutExpo",
+            duration: 680,
+            delay: stagger(16, { start: 0 }),
+          });
+        }
+
+        observer.unobserve(section);
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   const handleCategoryChange = (index) => {
     if (index === activeCategory || isTransitioning) return;
     setIsTransitioning(true);
 
-    // Slide out current
     animate(contentRef.current, {
       translateX: [0, -40],
       opacity: [1, 0],
@@ -162,13 +203,42 @@ export default function Skills() {
 
   return (
     <div
+      ref={sectionRef}
       id="skills"
-      className="relative w-full paper-bg"
+      className="relative w-full paper-bg overflow-hidden"
       style={{ borderBottom: "3px solid #0d0d0f" }}
     >
-      {/* Chapter title bar */}
       <div
-        className="w-full flex items-center overflow-hidden"
+        ref={burstRef}
+        className="pointer-events-none absolute inset-x-0 top-0 h-44 opacity-50"
+        style={{ zIndex: 0 }}
+      >
+        <svg width="100%" height="100%" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMid slice">
+          {Array.from({ length: 18 }).map((_, i) => {
+            const angle = 160 + (i / 18) * 40;
+            const rad = (angle * Math.PI) / 180;
+            const cx = 720;
+            const cy = 110;
+            const len = 620;
+            return (
+              <line
+                key={i}
+                x1={cx}
+                y1={cy}
+                x2={cx + Math.cos(rad) * len}
+                y2={cy + Math.sin(rad) * len}
+                stroke="rgba(13,13,15,0.12)"
+                strokeWidth={i % 3 === 0 ? "2" : "1"}
+                strokeDasharray="480"
+                strokeDashoffset="480"
+              />
+            );
+          })}
+        </svg>
+      </div>
+
+      <div
+        className="relative z-10 w-full flex items-center overflow-hidden"
         style={{ borderBottom: "3px solid #0d0d0f" }}
       >
         <div
@@ -209,8 +279,7 @@ export default function Skills() {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row" style={{ minHeight: "60vh" }}>
-        {/* Category tabs */}
+      <div className="relative z-10 flex flex-col md:flex-row" style={{ minHeight: "60vh" }}>
         <div
           className="flex flex-row md:flex-col flex-shrink-0"
           style={{ borderRight: "3px solid #0d0d0f", minWidth: 160 }}
@@ -250,9 +319,7 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Stats content */}
         <div ref={contentRef} className="flex-1 p-8 md:p-12">
-          {/* HUD bar */}
           <div
             className="flex items-center justify-between px-5 py-3 mb-8"
             style={{ border: "2px solid #0d0d0f", background: "#0d0d0f" }}
@@ -271,14 +338,13 @@ export default function Skills() {
             </span>
           </div>
 
-          {/* Skill rows */}
           <div className="flex flex-col gap-5">
-            {active.skills.map((skill, i) => (
+            {active.skills.map((skill) => (
               <div
                 key={`${activeCategory}-${skill.name}`}
-                className="flex items-center gap-5"
+                className="skill-row flex items-center gap-5"
+                style={{ opacity: 0 }}
               >
-                {/* Rank badge */}
                 <div
                   className="rank-badge flex-shrink-0 flex items-center justify-center font-manga"
                   style={{
@@ -296,21 +362,20 @@ export default function Skills() {
                   {skill.rank}
                 </div>
 
-                {/* Icon */}
                 <div
-                  className="flex-shrink-0 flex items-center justify-center"
+                  className="skill-icon-box flex-shrink-0 flex items-center justify-center"
                   style={{
                     width: 40,
                     height: 40,
                     border: "2px solid #0d0d0f",
                     background: "white",
                     boxShadow: "2px 2px 0px #0d0d0f",
+                    opacity: 0,
                   }}
                 >
                   <skill.Icon size={20} color="#0d0d0f" />
                 </div>
 
-                {/* Name + bar */}
                 <div className="flex-1 flex flex-col gap-1.5">
                   <div className="flex items-center justify-between">
                     <span
@@ -324,7 +389,8 @@ export default function Skills() {
                       {skill.name}
                     </span>
                     <span
-                      className="font-manga"
+                      className="skill-level-number font-manga"
+                      data-level={skill.level}
                       style={{
                         fontSize: 12,
                         color: "rgba(13,13,15,0.4)",
@@ -352,7 +418,6 @@ export default function Skills() {
             ))}
           </div>
 
-          {/* DEV NOTE */}
           <div
             className="mt-8 px-5 py-3 flex items-center gap-3"
             style={{

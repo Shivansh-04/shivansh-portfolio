@@ -1,20 +1,18 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { animate, stagger, createTimeline } from "animejs";
+import { animate, stagger } from "animejs";
 
 const PHOTO_SRC = "/hero-avatar-alt.png";
 
 export default function Hero() {
   const { scrollY } = useScroll();
   const avatarY = useTransform(scrollY, [0, 500], [0, 40]);
-  const buildingY = useTransform(scrollY, [0, 500], [0, -30])
-const halftoneY = useTransform(scrollY, [0, 500], [0, 20])
+  const buildingY = useTransform(scrollY, [0, 500], [0, -30]);
+  const halftoneY = useTransform(scrollY, [0, 500], [0, 20]);
 
   const speedLinesRef = useRef(null);
   const titleRef = useRef(null);
   const panelBorderRef = useRef(null);
-  const panelBorderTopRef = useRef(null);
-  const panelBorderRightRef = useRef(null);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -329,7 +327,7 @@ const halftoneY = useTransform(scrollY, [0, 500], [0, 20])
 
           {/* Halftone behind character */}
           <div
-            className="absolute inset-0 opacity-20"
+            className="absolute inset-0 opacity-20 pointer-events-none"
             style={{
               backgroundImage:
                 "radial-gradient(circle, #0d0d0f 1px, transparent 1px)",
@@ -374,12 +372,12 @@ const halftoneY = useTransform(scrollY, [0, 500], [0, 20])
 
           {/* BUILDING!! action word */}
           <motion.div
-  initial={{ opacity: 0, scale: 0.5, rotate: -15 }}
-  animate={{ opacity: 1, scale: 1, rotate: -10 }}
-  style={{ y: buildingY }}
-  transition={{ delay: 1.2, duration: 0.5, type: 'spring', stiffness: 200 }}
-  className="absolute top-6 right-4 z-20"
->
+            initial={{ opacity: 0, scale: 0.5, rotate: -15 }}
+            animate={{ opacity: 1, scale: 1, rotate: -10 }}
+            style={{ y: buildingY }}
+            transition={{ delay: 1.2, duration: 0.5, type: "spring", stiffness: 200 }}
+            className="absolute top-6 right-4 z-20"
+          >
             <span
               className="font-manga text-[#0d0d0f] block"
               style={{

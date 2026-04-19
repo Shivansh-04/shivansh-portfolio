@@ -21,6 +21,11 @@ import ChapterLoader from "./components/ChapterLoader";
 import CodingDNA from "./components/CodingDNA";
 import HiringMode from "./components/HiringMode";
 import MobileChapterCover from "./components/MobileChapterCover";
+import MobileChapterDock from "./components/MobileChapterDock";
+import AchievementWall from "./components/AchievementWall";
+import ContextAwareFX from "./components/ContextAwareFX";
+import SecretTerminal from "./components/SecretTerminal";
+import JourneyMode from "./components/JourneyMode";
 
 export default function App() {
   const [introComplete, setIntroComplete] = useState(false);
@@ -41,58 +46,6 @@ export default function App() {
     document.documentElement.setAttribute("data-theme", "paper");
   }, []);
 
-//   useEffect(() => {
-//   if (!loaderComplete) return
-
-//   let touchStartX = 0
-//   let touchStartY = 0
-
-//   const CHAPTER_IDS = ['hero', 'about', 'skills', 'projects', 'opensource', 'github', 'contact']
-
-//   const getCurrentChapter = () => {
-//     const scrollY = window.scrollY
-//     let current = 0
-//     CHAPTER_IDS.forEach((id, i) => {
-//       const el = document.getElementById(id)
-//       if (el && scrollY >= el.offsetTop - 200) current = i
-//     })
-//     return current
-//   }
-
-//   const onTouchStart = (e) => {
-//     touchStartX = e.touches[0].clientX
-//     touchStartY = e.touches[0].clientY
-//   }
-
-//   const onTouchEnd = (e) => {
-//     const dx = e.changedTouches[0].clientX - touchStartX
-//     const dy = e.changedTouches[0].clientY - touchStartY
-
-//     // Only trigger on predominantly vertical swipes
-//     if (Math.abs(dy) < Math.abs(dx)) return
-//     if (Math.abs(dy) < 60) return
-
-//     const current = getCurrentChapter()
-
-//     if (dy < 0 && current < CHAPTER_IDS.length - 1) {
-//       // Swipe up — next chapter
-//       const next = document.getElementById(CHAPTER_IDS[current + 1])
-//       if (next) next.scrollIntoView({ behavior: 'smooth' })
-//     } else if (dy > 0 && current > 0) {
-//       // Swipe down — previous chapter
-//       const prev = document.getElementById(CHAPTER_IDS[current - 1])
-//       if (prev) prev.scrollIntoView({ behavior: 'smooth' })
-//     }
-//   }
-
-//   window.addEventListener('touchstart', onTouchStart, { passive: true })
-//   window.addEventListener('touchend', onTouchEnd, { passive: true })
-
-//   return () => {
-//     window.removeEventListener('touchstart', onTouchStart)
-//     window.removeEventListener('touchend', onTouchEnd)
-//   }
-// }, [loaderComplete])
 
   return (
     <>
@@ -110,11 +63,14 @@ export default function App() {
       >
         <div id="scroll-progress" />
         <CustomCursor />
+        <ContextAwareFX />
+        <SecretTerminal />
         <ScrollProgress />
         {/* <ThemeToggle isDark={isDark} onToggle={toggleTheme} /> */}
         {/* <HiringMode /> */}
         <MangaProgress />
         {/* <MobileChapterCover /> */}
+        <MobileChapterDock />
         <TimeAware />
         {/* <VisitorCounter /> */}
         <PlotTwist />
@@ -122,6 +78,7 @@ export default function App() {
         <AnimatePresence>
           <main>
             <Hero />
+            {/* <JourneyMode /> */}
             <div className="flex flex-col items-center w-full">
               <About />
               {/* <InkSplash /> */}
@@ -130,6 +87,8 @@ export default function App() {
               <Projects />
               {/* <InkSplash /> */}
               <OpenSource />
+              {/* <InkSplash /> */}
+              <AchievementWall />
               {/* <InkSplash /> */}
               <GitHubGraph />
               {/* <InkSplash /> */}

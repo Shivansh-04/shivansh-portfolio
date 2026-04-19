@@ -140,7 +140,7 @@ export default function ToBeContinued() {
           <div className="h-px w-12" style={{ background: 'rgba(255,255,255,0.2)' }} />
         </motion.div>
 
-        {/* TO BE CONTINUED — letter by letter */}
+        {/* TO BE CONTINUED ” letter by letter */}
         <div
           ref={textRef}
           className="flex items-center gap-1 flex-wrap justify-center px-8"
@@ -207,7 +207,7 @@ export default function ToBeContinued() {
         </motion.p>
       </div>
 
-      {/* Bottom right — next volume teaser */}
+      {/* Bottom right â€” next volume teaser */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -219,7 +219,7 @@ export default function ToBeContinued() {
           className="font-manga text-white opacity-15"
           style={{ fontSize: 9, letterSpacing: '0.2em' }}
         >
-          NEXT: V3 · 3D EDITION
+          NEXT: V3 Â· 3D EDITION
         </span>
         <span
           className="font-manga text-white opacity-10"

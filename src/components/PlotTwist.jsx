@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { animate, stagger } from 'animejs'
 
 const PLOT_TWISTS = [
   "PLOT TWIST: He solved 200+ problems AND plans spiritual pilgrimages to Braj Dham.",
@@ -11,23 +12,75 @@ const PLOT_TWISTS = [
 ]
 
 export default function PlotTwist() {
-  const [triggered, setTriggered] = useState(false)
   const [twistIndex, setTwistIndex] = useState(0)
   const [visible, setVisible] = useState(false)
+  const linesRef = useRef(null)
+  const cardRef = useRef(null)
+  const textRef = useRef(null)
+  const hideTimerRef = useRef(null)
 
   const trigger = () => {
     const next = Math.floor(Math.random() * PLOT_TWISTS.length)
     setTwistIndex(next)
-    setTriggered(true)
     setVisible(true)
-    setTimeout(() => setVisible(false), 4000)
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
+    hideTimerRef.current = setTimeout(() => setVisible(false), 6500)
   }
+
+  useEffect(() => {
+    if (!visible) return
+
+    const timeout = setTimeout(() => {
+      const lines = Array.from(linesRef.current?.querySelectorAll('line') || [])
+      const letters = Array.from(textRef.current?.querySelectorAll('.twist-letter') || [])
+
+      if (cardRef.current) {
+        animate(cardRef.current, {
+          translateX: [0, -10, 8, -6, 0],
+          rotate: [-2, -3, -1, -2, -2],
+          ease: 'easeOutExpo',
+          duration: 520,
+        })
+      }
+
+      if (lines.length) {
+        animate(lines, {
+          strokeDashoffset: [900, 0],
+          opacity: [0.9, 0.12],
+          ease: 'easeOutExpo',
+          duration: 700,
+          delay: stagger(14, { start: 60 }),
+        })
+      }
+
+      if (letters.length) {
+        animate(letters, {
+          opacity: [0, 1],
+          scale: [0.4, 1.08, 1],
+          rotate: ['-8deg', '2deg', '0deg'],
+          ease: 'easeOutElastic(1, .55)',
+          duration: 620,
+          delay: stagger(18, { start: 180 }),
+        })
+      }
+    }, 40)
+
+    return () => clearTimeout(timeout)
+  }, [visible, twistIndex])
+
+  useEffect(() => {
+    return () => {
+      if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
+    }
+  }, [])
 
   return (
     <>
-      {/* Hidden button — subtle, easy to miss */}
       <motion.button
         onClick={trigger}
+        data-plot-twist-trigger
+        data-fx
+        data-fx-label="SHOCK PANEL"
         className="fixed bottom-16 right-6 z-[9993] font-manga"
         style={{
           background: 'transparent',
@@ -49,11 +102,9 @@ export default function PlotTwist() {
         PLOT TWIST?
       </motion.button>
 
-      {/* Full screen flash + reveal */}
       <AnimatePresence>
         {visible && (
           <>
-            {/* White flash */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 1, 0] }}
@@ -62,32 +113,33 @@ export default function PlotTwist() {
               style={{ background: '#f0ebe0' }}
             />
 
-            {/* Speed lines burst */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: [0, 0.6, 0] }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="fixed inset-0 z-[99989] pointer-events-none flex items-center justify-center"
             >
-              <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+              <svg ref={linesRef} width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
                 {Array.from({ length: 24 }).map((_, i) => {
                   const angle = (i / 24) * 360
                   const rad = (angle * Math.PI) / 180
                   return (
                     <line
                       key={i}
-                      x1={720} y1={450}
+                      x1={720}
+                      y1={450}
                       x2={720 + Math.cos(rad) * 900}
                       y2={450 + Math.sin(rad) * 900}
                       stroke="#0d0d0f"
                       strokeWidth={i % 3 === 0 ? '3' : '1'}
+                      strokeDasharray="900"
+                      strokeDashoffset="900"
                     />
                   )
                 })}
               </svg>
             </motion.div>
 
-            {/* Plot twist card */}
             <motion.div
               initial={{ scale: 0.5, opacity: 0, rotate: -6 }}
               animate={{ scale: 1, opacity: 1, rotate: -2 }}
@@ -96,6 +148,7 @@ export default function PlotTwist() {
               className="fixed inset-0 z-[99991] flex items-center justify-center pointer-events-none px-8"
             >
               <div
+                ref={cardRef}
                 style={{
                   background: '#0d0d0f',
                   border: '4px solid #f0ebe0',
@@ -106,7 +159,6 @@ export default function PlotTwist() {
                   position: 'relative',
                 }}
               >
-                {/* Top label */}
                 <div
                   style={{
                     position: 'absolute',
@@ -122,8 +174,8 @@ export default function PlotTwist() {
                   </span>
                 </div>
 
-                {/* Twist text */}
                 <p
+                  ref={textRef}
                   className="font-manga text-white text-center"
                   style={{
                     fontSize: 'clamp(18px, 3vw, 28px)',
@@ -132,10 +184,17 @@ export default function PlotTwist() {
                     WebkitTextStroke: '0.5px rgba(255,255,255,0.5)',
                   }}
                 >
-                  {PLOT_TWISTS[twistIndex]}
+                  {PLOT_TWISTS[twistIndex].split('').map((char, i) => (
+                    <span
+                      key={i}
+                      className="twist-letter inline-block"
+                      style={{ opacity: 0 }}
+                    >
+                      {char === ' ' ? '\u00A0' : char}
+                    </span>
+                  ))}
                 </p>
 
-                {/* Bottom panel number */}
                 <div className="flex justify-end mt-6">
                   <span
                     className="font-manga text-white opacity-20"

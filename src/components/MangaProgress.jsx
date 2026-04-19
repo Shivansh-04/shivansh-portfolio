@@ -7,8 +7,9 @@ const CHAPTERS = [
   { id: 'skills', label: 'CH.03', title: 'STATS', sub: 'Ability Cards' },
   { id: 'projects', label: 'CH.04', title: 'PROJECTS', sub: 'Built Things' },
   { id: 'opensource', label: 'CH.05', title: 'BEYOND', sub: 'Achievements' },
-  { id: 'github', label: 'CH.06', title: 'ACTIVITY', sub: 'Battle Record' },
-  { id: 'contact', label: 'CH.07', title: 'CONTACT', sub: 'Final Chapter' },
+  { id: 'achievements', label: 'CH.06', title: 'BADGES', sub: 'Unlock Wall' },
+  { id: 'github', label: 'CH.07', title: 'ACTIVITY', sub: 'Battle Record' },
+  { id: 'contact', label: 'CH.08', title: 'CONTACT', sub: 'Final Chapter' },
 ]
 
 export default function MangaProgress() {
@@ -47,7 +48,7 @@ export default function MangaProgress() {
       {visible && (
         <motion.aside
           initial={{ opacity: 0, x: 32 }}
-          animate={{ opacity: 1, x: 0 }}
+          animate={{ opacity: 1, x: 0 , y: '-40%'}}
           exit={{ opacity: 0, x: 32 }}
           transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="fixed right-4 top-1/2 z-[9991] hidden -translate-y-1/2 xl:flex"
@@ -138,6 +139,8 @@ export default function MangaProgress() {
                   <motion.button
                     key={chapter.id}
                     onClick={() => scrollToChapter(chapter.id)}
+                    data-fx
+                    data-fx-label={chapter.title}
                     className="flex items-center gap-3 text-left"
                     style={{ cursor: 'none' }}
                     whileHover={{ x: -4 }}
