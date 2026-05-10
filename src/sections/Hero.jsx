@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { animate, stagger } from "animejs";
 
-const PHOTO_SRC = "/hero-avatar-alt.png";
+const PHOTO_SRC = "/hero.png";
 
 export default function Hero() {
   const { scrollY } = useScroll();
@@ -395,7 +395,7 @@ export default function Hero() {
           <motion.img
             src={PHOTO_SRC}
             alt="Shivansh manga avatar"
-            className="relative z-10"
+            className="relative z-10 bg-white"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
