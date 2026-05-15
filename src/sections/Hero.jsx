@@ -1,8 +1,18 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { animate, stagger } from "animejs";
+import GlitchText from "../components/ReactBits/glitchTxt";
+import FlowingMenu from "../components/ReactBits/FlowingMenu";
 
 const PHOTO_SRC = "/hero.png";
+
+const quickMenuItems = [
+  { link: "#projects", text: "Work", image: "/projects-action.png" },
+  { link: "#about", text: "About", image: "/about-character.png" },
+  { link: "#skills", text: "Skills", image: "/hero-avatar-alt.png" },
+  { link: "/Shivansh_Resue.pdf", text: "Resume", image: "/2.png" },
+  { link: "#contact", text: "Contact", image: "/sample.jpg" },
+];
 
 export default function Hero() {
   const { scrollY } = useScroll();
@@ -11,7 +21,6 @@ export default function Hero() {
   const halftoneY = useTransform(scrollY, [0, 500], [0, 20]);
 
   const speedLinesRef = useRef(null);
-  const titleRef = useRef(null);
   const panelBorderRef = useRef(null);
 
   useEffect(() => {
@@ -32,21 +41,6 @@ export default function Hero() {
       }
 
       // ── 2. SHIVANSH letter ink-stamp ──
-      if (titleRef.current) {
-        const letters = Array.from(
-          titleRef.current.querySelectorAll(".manga-letter"),
-        );
-        if (letters.length > 0) {
-          animate(letters, {
-            scale: [1.4, 1],
-            opacity: [0, 1],
-            ease: "easeOutElastic(1, .5)",
-            duration: 600,
-            delay: stagger(60, { start: 400 }),
-          });
-        }
-      }
-
       // ── 3. Panel border draw-on ──
       if (panelBorderRef.current) {
         animate(panelBorderRef.current, {
@@ -202,7 +196,6 @@ export default function Hero() {
           {/* SHIVANSH — full manga title */}
           <div className="flex-1 flex flex-col justify-center">
             <h1
-              ref={titleRef}
               className="font-manga text-[#0d0d0f] leading-none"
               style={{
                 fontSize: "clamp(60px, 9vw, 130px)",
@@ -212,15 +205,14 @@ export default function Hero() {
                 lineHeight: 0.9,
               }}
             >
-              {"SHIVANSH".split("").map((char, i) => (
-                <span
-                  key={i}
-                  className="manga-letter inline-block"
-                  style={{ opacity: 0 }}
-                >
-                  {char}
-                </span>
-              ))}
+              <GlitchText
+                speed={0.9}
+                enableShadows={true}
+                enableOnHover={false}
+                className="hero-glitch"
+              >
+                SHIVANSH
+              </GlitchText>
             </h1>
 
             {/* Subtitle */}
@@ -530,37 +522,17 @@ export default function Hero() {
           </div>
 
           <div className="pt-6 flex flex-col gap-3 w-full">
-            <button
-              onClick={() =>
-                document
-                  .getElementById("projects")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="font-manga w-full py-3 text-white bg-[#0d0d0f] transition-all duration-150 active:scale-95"
-              style={{
-                fontSize: 14,
-                letterSpacing: "0.15em",
-                border: "2.5px solid #0d0d0f",
-                boxShadow: "4px 4px 0px #0d0d0f",
-              }}
-            >
-              VIEW WORK
-            </button>
-            <a
-              href="./Shivansh_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-manga w-full py-3 text-[#0d0d0f] text-center transition-all duration-150 active:scale-95 block"
-              style={{
-                fontSize: 14,
-                letterSpacing: "0.15em",
-                border: "2.5px solid #0d0d0f",
-                boxShadow: "4px 4px 0px rgba(13,13,15,0.3)",
-                background: "transparent",
-              }}
-            >
-              RESUME
-            </a>
+            <div className="hero-flow-menu">
+              <FlowingMenu
+                items={quickMenuItems}
+                speed={9}
+                textColor="#0d0d0f"
+                bgColor="#f8f4ec"
+                marqueeBgColor="#0d0d0f"
+                marqueeTextColor="#f8f4ec"
+                borderColor="#0d0d0f"
+              />
+            </div>
 
             {/* Scroll cue */}
             <div className="flex items-center gap-2 mt-2">

@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import SectionWrapper from "../components/SectionWrapper";
 
 const FUN_FACTS = [
   { icon: "★", label: "Competitive Programmer" },
