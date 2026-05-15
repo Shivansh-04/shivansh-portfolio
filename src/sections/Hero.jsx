@@ -50,7 +50,7 @@ export default function Hero() {
           delay: 300,
         });
       }
-    }, 100); // wait for DOM to fully render
+    }, 100); // wait for DOM to fully renderr
 
     return () => clearTimeout(timeout);
   }, []);
