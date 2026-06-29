@@ -20,20 +20,20 @@ const PROJECTS = [
     panel: "A",
   },
   {
-    id: 2,
-    name: "SurakshaSetu",
-    tagline: "AI-powered crime reporting system",
-    description:
-      "An intelligent reporting platform that classifies crime reports using AI, routes them to authorities, and provides real-time tracking with location-based insights.",
-    tags: ["MERN", "AI", "Maps API", "Socket.io"],
-    category: ["Full Stack", "AI/ML"],
-    featured: true,
-    github: "https://github.com/Shivansh-04",
-    live: "#",
-    challenges:
-      "Handled multi-API integration and built a reliable real-time communication pipeline.",
-    panel: "B",
-  },
+  id: 2,
+  name: "Options Pricing Engine",
+  tagline: "Black-Scholes · Greeks · Monte Carlo — built from scratch",
+  description:
+    "A full-stack financial derivatives calculator implementing three industry-standard pricing models in pure JavaScript — zero external math libraries. Black-Scholes, all 5 Greeks, and 10,000-path Monte Carlo simulation. The two models converge to the same answer, validating the math engine.",
+  tags: ["Node.js", "Express", "MongoDB", "React", "Vite", "Recharts", "JWT"],
+  category: ["Full Stack", "Fintech"],
+  featured: true,
+  github: "https://github.com/Shivansh-04/options-engine",
+  live: "https://options-engine-red.vercel.app",
+  challenges:
+    "Implementing Normal CDF, Box-Muller transform, and Geometric Brownian Motion from scratch in pure JavaScript without any external math libraries — then validating correctness by proving Black-Scholes and Monte Carlo converge to the same price.",
+  panel: "B",
+},
   {
     id: 3,
     name: "Sorting Visualizer",
