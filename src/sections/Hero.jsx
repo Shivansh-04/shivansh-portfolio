@@ -12,7 +12,7 @@ const quickMenuItems = [
   { link: "#skills", text: "Skills", image: "/hero-avatar-alt.png" },
   { link: "#projects", text: "Work", image: "/projects-action.png" },
   { link: "#contact", text: "Contact", image: "/sample.jpg" },
-  { link: "public/assets/Shivansh_Resume.pdf", text: "Resume", image: "/2.png" },
+  { link: "public/assets/shivansh_resume_main.pdf", text: "Resume", image: "/2.png" },
 ];
 
 export default function Hero() {
