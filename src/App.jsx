@@ -58,12 +58,12 @@ export default function App() {
 
         <CustomCursor />
         <ContextAwareFX />
-        <SecretTerminal />
-        <ScrollProgress />
-        <MangaProgress />
-        <MobileChapterDock />
+        {/* <SecretTerminal /> */}
+        {/* <ScrollProgress /> */}
+        {/* <MangaProgress /> */}
+        {/* <MobileChapterDock /> */}
         <TimeAware />
-        <PlotTwist />
+        {/* <PlotTwist /> */}
 
         <AnimatePresence>
           <main>
