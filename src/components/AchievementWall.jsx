@@ -34,7 +34,7 @@ const BADGES = [
 ];
 
 const STAMPS = [
-  { label: "HACKATHONS", value: "2", Icon: Trophy },
+  { label: "HACKATHONS", value: "6", Icon: Trophy },
   { label: "FEATURED BUILDS", value: "4", Icon: Medal },
   { label: "ACTIVE STREAK", value: "2026", Icon: Flame },
 ];

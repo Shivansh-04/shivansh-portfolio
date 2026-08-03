@@ -7,11 +7,12 @@ import FlowingMenu from "../components/ReactBits/FlowingMenu";
 const PHOTO_SRC = "/hero.png";
 
 const quickMenuItems = [
-  { link: "#projects", text: "Work", image: "/projects-action.png" },
   { link: "#about", text: "About", image: "/about-character.png" },
+  { link: "#experience", text: "Experience", image: "/2.png" },
   { link: "#skills", text: "Skills", image: "/hero-avatar-alt.png" },
-  { link: "/Shivansh_Resue.pdf", text: "Resume", image: "/2.png" },
+  { link: "#projects", text: "Work", image: "/projects-action.png" },
   { link: "#contact", text: "Contact", image: "/sample.jpg" },
+  { link: "public/assets/Shivansh_Resume.pdf", text: "Resume", image: "/2.png" },
 ];
 
 export default function Hero() {

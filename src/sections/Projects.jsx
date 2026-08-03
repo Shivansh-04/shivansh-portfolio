@@ -20,20 +20,20 @@ const PROJECTS = [
     panel: "A",
   },
   {
-  id: 2,
-  name: "Options Pricing Engine",
-  tagline: "Black-Scholes · Greeks · Monte Carlo — built from scratch",
-  description:
-    "A full-stack financial derivatives calculator implementing three industry-standard pricing models in pure JavaScript — zero external math libraries. Black-Scholes, all 5 Greeks, and 10,000-path Monte Carlo simulation. The two models converge to the same answer, validating the math engine.",
-  tags: ["Node.js", "Express", "MongoDB", "React", "Vite", "Recharts", "JWT"],
-  category: ["Full Stack", "Fintech"],
-  featured: true,
-  github: "https://github.com/Shivansh-04/options-engine",
-  live: "https://options-engine-red.vercel.app",
-  challenges:
-    "Implementing Normal CDF, Box-Muller transform, and Geometric Brownian Motion from scratch in pure JavaScript without any external math libraries — then validating correctness by proving Black-Scholes and Monte Carlo converge to the same price.",
-  panel: "B",
-},
+    id: 2,
+    name: "Options Pricing Engine",
+    tagline: "Black-Scholes · Greeks · Monte Carlo — built from scratch",
+    description:
+      "A full-stack financial derivatives calculator implementing three industry-standard pricing models in pure JavaScript — zero external math libraries. Black-Scholes, all 5 Greeks, and 10,000-path Monte Carlo simulation. The two models converge to the same answer, validating the math engine.",
+    tags: ["Node.js", "Express", "MongoDB", "React", "Vite", "Recharts", "JWT"],
+    category: ["Full Stack", "Fintech"],
+    featured: true,
+    github: "https://github.com/Shivansh-04/options-engine",
+    live: "https://options-engine-red.vercel.app",
+    challenges:
+      "Implementing Normal CDF, Box-Muller transform, and Geometric Brownian Motion from scratch in pure JavaScript without any external math libraries — then validating correctness by proving Black-Scholes and Monte Carlo converge to the same price.",
+    panel: "B",
+  },
   {
     id: 3,
     name: "Sorting Visualizer",
@@ -66,7 +66,98 @@ const PROJECTS = [
   },
 ];
 
-const FILTERS = ["All", "Full Stack", "Visualizer", "Backend"];
+const FILTERS = ["All", "Full Stack", "Visualizer", "Backend", "AI/ML", "Fintech"];
+
+function ProjectCard({ project, index, onOpen }) {
+  const isFeatured = project.featured;
+
+  return (
+    <motion.article
+      layout
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.45, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -5, scale: 1.01, boxShadow: "0 20px 40px rgba(13,13,15,0.08)" }}
+      onClick={() => onOpen(project)}
+      className={`group relative cursor-pointer overflow-hidden rounded-[24px] border border-[#0d0d0f]/15 bg-[#f8f4ec] ${isFeatured ? "md:col-span-2" : ""}`}
+      style={{ boxShadow: "0 10px 30px rgba(13,13,15,0.05)" }}
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(13,13,15,0.06),_transparent_60%)]" />
+      <div className="absolute inset-0 opacity-30 transition-opacity duration-500 group-hover:opacity-50" style={{ background: "linear-gradient(120deg, transparent 0%, rgba(13,13,15,0.04) 50%, transparent 100%)" }} />
+
+      <div className="relative flex h-full flex-col p-6 md:p-7">
+        <div className="flex items-start justify-between gap-3">
+          <div className="rounded-full border border-[#0d0d0f] bg-[#0d0d0f] px-3 py-1">
+            <span className="font-manga text-[10px] uppercase tracking-[0.18em] text-white">
+              PANEL {project.panel}
+            </span>
+          </div>
+          {isFeatured && (
+            <div className="rounded-full border border-[#0d0d0f] bg-[#f0ebe0] px-3 py-1">
+              <span className="font-manga text-[9px] uppercase tracking-[0.2em] text-[#0d0d0f]">
+                FEATURED
+              </span>
+            </div>
+          )}
+        </div>
+
+        <div className="mt-6 flex-1">
+          <div className="mb-3 flex items-center justify-between">
+            <span className="font-manga text-[11px] uppercase tracking-[0.2em] text-[#0d0d0f]/40">
+              0{index + 1}
+            </span>
+            <div className="h-[2px] w-20 rounded-full bg-[#0d0d0f]/20" />
+          </div>
+
+          <h3 className="font-manga leading-[0.95] text-[#0d0d0f]" style={{ fontSize: "clamp(24px, 3vw, 34px)" }}>
+            {project.name}
+          </h3>
+          <p className="mt-3 text-sm leading-7 text-[rgba(13,13,15,0.62)]" style={{ fontStyle: "italic" }}>
+            {project.tagline}
+          </p>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="font-manga rounded-full border border-[#0d0d0f]/15 bg-white px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] text-[#0d0d0f]"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-8 flex items-center justify-between border-t border-[#0d0d0f]/10 pt-4">
+          <div className="flex items-center gap-2">
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="rounded-full border border-[#0d0d0f] bg-white p-2 transition-transform duration-200 hover:scale-105"
+            >
+              <SiGithub size={14} color="#0d0d0f" />
+            </a>
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="rounded-full border border-[#0d0d0f] bg-white p-2 transition-transform duration-200 hover:scale-105"
+            >
+              <ExternalLink size={14} color="#0d0d0f" />
+            </a>
+          </div>
+          <span className="font-manga text-[10px] uppercase tracking-[0.18em] text-[#0d0d0f]/40">
+            OPEN CASE →
+          </span>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -79,265 +170,56 @@ export default function Projects() {
 
   return (
     <>
-      <div
-        id="projects"
-        className="relative w-full paper-bg"
-        style={{ borderBottom: "3px solid #0d0d0f" }}
-      >
-        {/* Chapter title bar */}
-        <div
-          className="w-full flex items-center overflow-hidden"
-          style={{ borderBottom: "3px solid #0d0d0f" }}
-        >
-          <div
-            className="px-8 py-4 flex items-center gap-4 flex-shrink-0"
-            style={{ borderRight: "3px solid #0d0d0f", background: "#0d0d0f" }}
-          >
-            <span
-              className="font-manga text-white tracking-widest"
-              style={{ fontSize: 13 }}
-            >
-              CHAPTER 04
-            </span>
-          </div>
-          <div className="flex-1 px-8 py-4 flex items-center justify-between overflow-hidden">
+      <div id="projects" className="relative w-full overflow-hidden bg-[#f0ebe0]" style={{ borderBottom: "3px solid #0d0d0f" }}>
+        <div className="pointer-events-none absolute inset-0 opacity-40" style={{ backgroundImage: "linear-gradient(rgba(13,13,15,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(13,13,15,0.04) 1px, transparent 1px)", backgroundSize: "34px 34px" }} />
+
+        <div className="relative z-10 flex flex-wrap items-center justify-between gap-4 border-b border-[#0d0d0f]/15 px-6 py-4 md:px-8 md:py-5">
+          <div className="flex items-center gap-3">
+            <div className="rounded-full border border-[#0d0d0f] bg-[#0d0d0f] px-3 py-1">
+              <span className="font-manga text-[10px] uppercase tracking-[0.2em] text-white">
+                CHAPTER 06
+              </span>
+            </div>
             <motion.h2
-              initial={{ x: -40, opacity: 0 }}
+              initial={{ x: -24, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="font-manga tracking-wide"
-              style={{ fontSize: "clamp(22px, 4vw, 42px)", color: "#0d0d0f" }}
+              transition={{ duration: 0.55 }}
+              className="font-manga tracking-wide text-[#0d0d0f]"
+              style={{ fontSize: "clamp(22px, 4vw, 40px)" }}
             >
               THINGS I'VE BUILT
             </motion.h2>
-
-            <div
-              className="relative flex-shrink-0 hidden md:block"
-              style={{ height: 110, width: 110 }}
-            >
-              <img
-                src="/projects-action.png"
-                alt=""
-                className="h-full w-full object-contain"
-                style={{ mixBlendMode: "multiply" }}
-              />
-            </div>
+          </div>
+          <div className="rounded-full border border-[#0d0d0f] bg-[#0d0d0f] px-4 py-2">
+            <span className="font-manga text-[11px] uppercase tracking-[0.18em] text-white">
+              {filtered.length} PROJECTS
+            </span>
           </div>
         </div>
 
-        {/* Filter tabs */}
-        <div
-          className="flex items-center"
-          style={{ borderBottom: "3px solid #0d0d0f" }}
-        >
+        <div className="relative z-10 flex flex-wrap items-center gap-2 border-b border-[#0d0d0f]/15 px-4 py-4 md:px-8">
           {FILTERS.map((f) => (
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className="relative px-6 py-3 font-manga transition-all duration-200"
+              className="relative rounded-full border border-transparent px-4 py-2 font-manga text-[11px] uppercase tracking-[0.16em] transition-all duration-200"
               style={{
-                fontSize: 12,
-                letterSpacing: "0.15em",
-                borderRight: "2px solid #0d0d0f",
                 background: activeFilter === f ? "#0d0d0f" : "transparent",
-                color: activeFilter === f ? "white" : "rgba(13,13,15,0.5)",
-                cursor: "none",
+                color: activeFilter === f ? "white" : "#0d0d0f",
               }}
             >
               {f}
-              {activeFilter === f && (
-                <motion.div
-                  layoutId="filter-indicator"
-                  className="absolute bottom-0 left-0 right-0 h-0.5"
-                  style={{ background: "white" }}
-                />
-              )}
+              {activeFilter === f && <motion.div layoutId="filter-indicator" className="absolute inset-x-1 bottom-0 h-[2px] rounded-full bg-white" />}
             </button>
           ))}
-          <div className="flex-1" />
-          <span
-            className="font-manga px-6 py-3"
-            style={{
-              fontSize: 11,
-              color: "rgba(13,13,15,0.3)",
-              letterSpacing: "0.15em",
-            }}
-          >
-            {filtered.length} PROJECTS
-          </span>
         </div>
 
-        {/* Project panels grid */}
-        <div className="p-0">
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2">
+        <div className="relative z-10 p-4 md:p-8">
+          <motion.div layout className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <AnimatePresence mode="popLayout">
               {filtered.map((project, i) => (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ delay: i * 0.08, duration: 0.35 }}
-                  className={`relative group cursor-none ${
-                    project.featured && filtered.length === PROJECTS.length
-                      ? "md:col-span-2"
-                      : ""
-                  }`}
-                  style={{
-                    border: "1.5px solid #0d0d0f",
-                    borderTop: "none",
-                    borderLeft:
-                      i % 2 !== 0 ? "1.5px solid #0d0d0f" : "3px solid #0d0d0f",
-                    background: "#f8f4ec",
-                  }}
-                  whileHover={{ background: "#ede8dc" }}
-                  onClick={() => setSelectedProject(project)}
-                >
-                  <div
-                    className="absolute top-4 left-4 z-10"
-                    style={{
-                      border: "1.5px solid #0d0d0f",
-                      padding: "2px 8px",
-                      background: "#0d0d0f",
-                    }}
-                  >
-                    <span
-                      className="font-manga text-white"
-                      style={{ fontSize: 9, letterSpacing: "0.15em" }}
-                    >
-                      PANEL {project.panel}
-                    </span>
-                  </div>
-
-                  {project.featured && (
-                    <div
-                      className="absolute top-4 right-4 z-10"
-                      style={{
-                        border: "2px solid #0d0d0f",
-                        padding: "2px 10px",
-                        transform: "rotate(2deg)",
-                        background: "#0d0d0f",
-                      }}
-                    >
-                      <span
-                        className="font-manga text-white"
-                        style={{ fontSize: 9, letterSpacing: "0.2em" }}
-                      >
-                        FEATURED
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="p-6 pt-12">
-                    <h3
-                      className="font-manga text-[#0d0d0f] mb-1 leading-tight"
-                      style={{
-                        fontSize: "clamp(24px, 3vw, 36px)",
-                        letterSpacing: "0.04em",
-                      }}
-                    >
-                      {project.name}
-                    </h3>
-
-                    <div className="flex items-center gap-3 mb-4">
-                      <div
-                        className="flex-1 h-px"
-                        style={{ background: "#0d0d0f", opacity: 0.15 }}
-                      />
-                    </div>
-
-                    <p
-                      className="font-body mb-6"
-                      style={{
-                        fontSize: 14,
-                        color: "rgba(13,13,15,0.6)",
-                        lineHeight: 1.7,
-                      }}
-                    >
-                      {project.tagline}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="font-manga"
-                          style={{
-                            fontSize: 10,
-                            letterSpacing: "0.12em",
-                            border: "1.5px solid #0d0d0f",
-                            padding: "2px 8px",
-                            color: "#0d0d0f",
-                            background: "white",
-                            boxShadow: "1.5px 1.5px 0px #0d0d0f",
-                          }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div
-                        className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 transition-colors"
-                          style={{
-                            border: "1.5px solid #0d0d0f",
-                            background: "white",
-                            boxShadow: "2px 2px 0px #0d0d0f",
-                          }}
-                        >
-                          <SiGithub size={14} color="#0d0d0f" />
-                        </a>
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 transition-colors"
-                          style={{
-                            border: "1.5px solid #0d0d0f",
-                            background: "white",
-                            boxShadow: "2px 2px 0px #0d0d0f",
-                          }}
-                        >
-                          <ExternalLink size={14} color="#0d0d0f" />
-                        </a>
-                      </div>
-
-                      <motion.span
-                        className="font-manga"
-                        style={{
-                          fontSize: 11,
-                          color: "rgba(13,13,15,0.35)",
-                          letterSpacing: "0.15em",
-                        }}
-                        whileHover={{ color: "#0d0d0f" }}
-                      >
-                        READ MORE →
-                      </motion.span>
-                    </div>
-                  </div>
-
-                  <div
-                    className="absolute bottom-3 right-4 font-manga"
-                    style={{
-                      fontSize: 9,
-                      color: "#0d0d0f",
-                      opacity: 0.15,
-                      letterSpacing: "0.12em",
-                    }}
-                  >
-                    04 · {String(i + 1).padStart(2, "0")}
-                  </div>
-                </motion.div>
+                <ProjectCard key={project.id} project={project} index={i} onOpen={setSelectedProject} />
               ))}
             </AnimatePresence>
           </motion.div>
@@ -350,179 +232,85 @@ export default function Projects() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9980] flex items-center justify-center p-6"
-            style={{
-              background: "rgba(13,13,15,0.7)",
-              backdropFilter: "blur(8px)",
-            }}
+            className="fixed inset-0 z-[9980] flex items-center justify-center bg-[rgba(13,13,15,0.72)] p-4 backdrop-blur-md"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
-              initial={{ scale: 0.92, opacity: 0, y: 20 }}
+              initial={{ scale: 0.96, opacity: 0, y: 18 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.92, opacity: 0, y: 20 }}
+              exit={{ scale: 0.96, opacity: 0, y: 18 }}
               transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="relative w-full max-w-2xl paper-bg"
-              style={{
-                border: "3px solid #0d0d0f",
-                boxShadow: "8px 8px 0px #0d0d0f",
-              }}
+              className="relative w-full max-w-2xl overflow-hidden rounded-[26px] border border-[#0d0d0f] bg-[#f8f4ec]"
+              style={{ boxShadow: "0 20px 50px rgba(13,13,15,0.16)" }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div
-                className="flex items-center justify-between px-6 py-3"
-                style={{
-                  borderBottom: "3px solid #0d0d0f",
-                  background: "#0d0d0f",
-                }}
-              >
-                <span
-                  className="font-manga text-white"
-                  style={{ fontSize: 11, letterSpacing: "0.2em" }}
-                >
+              <div className="flex items-center justify-between border-b border-[#0d0d0f]/15 bg-[#0d0d0f] px-6 py-3">
+                <span className="font-manga text-[11px] uppercase tracking-[0.2em] text-white">
                   PROJECT FILE · CLASSIFIED
                 </span>
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="p-1"
-                  style={{ cursor: "none" }}
-                >
-                  <X size={16} color="white" />
+                <button onClick={() => setSelectedProject(null)} className="rounded-full border border-white/20 p-1.5">
+                  <X size={15} color="white" />
                 </button>
               </div>
 
-              <div className="p-8">
-                <div className="flex items-start justify-between mb-2 gap-4">
-                  <h3
-                    className="font-manga text-[#0d0d0f] leading-tight"
-                    style={{
-                      fontSize: "clamp(28px, 4vw, 44px)",
-                      letterSpacing: "0.04em",
-                    }}
-                  >
-                    {selectedProject.name}
-                  </h3>
+              <div className="p-7 md:p-8">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div>
+                    <h3 className="font-manga leading-[0.95] text-[#0d0d0f]" style={{ fontSize: "clamp(28px, 4vw, 40px)" }}>
+                      {selectedProject.name}
+                    </h3>
+                    <p className="mt-2 text-sm text-[rgba(13,13,15,0.55)]" style={{ fontStyle: "italic" }}>
+                      {selectedProject.tagline}
+                    </p>
+                  </div>
                   {selectedProject.featured && (
-                    <div
-                      className="flex-shrink-0 mt-1"
-                      style={{
-                        border: "2px solid #0d0d0f",
-                        padding: "2px 10px",
-                        transform: "rotate(2deg)",
-                        background: "#0d0d0f",
-                      }}
-                    >
-                      <span
-                        className="font-manga text-white"
-                        style={{ fontSize: 9, letterSpacing: "0.2em" }}
-                      >
+                    <div className="rounded-full border border-[#0d0d0f] bg-[#f0ebe0] px-3 py-1">
+                      <span className="font-manga text-[9px] uppercase tracking-[0.2em] text-[#0d0d0f]">
                         FEATURED
                       </span>
                     </div>
                   )}
                 </div>
 
-                <p
-                  className="font-body mb-6"
-                  style={{
-                    fontSize: 13,
-                    color: "rgba(13,13,15,0.5)",
-                    letterSpacing: "0.02em",
-                  }}
-                >
-                  {selectedProject.tagline}
-                </p>
+                <div className="mt-6 h-[1px] w-full bg-[#0d0d0f]/10" />
 
-                <div
-                  className="h-px w-full mb-6"
-                  style={{ background: "#0d0d0f", opacity: 0.12 }}
-                />
-
-                <p
-                  className="font-body mb-6"
-                  style={{
-                    fontSize: 15,
-                    color: "rgba(13,13,15,0.7)",
-                    lineHeight: 1.8,
-                  }}
-                >
+                <p className="mt-6 text-[15px] leading-8 text-[rgba(13,13,15,0.72)]">
                   {selectedProject.description}
                 </p>
 
-                <div
-                  className="mb-6 p-4"
-                  style={{
-                    border: "2px solid #0d0d0f",
-                    background: "#0d0d0f",
-                    boxShadow: "4px 4px 0px rgba(13,13,15,0.2)",
-                  }}
-                >
-                  <span
-                    className="font-manga text-white opacity-50 block mb-1"
-                    style={{ fontSize: 10, letterSpacing: "0.2em" }}
-                  >
+                <div className="mt-6 rounded-[18px] border border-[#0d0d0f]/15 bg-[#0d0d0f] p-4">
+                  <span className="mb-2 block font-manga text-[10px] uppercase tracking-[0.2em] text-white/50">
                     KEY CHALLENGE
                   </span>
-                  <p
-                    className="font-body text-white"
-                    style={{ fontSize: 13, lineHeight: 1.7, opacity: 0.75 }}
-                  >
+                  <p className="text-[13px] leading-7 text-white/75">
                     {selectedProject.challenges}
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="mt-6 flex flex-wrap gap-2">
                   {selectedProject.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="font-manga"
-                      style={{
-                        fontSize: 10,
-                        letterSpacing: "0.12em",
-                        border: "1.5px solid #0d0d0f",
-                        padding: "2px 8px",
-                        color: "#0d0d0f",
-                        background: "white",
-                        boxShadow: "1.5px 1.5px 0px #0d0d0f",
-                      }}
-                    >
+                    <span key={tag} className="font-manga rounded-full border border-[#0d0d0f]/15 bg-white px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] text-[#0d0d0f]">
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex gap-3">
+                <div className="mt-8 flex flex-wrap gap-3">
                   <a
                     href={selectedProject.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-manga flex items-center gap-2 px-5 py-3"
-                    style={{
-                      fontSize: 12,
-                      letterSpacing: "0.12em",
-                      border: "2.5px solid #0d0d0f",
-                      color: "#0d0d0f",
-                      boxShadow: "3px 3px 0px #0d0d0f",
-                      background: "white",
-                    }}
+                    className="font-manga flex items-center gap-2 rounded-full border border-[#0d0d0f] bg-white px-5 py-3 text-[11px] uppercase tracking-[0.18em] text-[#0d0d0f]"
                   >
-                    <SiGithub size={14} /> GITHUB
+                    <SiGithub size={13} /> GitHub
                   </a>
                   <a
                     href={selectedProject.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-manga flex items-center gap-2 px-5 py-3"
-                    style={{
-                      fontSize: 12,
-                      letterSpacing: "0.12em",
-                      border: "2.5px solid #0d0d0f",
-                      color: "white",
-                      background: "#0d0d0f",
-                      boxShadow: "3px 3px 0px rgba(13,13,15,0.3)",
-                    }}
+                    className="font-manga flex items-center gap-2 rounded-full border border-[#0d0d0f] bg-[#0d0d0f] px-5 py-3 text-[11px] uppercase tracking-[0.18em] text-white"
                   >
-                    <ExternalLink size={14} /> LIVE DEMO
+                    <ExternalLink size={13} /> Live Demo
                   </a>
                 </div>
               </div>

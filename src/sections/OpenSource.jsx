@@ -150,7 +150,7 @@ function StatCard({ label, value, suffix, sub, panel, index }) {
           color: index === 1 ? "white" : "#0d0d0f",
         }}
       >
-        05 · 0{index + 1}
+        07 / 0{index + 1}
       </div>
     </motion.div>
   );
@@ -176,7 +176,7 @@ export default function OpenSource() {
             className="font-manga text-white tracking-widest"
             style={{ fontSize: 13 }}
           >
-            CHAPTER 05
+            CHAPTER 07
           </span>
         </div>
         <div className="flex-1 px-8 py-4">
@@ -418,7 +418,7 @@ export default function OpenSource() {
           className="absolute bottom-3 right-6 font-manga text-white"
           style={{ fontSize: 9, opacity: 0.1, letterSpacing: "0.12em" }}
         >
-          05 · 06
+          07 / 06
         </div>
       </motion.div>
     </div>

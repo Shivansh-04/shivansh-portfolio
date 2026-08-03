@@ -13,7 +13,7 @@ const SOCIAL_LINKS = [
   { Icon: Mail, href: "mailto:shivanshgupta0987@gmail.com", label: "Email" },
   {
     Icon: SiLeetcode,
-    href: "https://leetcode.com/shivansh",
+    href: "https://leetcode.com/u/Shivansh-04/",
     label: "LeetCode",
   },
   {
@@ -184,7 +184,7 @@ export default function Contact() {
             className="font-manga text-white tracking-widest"
             style={{ fontSize: 13 }}
           >
-            CHAPTER 06
+            CHAPTER 10
           </span>
         </div>
         <div className="flex-1 px-8 py-4">
@@ -350,7 +350,7 @@ export default function Contact() {
             className="absolute bottom-4 right-5 font-manga text-white"
             style={{ fontSize: 9, opacity: 0.1, letterSpacing: "0.12em" }}
           >
-            06 · 01
+            10 / 01
           </div>
         </motion.div>
 
@@ -386,7 +386,7 @@ export default function Contact() {
               className="font-manga text-[#0d0d0f] opacity-40"
               style={{ fontSize: 10, letterSpacing: "0.2em" }}
             >
-              005 — CONTACT
+              010 - CONTACT
             </span>
             <p
               className="font-manga text-[#0d0d0f] mt-1"
@@ -478,7 +478,7 @@ export default function Contact() {
             className="absolute bottom-4 right-5 font-manga text-[#0d0d0f]"
             style={{ fontSize: 9, opacity: 0.12, letterSpacing: "0.12em" }}
           >
-            06 · 02
+            10 / 02
           </div>
         </motion.div>
       </div>

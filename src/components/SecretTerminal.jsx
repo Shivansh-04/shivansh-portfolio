@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 const CHAPTERS = [
   "hero",
   "about",
+  "experience",
+  "resume-snapshot",
   "skills",
   "projects",
   "opensource",

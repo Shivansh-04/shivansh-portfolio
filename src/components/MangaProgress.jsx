@@ -4,12 +4,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 const CHAPTERS = [
   { id: 'hero', label: 'CH.01', title: 'HERO', sub: 'Opening Spread' },
   { id: 'about', label: 'CH.02', title: 'DEVELOPER', sub: 'Origin Story' },
-  { id: 'skills', label: 'CH.03', title: 'STATS', sub: 'Ability Cards' },
-  { id: 'projects', label: 'CH.04', title: 'PROJECTS', sub: 'Built Things' },
-  { id: 'opensource', label: 'CH.05', title: 'BEYOND', sub: 'Achievements' },
-  { id: 'achievements', label: 'CH.06', title: 'BADGES', sub: 'Unlock Wall' },
-  { id: 'github', label: 'CH.07', title: 'ACTIVITY', sub: 'Battle Record' },
-  { id: 'contact', label: 'CH.08', title: 'CONTACT', sub: 'Final Chapter' },
+  { id: 'experience', label: 'CH.03', title: 'EXPERIENCE', sub: 'Internship Arc' },
+  { id: 'resume-snapshot', label: 'CH.04', title: 'SNAPSHOT', sub: 'Recruiter Scan' },
+  { id: 'skills', label: 'CH.05', title: 'STATS', sub: 'Ability Cards' },
+  { id: 'projects', label: 'CH.06', title: 'PROJECTS', sub: 'Built Things' },
+  { id: 'opensource', label: 'CH.07', title: 'BEYOND', sub: 'Achievements' },
+  { id: 'achievements', label: 'CH.08', title: 'BADGES', sub: 'Unlock Wall' },
+  { id: 'github', label: 'CH.09', title: 'ACTIVITY', sub: 'Battle Record' },
+  { id: 'contact', label: 'CH.10', title: 'CONTACT', sub: 'Final Chapter' },
 ]
 
 export default function MangaProgress() {

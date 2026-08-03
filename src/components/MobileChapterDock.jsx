@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Sparkles, FolderKanban, Trophy, Award, GitBranch, Mail } from "lucide-react";
+import { User, BriefcaseBusiness, FileText, Sparkles, FolderKanban, Trophy, Award, GitBranch, Mail } from "lucide-react";
 
 const CHAPTERS = [
   { id: "about", label: "ABOUT", Icon: User },
+  { id: "experience", label: "EXP", Icon: BriefcaseBusiness },
+  { id: "resume-snapshot", label: "CV", Icon: FileText },
   { id: "skills", label: "STATS", Icon: Sparkles },
   { id: "projects", label: "WORK", Icon: FolderKanban },
   { id: "opensource", label: "OPEN", Icon: Trophy },
