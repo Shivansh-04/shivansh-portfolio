@@ -2,34 +2,22 @@ import { motion } from "framer-motion";
 import { BriefcaseBusiness, Cpu, GitBranch, Rocket } from "lucide-react";
 
 const EXPERIENCE = [
-  {
-    company: "NPTI - National Power Training Institute (An Autonomous Institute under Ministry of Power, Govt. of India)",
-    short: "NPTI",
-    role: "Technical Intern",
-    period: "Present",
-    location: "Hybrid",
-    summary:
-      "Working on technical product tasks across AI-enabled workflows, frontend polish, debugging, and engineering support.",
-    points: [
-      "Contributing to production-minded features with a focus on clean UI behavior and reliable implementation.",
-      "Collaborating around AI product flows, testing edge cases, and tightening the user experience.",
-      "Learning how real teams ship: reading context, fixing issues, documenting decisions, and iterating quickly.",
-    ],
-  },
-  {
-    company: "NPTI - National Power Training Institute (An Autonomous Institute under Ministry of Power, Govt. of India)",
-    short: "NPTI",
-    role: "Technical Intern",
-    period: "Present",
-    location: "Hybrid",
-    summary:
-      "Working on technical product tasks across AI-enabled workflows, frontend polish, debugging, and engineering support.",
-    points: [
-      "Contributing to production-minded features with a focus on clean UI behavior and reliable implementation.",
-      "Collaborating around AI product flows, testing edge cases, and tightening the user experience.",
-      "Learning how real teams ship: reading context, fixing issues, documenting decisions, and iterating quickly.",
-    ],
-  },
+    {
+  company: "NPTI - National Power Training Institute (An Autonomous Institute under Ministry of Power, Govt. of India)",
+  short: "NPTI",
+  role: "Technical Intern",
+  period: "Jul 2026 - Present",
+  location: "Hybrid",
+  summary:
+    "Supporting the modernization and quality assurance of NPTI's official website through GIGW 3.0 compliance, website auditing, content validation, and technical documentation.",
+  points: [
+    "Studied GIGW 3.0 guidelines and contributed to aligning npti.gov.in with Government of India web standards.",
+    "Performed comprehensive website QA, identified and documented 35+ bugs including broken links, UI inconsistencies, and content issues.",
+    "Audited Hindi and English website versions, reporting URL and content mismatches to improve bilingual consistency.",
+    "Assisted in updating RTI documentation and validating website content to ensure accuracy, accessibility, and compliance."
+  ]
+}
+  
 ];
 
 const IMPACT_CARDS = [
