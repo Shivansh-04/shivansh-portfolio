@@ -454,6 +454,7 @@ export default function Hero() {
               { label: "STACK", value: "MERN" },
               { label: "DSA", value: "200+ Problems" },
               { label: "STATUS", value: "Open to Work" },
+              { label: "EXPERIENCE", value: "NPTI - INTERN" },
             ].map((row, i) => (
               <div
                 key={i}
