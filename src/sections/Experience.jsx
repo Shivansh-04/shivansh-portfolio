@@ -28,7 +28,7 @@ const IMPACT_CARDS = [
 ];
 
 export default function Experience() {
-  const current = EXPERIENCE[0];
+  const current = EXPERIENCE[1];
 
   return (
     <section
