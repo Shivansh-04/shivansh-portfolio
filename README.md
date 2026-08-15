@@ -4,18 +4,9 @@
 
 ---
 
-```text
-+--------------------------------------------------------------+
-|                                                              |
-|   ######  ##   ## #### ##    ##    ###    ##    ##  ######   |
-|  ##       ##   ##  ##  ##    ##   ## ##   ###   ## ##        |
-|   #####   #######  ##  ##    ##  ##   ##  ####  ##  #####    |
-|       ##  ##   ##  ##   ##  ##   #######  ## ## ##      ##   |
-|  ######   ##   ## ####   ####    ##   ##  ##  #### ######    |
-|                                                              |
-|              THE DEVELOPER CHRONICLES: PORTFOLIO             |
-+--------------------------------------------------------------+
-```
+<p align="center">
+  <img src="./public/banner.png" alt="Shivansh - The Developer Chronicles: Portfolio" width="700">
+</p>
 
 A cinematic developer portfolio built like a manga chapter release. The site mixes bold panel-based layouts, chapter navigation, scroll-driven storytelling, and layered animations so the whole experience feels more like reading a stylized issue than browsing a standard portfolio.
 
@@ -72,12 +63,10 @@ This build now includes some less-common touches that make it stand out:
 | --- | --- |
 | `IntroAnimation` | Opens the portfolio like a cover reveal |
 | `MangaProgress` | Desktop chapter navigation styled like manga progress |
-| `MobileChapterDock` | Quick mobile navigation with chapter shortcuts |
 | `TimeAware` | Time-based context layer for the page mood |
 | `PlotTwist` | Surprise manga-panel interaction moment |
 | `AchievementWall` | Badge wall with unlock energy and stat-card framing |
 | `ContextAwareFX` | Global hover/click feedback tied to nearby sections |
-| `SecretTerminal` | Hidden terminal with commands like `help`, `goto`, and `plottwist` |
 | `ToBeContinued` | Closing panel that ends the issue cleanly |
 
 ## Secret Terminal
