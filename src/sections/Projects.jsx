@@ -7,7 +7,7 @@ const PROJECTS = [
   {
     id: 1,
     name: "Options Pricing Engine",
-    project_banner: "public/Project/Optimous engine.png",
+    project_banner: "/Project/Optimous engine.png",
     tagline: "Black-Scholes · Greeks · Monte Carlo — built from scratch",
     description:
       "A full-stack financial derivatives calculator implementing three industry-standard pricing models in pure JavaScript — zero external math libraries. Black-Scholes, all 5 Greeks, and 10,000-path Monte Carlo simulation. The two models converge to the same answer, validating the math engine.",
@@ -22,7 +22,7 @@ const PROJECTS = [
   {
     id: 2,
     name: "Algorithm Visualizer",
-    project_banner: "public/Project/Algorithm.png",
+    project_banner: "/Project/Algorithm.png",
     tagline: "Sorting algorithms, visualized in real time",
     description:
       "A web app that visualizes sorting algorithms in real time with a dark, cinematic aesthetic. 8 algorithms animated at 60fps, with side-by-side code in JS/Java/Python and a live Big-O complexity readout as the animation runs.",
@@ -37,7 +37,7 @@ const PROJECTS = [
   {
     id: 3,
     name: "DualGuard",
-    project_banner: "public/Project/DualGuard.png",
+    project_banner: "/Project/DualGuard.png",
     tagline: "Dual-stream CNN for deepfake detection — SF2-Net",
     description:
       "A dual-stream spatial-frequency CNN, built as my final-year major project, that detects deepfakes by reading both the spatial content and the frequency signature of an image. EfficientNet-B4 handles the spatial stream, MobileNetV3 handles the frequency (FFT/DCT) stream, fused through a custom network with Grad-CAM explainability on every prediction.",
@@ -52,7 +52,7 @@ const PROJECTS = [
   {
     id: 4,
     name: "SatQuery AI",
-    project_banner: "public/Project/Sat.png",
+    project_banner: "/Project/Sat.png",
     tagline: "Agentic AI for reading satellite imagery",
     description:
       "A solo project inspired by an ISRO hackathon problem statement — an agentic AI system for satellite imagery: answering questions about a single image, detecting change between two, and cross-referencing optical with radar (SAR) data. Currently a working skeleton, with real models being swapped in one capability at a time.",
@@ -67,7 +67,7 @@ const PROJECTS = [
   {
     id: 5,
     name: "Image Upload & Storage Service",
-    project_banner: "public/Project/Image.png",
+    project_banner: "/Project/Image.png",
     tagline: "Backend service for file uploads using ImageKit",
     description:
       "A backend service built with Express and Multer to handle image uploads, process files, and store them securely using ImageKit with efficient API integration.",
