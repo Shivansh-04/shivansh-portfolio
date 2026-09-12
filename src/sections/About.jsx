@@ -198,7 +198,7 @@ export default function About() {
                   style={{ background: "#4ade80" }}
                 />
                 <p className="font-body text-white text-[14px] leading-snug">
-                  SurakshaSetu — AI-powered crime reporting platform
+                  Dual-Guard — AI-powered deepfake detection.
                 </p>
               </div>
             </div>

@@ -57,7 +57,7 @@ const EXPERIENCE = [
         metric: "RTI docs",
       },
     ],
-    note: "Hybrid role — in office Monday & Friday, remote the rest of the week.",
+    note: "Hybrid role — in office Monday , Wednesday & Friday, remote the rest of the week.",
   },
   // {
   //   id: "cati",

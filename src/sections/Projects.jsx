@@ -6,63 +6,78 @@ import { SiGithub } from "react-icons/si";
 const PROJECTS = [
   {
     id: 1,
-    name: "MindSpace",
-    tagline: "AI-driven mental health support platform",
-    description:
-      "A full-stack AI-powered platform providing anonymous mental health support, mood tracking, and personalized recommendations with a strong focus on privacy and scalability.",
-    tags: ["React", "Node.js", "MongoDB", "AI", "Express"],
-    category: ["Full Stack", "AI/ML"],
-    featured: true,
-    github: "https://github.com/Shivansh-04/mental-health.git",
-    live: "https://mental-health-beta.vercel.app/",
-    challenges:
-      "Built real-time AI interactions while maintaining low latency and ensuring strict data privacy.",
-    panel: "A",
-  },
-  {
-    id: 2,
     name: "Options Pricing Engine",
+    project_banner: "public/Project/Optimous engine.png",
     tagline: "Black-Scholes · Greeks · Monte Carlo — built from scratch",
     description:
       "A full-stack financial derivatives calculator implementing three industry-standard pricing models in pure JavaScript — zero external math libraries. Black-Scholes, all 5 Greeks, and 10,000-path Monte Carlo simulation. The two models converge to the same answer, validating the math engine.",
     tags: ["Node.js", "Express", "MongoDB", "React", "Vite", "Recharts", "JWT"],
     category: ["Full Stack", "Fintech"],
-    featured: true,
+    featured: false,
     github: "https://github.com/Shivansh-04/options-engine",
     live: "https://options-engine-red.vercel.app",
     challenges:
-      "Implementing Normal CDF, Box-Muller transform, and Geometric Brownian Motion from scratch in pure JavaScript without any external math libraries — then validating correctness by proving Black-Scholes and Monte Carlo converge to the same price.",
-    panel: "B",
+      "Implementing Normal CDF, Box-Muller transform, and Geometric Brownian Motion from scratch in pure JavaScript — then validating correctness by proving Black-Scholes and Monte Carlo converge to the same price.",
   },
   {
-    id: 3,
-    name: "Sorting Visualizer",
-    tagline: "Interactive algorithm visualization tool",
+    id: 2,
+    name: "Algorithm Visualizer",
+    project_banner: "public/Project/Algorithm.png",
+    tagline: "Sorting algorithms, visualized in real time",
     description:
-      "A web-based visualizer demonstrating sorting algorithms like Bubble, Merge, and Quick Sort with step-by-step animations and performance comparison.",
-    tags: ["JavaScript", "React", "Node.js", "CSS"],
+      "A web app that visualizes sorting algorithms in real time with a dark, cinematic aesthetic. 8 algorithms animated at 60fps, with side-by-side code in JS/Java/Python and a live Big-O complexity readout as the animation runs.",
+    tags: ["React", "TypeScript", "Vite", "Tailwind", "GSAP", "Three.js", "Zustand"],
     category: ["Visualizer"],
     featured: false,
     github: "https://github.com/Shivansh-04/sort-scape-animations.git",
     live: "https://sortingvisualizer-zeta.vercel.app/",
     challenges:
-      "Optimized rendering logic to achieve smooth animations for large datasets.",
-    panel: "C",
+      "Keeping animations smooth at 60fps across 8 different algorithms while rendering synced multi-language code panels without frame drops.",
+  },
+  {
+    id: 3,
+    name: "DualGuard",
+    project_banner: "public/Project/DualGuard.png",
+    tagline: "Dual-stream CNN for deepfake detection — SF2-Net",
+    description:
+      "A dual-stream spatial-frequency CNN, built as my final-year major project, that detects deepfakes by reading both the spatial content and the frequency signature of an image. EfficientNet-B4 handles the spatial stream, MobileNetV3 handles the frequency (FFT/DCT) stream, fused through a custom network with Grad-CAM explainability on every prediction.",
+    tags: ["PyTorch", "FastAPI", "Node.js", "React","GSAP", "Three.js", "Tailwind"],
+    category: ["AI/ML"],
+    featured: false,
+    github: "", // TODO: add repo link
+    live: "#",
+    challenges:
+      "Fusing two very different signal domains — spatial and frequency-domain features — without one stream overwhelming the other; validated with an ablation study across two datasets.",
   },
   {
     id: 4,
+    name: "SatQuery AI",
+    project_banner: "public/Project/Sat.png",
+    tagline: "Agentic AI for reading satellite imagery",
+    description:
+      "A solo project inspired by an ISRO hackathon problem statement — an agentic AI system for satellite imagery: answering questions about a single image, detecting change between two, and cross-referencing optical with radar (SAR) data. Currently a working skeleton, with real models being swapped in one capability at a time.",
+    tags: ["React", "FastAPI", "Python"],
+    category: ["AI/ML"],
+    featured: false,
+    github: "", // TODO: add repo link
+    live: "#",
+    challenges:
+      "Scoping a large multi-capability research problem down to something one person can realistically build, without losing the ambition of the original brief.",
+  },
+  {
+    id: 5,
     name: "Image Upload & Storage Service",
+    project_banner: "public/Project/Image.png",
     tagline: "Backend service for file uploads using ImageKit",
     description:
       "A backend service built with Express and Multer to handle image uploads, process files, and store them securely using ImageKit with efficient API integration.",
     tags: ["Node.js", "Express", "Multer", "ImageKit API"],
     category: ["Backend"],
     featured: false,
-    github: "https://github.com/Shivansh-04",
+    github: "https://github.com/Shivansh-04", // TODO: replace with the actual repo link
     live: "#",
     challenges:
       "Handled file processing, base64 conversion, and secure cloud storage integration.",
-    panel: "D",
   },
 ];
 
@@ -70,6 +85,7 @@ const FILTERS = ["All", "Full Stack", "Visualizer", "Backend", "AI/ML", "Fintech
 
 function ProjectCard({ project, index, onOpen }) {
   const isFeatured = project.featured;
+  const hasLiveDemo = project.live && project.live !== "#";
 
   return (
     <motion.article
@@ -80,56 +96,41 @@ function ProjectCard({ project, index, onOpen }) {
       transition={{ duration: 0.45, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -5, scale: 1.01, boxShadow: "0 20px 40px rgba(13,13,15,0.08)" }}
       onClick={() => onOpen(project)}
-      className={`group relative cursor-pointer overflow-hidden rounded-[24px] border border-[#0d0d0f]/15 bg-[#f8f4ec] ${isFeatured ? "md:col-span-2" : ""}`}
+      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-[24px] border border-[#0d0d0f]/15 bg-[#f8f4ec] md:flex-row ${isFeatured ? "md:col-span-2" : ""}`}
       style={{ boxShadow: "0 10px 30px rgba(13,13,15,0.05)" }}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(13,13,15,0.06),_transparent_60%)]" />
-      <div className="absolute inset-0 opacity-30 transition-opacity duration-500 group-hover:opacity-50" style={{ background: "linear-gradient(120deg, transparent 0%, rgba(13,13,15,0.04) 50%, transparent 100%)" }} />
+      {/* Left spine: project number + name */}
+      <div className="flex shrink-0 flex-row items-center justify-between gap-3 border-b border-[#0d0d0f]/10 p-4 md:w-[90px] md:flex-col md:items-start md:justify-start md:border-b-0 md:border-r">
+        <span className="font-manga text-[11px] uppercase tracking-[0.2em] text-[#0d0d0f]/40">
+          0{index + 1}
+        </span>
+        <h3
+          className="font-manga leading-[0.95] text-[#0d0d0f] md:[writing-mode:vertical-rl] md:rotate-180"
+          style={{ fontSize: "clamp(14px, 1.8vw, 20px)" }}
+        >
+          {project.name}
+        </h3>
+      </div>
 
-      <div className="relative flex h-full flex-col p-6 md:p-7">
-        <div className="flex items-start justify-between gap-3">
-          <div className="rounded-full border border-[#0d0d0f] bg-[#0d0d0f] px-3 py-1">
-            <span className="font-manga text-[10px] uppercase tracking-[0.18em] text-white">
-              PANEL {project.panel}
-            </span>
-          </div>
-          {isFeatured && (
-            <div className="rounded-full border border-[#0d0d0f] bg-[#f0ebe0] px-3 py-1">
-              <span className="font-manga text-[9px] uppercase tracking-[0.2em] text-[#0d0d0f]">
-                FEATURED
+      {/* Right side: banner + footer */}
+      <div className="flex flex-1 flex-col">
+        <div className="relative min-h-[200px] flex-1 bg-[#0d0d0f]/5">
+          {project.project_banner ? (
+            <img
+              src={project.project_banner}
+              alt={`${project.name} banner`}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <div className="flex h-full min-h-[200px] w-full items-center justify-center border-2 border-dashed border-[#0d0d0f]/20">
+              <span className="font-manga text-[11px] uppercase tracking-[0.18em] text-[#0d0d0f]/30">
+                Banner pending
               </span>
             </div>
           )}
         </div>
 
-        <div className="mt-6 flex-1">
-          <div className="mb-3 flex items-center justify-between">
-            <span className="font-manga text-[11px] uppercase tracking-[0.2em] text-[#0d0d0f]/40">
-              0{index + 1}
-            </span>
-            <div className="h-[2px] w-20 rounded-full bg-[#0d0d0f]/20" />
-          </div>
-
-          <h3 className="font-manga leading-[0.95] text-[#0d0d0f]" style={{ fontSize: "clamp(24px, 3vw, 34px)" }}>
-            {project.name}
-          </h3>
-          <p className="mt-3 text-sm leading-7 text-[rgba(13,13,15,0.62)]" style={{ fontStyle: "italic" }}>
-            {project.tagline}
-          </p>
-
-          <div className="mt-5 flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="font-manga rounded-full border border-[#0d0d0f]/15 bg-white px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] text-[#0d0d0f]"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-8 flex items-center justify-between border-t border-[#0d0d0f]/10 pt-4">
+        <div className="flex items-center justify-between border-t border-[#0d0d0f]/10 px-4 py-3">
           <div className="flex items-center gap-2">
             <a
               href={project.github}
@@ -140,19 +141,34 @@ function ProjectCard({ project, index, onOpen }) {
             >
               <SiGithub size={14} color="#0d0d0f" />
             </a>
+            {hasLiveDemo && (
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="rounded-full border border-[#0d0d0f] bg-white p-2 transition-transform duration-200 hover:scale-105"
+              >
+                <ExternalLink size={14} color="#0d0d0f" />
+              </a>
+            )}
+          </div>
+
+          {hasLiveDemo ? (
             <a
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="rounded-full border border-[#0d0d0f] bg-white p-2 transition-transform duration-200 hover:scale-105"
+              className="font-manga flex items-center gap-1 text-[10px] uppercase tracking-[0.18em] text-[#0d0d0f] transition-opacity hover:opacity-60"
             >
-              <ExternalLink size={14} color="#0d0d0f" />
+              Take me to the project →
             </a>
-          </div>
-          <span className="font-manga text-[10px] uppercase tracking-[0.18em] text-[#0d0d0f]/40">
-            OPEN CASE →
-          </span>
+          ) : (
+            <span className="font-manga rounded-full border border-[#0d0d0f]/20 bg-[#0d0d0f]/5 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-[#0d0d0f]/40">
+              In Progress
+            </span>
+          )}
         </div>
       </div>
     </motion.article>
