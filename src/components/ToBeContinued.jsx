@@ -45,8 +45,8 @@ export default function ToBeContinued() {
     <div
       className="relative w-full overflow-hidden"
       style={{
-        borderTop: '3px solid #0d0d0f',
-        background: '#0d0d0f',
+        borderTop: '3px solid var(--line-strong)',
+        background: 'var(--reverse-bg)',
         minHeight: '280px',
       }}
     >
@@ -75,7 +75,7 @@ export default function ToBeContinued() {
                 y1={cy}
                 x2={cx + Math.cos(rad) * len}
                 y2={cy + Math.sin(rad) * len}
-                stroke="rgba(255,255,255,0.06)"
+                stroke="var(--reverse-line)"
                 strokeWidth="1.5"
                 strokeDasharray="1000"
                 strokeDashoffset="1000"
@@ -89,7 +89,7 @@ export default function ToBeContinued() {
       <div
         className="absolute inset-0 pointer-events-none opacity-20"
         style={{
-          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, var(--reverse-line) 1px, transparent 1px)',
           backgroundSize: '18px 18px',
         }}
       />
@@ -97,22 +97,22 @@ export default function ToBeContinued() {
       {/* Panel border */}
       <div
         className="absolute inset-3 pointer-events-none"
-        style={{ border: '2px solid rgba(255,255,255,0.08)' }}
+        style={{ border: '2px solid var(--reverse-line)' }}
       />
 
       {/* Top bar */}
       <div
         className="absolute top-0 left-0 right-0 flex items-center justify-between px-8 py-3"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}
+        style={{ borderBottom: '1px solid var(--reverse-line)' }}
       >
         <span
-          className="font-manga text-white opacity-20"
+          className="font-manga text-[color:var(--reverse-text)] opacity-20"
           style={{ fontSize: 10, letterSpacing: '0.25em' }}
         >
           VOL.01 · FIN
         </span>
         <span
-          className="font-manga text-white opacity-20"
+          className="font-manga text-[color:var(--reverse-text)] opacity-20"
           style={{ fontSize: 10, letterSpacing: '0.25em' }}
         >
           END OF VOLUME 01
@@ -130,14 +130,14 @@ export default function ToBeContinued() {
           transition={{ delay: 0.1, duration: 0.5 }}
           className="flex items-center gap-4"
         >
-          <div className="h-px w-12" style={{ background: 'rgba(255,255,255,0.2)' }} />
+          <div className="h-px w-12" style={{ background: 'var(--reverse-line)' }} />
           <span
-            className="font-manga text-white opacity-30"
+            className="font-manga text-[color:var(--reverse-text)] opacity-30"
             style={{ fontSize: 11, letterSpacing: '0.3em' }}
           >
             CHAPTER 06 · END
           </span>
-          <div className="h-px w-12" style={{ background: 'rgba(255,255,255,0.2)' }} />
+          <div className="h-px w-12" style={{ background: 'var(--reverse-line)' }} />
         </motion.div>
 
         {/* TO BE CONTINUED ” letter by letter */}
@@ -148,12 +148,12 @@ export default function ToBeContinued() {
           {text.split('').map((char, i) => (
             <span
               key={i}
-              className="tbc-letter font-manga text-white inline-block"
+              className="tbc-letter font-manga text-[color:var(--reverse-text)] inline-block"
               style={{
                 fontSize: 'clamp(32px, 6vw, 72px)',
                 letterSpacing: char === ' ' ? '0.5em' : '0.04em',
                 opacity: 0,
-                WebkitTextStroke: '1px rgba(255,255,255,0.8)',
+                WebkitTextStroke: '1px var(--reverse-text)',
                 textShadow: '3px 3px 0px rgba(0,0,0,0.5)',
                 lineHeight: 1,
               }}
@@ -174,7 +174,7 @@ export default function ToBeContinued() {
           {[0, 1, 2].map((i) => (
             <motion.span
               key={i}
-              className="font-manga text-white"
+              className="font-manga text-[color:var(--reverse-text)]"
               style={{ fontSize: 'clamp(24px, 4vw, 48px)', opacity: 0.4 }}
               animate={{ opacity: [0.2, 0.8, 0.2] }}
               transition={{
@@ -195,7 +195,7 @@ export default function ToBeContinued() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 1.8, duration: 0.6 }}
-          className="font-display italic text-white text-center"
+          className="font-display italic text-[color:var(--reverse-text)] text-center"
           style={{
             fontSize: 'clamp(12px, 1.5vw, 16px)',
             opacity: 0.25,
@@ -216,13 +216,13 @@ export default function ToBeContinued() {
         className="absolute bottom-4 right-6 flex flex-col items-end gap-1"
       >
         <span
-          className="font-manga text-white opacity-15"
+          className="font-manga text-[color:var(--reverse-text)] opacity-15"
           style={{ fontSize: 9, letterSpacing: '0.2em' }}
         >
           NEXT: V3 Â· 3D EDITION
         </span>
         <span
-          className="font-manga text-white opacity-10"
+          className="font-manga text-[color:var(--reverse-text)] opacity-10"
           style={{ fontSize: 9, letterSpacing: '0.2em' }}
         >
           COMING SOON

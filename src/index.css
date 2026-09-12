@@ -1,289 +1,198 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   DESIGN TOKENS  —  single source of truth
+   Default :root = PAPER (light) theme. [data-theme="ink"] = dark.
+   Components consume the semantic vars below (never raw hex), so the
+   whole site recolors from here and the theme toggle "just works".
+   ============================================================ */
 :root {
-  --bg: #0d0d0f;
-  --text: #f0f0f0;
-  --accent: #ffffff;
-  --muted: #666666;
-  --surface: #141416;
-  --border: rgba(255, 255, 255, 0.08);
+  /* fixed base palette */
+  --c-ink: #0d0d0f;
+  --c-paper: #f0ebe0;
+  --c-paper-raised: #f8f4ec;
+  --c-white: #ffffff;
+  --c-accent: #e5322d;         /* shonen red */
+  --c-accent-strong: #c41e1a;  /* hover / small red text */
+  --c-accent-ink: #ffffff;     /* text on accent */
+
+  /* semantic — PAPER theme */
+  --bg: var(--c-paper);
+  --surface: var(--c-paper-raised);
+  --surface-2: var(--c-white);
+  --text: var(--c-ink);
+  --text-muted: rgba(13, 13, 15, 0.55);
+  --line: rgba(13, 13, 15, 0.15);       /* hairline borders */
+  --line-strong: var(--c-ink);          /* strong borders + hard manga shadows */
+  --shadow: rgba(13, 13, 15, 0.15);     /* soft ambient shadow */
+  --reverse-bg: var(--c-ink);           /* intentionally-dark inverted panels */
+  --reverse-text: var(--c-paper);
+  --reverse-text-muted: rgba(240, 235, 224, 0.5);  /* muted text on reversed panels */
+  --reverse-line: rgba(240, 235, 224, 0.22);       /* borders/fills on reversed panels */
+  --accent: var(--c-accent);
+  --accent-strong: var(--c-accent-strong);
+  --on-accent: var(--c-accent-ink);
 }
 
+[data-theme="ink"] {
+  --bg: #0d0d0f;
+  --surface: #141416;
+  --surface-2: #1b1b1e;
+  --text: #f0ebe0;
+  --text-muted: rgba(240, 235, 224, 0.55);
+  --line: rgba(240, 235, 224, 0.15);
+  --line-strong: rgba(240, 235, 224, 0.85);
+  --shadow: rgba(0, 0, 0, 0.6);
+  --reverse-bg: var(--c-paper);         /* panels invert with the theme */
+  --reverse-text: var(--c-ink);
+  --reverse-text-muted: rgba(13, 13, 15, 0.5);
+  --reverse-line: rgba(13, 13, 15, 0.22);
+  --accent: #ff5147;                    /* brighter red on dark */
+  --accent-strong: #ff6b62;
+  --on-accent: #0d0d0f;
+}
+
+/* ============================================================ RESET */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; background-color: var(--bg); }
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+}
 
 body {
   background-color: var(--bg);
-  background: radial-gradient(ellipse 120% 80% at 50% 0%, #1a1a2e 0%, #0d0d0f 50%);
   color: var(--text);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
-  cursor: none !important;
+  cursor: none;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  mix-blend-mode: overlay;
-}
+::selection { background: rgba(229, 50, 45, 0.22); color: var(--text); }
 
-#cursor-dot {
-  position: fixed; top: 0; left: 0;
-  width: 8px; height: 8px;
-  background: white; border-radius: 50%;
-  pointer-events: none; z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 3px; }
 
-#cursor-ring {
-  position: fixed; top: 0; left: 0;
-  width: 32px; height: 32px;
-  border: 1px solid rgba(255,255,255,0.4); border-radius: 50%;
-  pointer-events: none; z-index: 99998;
-  transform: translate(-50%, -50%);
-  transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease;
-}
-
-body.cursor-hover #cursor-dot { width: 6px; height: 6px; opacity: 0.5; }
-body.cursor-hover #cursor-ring { width: 48px; height: 48px; opacity: 0.25; }
-
+/* Scroll progress bar — driven by ScrollProgress.jsx */
 #scroll-progress {
   position: fixed; top: 0; left: 0;
-  height: 1px; background: rgba(255,255,255,0.7);
-  z-index: 99997; transform-origin: left;
+  width: 0; height: 3px;
+  background: var(--accent);
+  z-index: 99997;
 }
 
-::selection { background: rgba(255,255,255,0.15); color: white; }
-
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
-
-.section-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px; font-weight: 500;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 16px; display: block;
-}
-
-.section-heading {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(36px, 5vw, 56px);
-  font-weight: 700; color: white;
-  line-height: 1.1; margin-bottom: 48px;
-}
-
-.btn-sweep {
-  position: relative; overflow: hidden;
-  transition: color 0.3s ease; z-index: 1;
-}
-.btn-sweep::before {
-  content: ''; position: absolute; inset: 0;
-  background: white; transform: translateX(-101%);
-  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); z-index: -1;
-}
-.btn-sweep:hover::before { transform: translateX(0); }
-.btn-sweep:hover { color: black; }
-
-.btn-sweep-dark::before { background: #1a1a1a; }
-.btn-sweep-dark:hover { color: white; }
-
-.card {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--border);
-  border-radius: 12px; padding: 24px;
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-.card:hover { border-color: rgba(255,255,255,0.15); }
-
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-.shimmer-badge {
-  background: linear-gradient(90deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.08) 100%);
-  background-size: 200% auto;
-  animation: shimmer 2.5s linear infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-.animate-float { animation: float 4s ease-in-out infinite; }
-
-@keyframes pulseDot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.8); }
-}
-.animate-pulse-dot { animation: pulseDot 0s ease-in-out infinite; }
-
-.code-symbol {
-  position: absolute;
-  font-family: 'Inter', monospace;
-  font-size: 100px; font-weight: 700;
-  color: rgba(255,255,255,0.025);
-  pointer-events: none; user-select: none; z-index: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* ── Manga / V2 Utilities ── */
+/* ============================================================ FONTS
+   Bangers / Playfair Display / Inter are loaded in index.html. */
 .font-manga {
   font-family: 'Bangers', cursive;
   letter-spacing: 0.05em;
 }
 
-/* Panel grid overlay */
-.manga-panel {
-  position: relative;
-  border: 3px solid rgba(255,255,255,0.15);
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.05),
-    4px 4px 0px rgba(255,255,255,0.06);
-}
-
-/* Speed lines SVG background */
-.speed-lines {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cg stroke='rgba(255,255,255,0.04)' stroke-width='1'%3E%3Cline x1='300' y1='300' x2='0' y2='0'/%3E%3Cline x1='300' y1='300' x2='100' y2='0'/%3E%3Cline x1='300' y1='300' x2='200' y2='0'/%3E%3Cline x1='300' y1='300' x2='300' y2='0'/%3E%3Cline x1='300' y1='300' x2='400' y2='0'/%3E%3Cline x1='300' y1='300' x2='500' y2='0'/%3E%3Cline x1='300' y1='300' x2='600' y2='0'/%3E%3Cline x1='300' y1='300' x2='600' y2='100'/%3E%3Cline x1='300' y1='300' x2='600' y2='200'/%3E%3Cline x1='300' y1='300' x2='600' y2='300'/%3E%3Cline x1='300' y1='300' x2='600' y2='400'/%3E%3Cline x1='300' y1='300' x2='600' y2='500'/%3E%3Cline x1='300' y1='300' x2='600' y2='600'/%3E%3Cline x1='300' y1='300' x2='500' y2='600'/%3E%3Cline x1='300' y1='300' x2='400' y2='600'/%3E%3Cline x1='300' y1='300' x2='300' y2='600'/%3E%3Cline x1='300' y1='300' x2='200' y2='600'/%3E%3Cline x1='300' y1='300' x2='100' y2='600'/%3E%3Cline x1='300' y1='300' x2='0' y2='600'/%3E%3Cline x1='300' y1='300' x2='0' y2='500'/%3E%3Cline x1='300' y1='300' x2='0' y2='400'/%3E%3Cline x1='300' y1='300' x2='0' y2='300'/%3E%3Cline x1='300' y1='300' x2='0' y2='200'/%3E%3Cline x1='300' y1='300' x2='0' y2='100'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: cover;
-  background-position: center;
-}
-
-/* Manga action word style */
-.manga-action {
-  font-family: 'Bangers', cursive;
-  letter-spacing: 0.08em;
-  -webkit-text-stroke: 2px rgba(255,255,255,0.8);
-  text-shadow:
-    3px 3px 0px rgba(0,0,0,0.8),
-    -1px -1px 0px rgba(0,0,0,0.5);
-}
-
-/* Paper texture for content sections */
+/* ============================================================ SURFACES */
 .paper-bg {
-  background-color: #f0ebe0;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23f0ebe0'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='rgba(0,0,0,0.08)'/%3E%3C/svg%3E");
-  color: #0d0d0f;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
-/* Ink panel border for cards on paper bg */
+/* Bordered manga card with hard ink shadow */
 .ink-panel {
-  border: 2.5px solid #0d0d0f;
+  border: 2.5px solid var(--line-strong);
   border-radius: 4px;
-  box-shadow: 4px 4px 0px #0d0d0f;
+  box-shadow: 4px 4px 0px var(--line-strong);
 }
 
 /* Speech bubble */
 .speech-bubble {
   position: relative;
-  background: white;
-  border: 2.5px solid #0d0d0f;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 2.5px solid var(--line-strong);
   border-radius: 20px;
   padding: 8px 16px;
-  box-shadow: 3px 3px 0px #0d0d0f;
+  box-shadow: 3px 3px 0px var(--line-strong);
 }
 .speech-bubble::after {
   content: '';
-  position: absolute;
-  bottom: -14px;
-  left: 20px;
-  width: 0;
-  height: 0;
+  position: absolute; bottom: -14px; left: 20px;
+  width: 0; height: 0;
   border-left: 8px solid transparent;
   border-right: 4px solid transparent;
-  border-top: 14px solid #0d0d0f;
+  border-top: 14px solid var(--line-strong);
 }
 .speech-bubble::before {
   content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 21px;
-  width: 0;
-  height: 0;
+  position: absolute; bottom: -10px; left: 21px;
+  width: 0; height: 0;
   border-left: 7px solid transparent;
   border-right: 3px solid transparent;
-  border-top: 12px solid white;
+  border-top: 12px solid var(--surface-2);
   z-index: 1;
 }
 
-/* ── Dark Mode Theme ── */
-[data-theme="dark"] {
-  --paper-bg: #0d0d0f;
-  --paper-bg-2: #111113;
-  --ink: #f0ebe0;
-  --ink-muted: rgba(240,235,224,0.5);
-  --ink-border: rgba(240,235,224,0.15);
-  --ink-shadow: rgba(240,235,224,0.1);
+/* ============================================================ PRIMITIVES
+   Shared manga building blocks. Replace repeated inline styles across
+   sections (chapter bars, buttons, rank badges, tag chips). */
+
+/* Chapter title bar: the dark "CHAPTER 0X" tab + heading strip */
+.chapter-bar {
+  display: flex; align-items: center; overflow: hidden;
+  border-bottom: 3px solid var(--line-strong);
+}
+.chapter-bar__tab {
+  flex-shrink: 0;
+  padding: 16px 32px;
+  background: var(--reverse-bg);
+  color: var(--reverse-text);
+  border-right: 3px solid var(--line-strong);
 }
 
-[data-theme="paper"] {
-  --paper-bg: #f0ebe0;
-  --paper-bg-2: #f8f4ec;
-  --ink: #0d0d0f;
-  --ink-muted: rgba(13,13,15,0.5);
-  --ink-border: rgba(13,13,15,0.15);
-  --ink-shadow: rgba(13,13,15,0.1);
+/* Ink button — solid fill (primary action) */
+.ink-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px;
+  font-family: 'Bangers', cursive; letter-spacing: 0.1em;
+  background: var(--reverse-bg); color: var(--reverse-text);
+  border: 2px solid var(--line-strong);
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.ink-btn--ghost { background: transparent; color: var(--text); }
+.ink-btn--accent {
+  background: var(--accent); color: var(--on-accent);
+  border-color: var(--accent);
 }
 
-/* Apply to paper sections */
-[data-theme="dark"] .paper-bg {
-  background-color: #0d0d0f !important;
-  color: #f0ebe0 !important;
+/* Rank badge (S / A / B). --s variant carries the accent. */
+.rank-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 2px solid var(--line-strong);
+  font-family: 'Bangers', cursive; font-size: 13px;
+  color: var(--text);
+}
+.rank-badge--s {
+  border-color: var(--accent); color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(229, 50, 45, 0.12);
 }
 
-[data-theme="dark"] .paper-bg * {
-  border-color: rgba(240,235,224,0.15) !important;
+/* Tag chip */
+.tag-chip {
+  font-family: 'Bangers', cursive;
+  font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: 999px;
 }
 
-/* Ink borders flip */
-[data-theme="dark"] [style*="border: 3px solid #0d0d0f"],
-[data-theme="dark"] [style*="border: 2px solid #0d0d0f"],
-[data-theme="dark"] [style*="border: 1.5px solid #0d0d0f"],
-[data-theme="dark"] [style*="borderBottom: '3px solid #0d0d0f'"] {
-  border-color: rgba(240,235,224,0.2) !important;
-}
-
-/* Text color flip */
-[data-theme="dark"] .font-manga:not(.text-white):not([style*="color: white"]) {
-  color: #f0ebe0 !important;
-}
-
-/* Chapter title bars flip */
-[data-theme="dark"] [style*="background: '#0d0d0f'"] {
-  background: #f0ebe0 !important;
-  color: #0d0d0f !important;
-}
-
-/* Cards on paper flip */
-[data-theme="dark"] [style*="background: '#f8f4ec'"],
-[data-theme="dark"] [style*="background: '#f0ebe0'"] {
-  background: #141416 !important;
-}
-
-/* Halftone dots flip */
-[data-theme="dark"] [style*="radial-gradient(circle, #0d0d0f"] {
-  filter: invert(1);
-}
-
-/* Transition everything smoothly */
-* {
-  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease !important;
+/* ============================================================ MOTION */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

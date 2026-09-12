@@ -41,8 +41,8 @@ function FloatingLabelInput({
       <motion.label
         animate={
           lifted
-            ? { y: -22, fontSize: "10px", color: "#0d0d0f" }
-            : { y: 0, fontSize: "13px", color: "rgba(13,13,15,0.4)" }
+            ? { y: -22, fontSize: "10px", color: "var(--text)" }
+            : { y: 0, fontSize: "13px", color: "var(--text-muted)" }
         }
         transition={{ duration: 0.2 }}
         className="absolute left-4 top-4 pointer-events-none font-manga uppercase tracking-wider origin-left"
@@ -59,13 +59,13 @@ function FloatingLabelInput({
           onBlur={() => setFocused(false)}
           style={{
             width: "100%",
-            background: "#f8f4ec",
-            border: `2px solid ${focused ? "#0d0d0f" : "rgba(13,13,15,0.2)"}`,
+            background: "var(--surface)",
+            border: `2px solid ${focused ? "var(--line-strong)" : "var(--line)"}`,
             boxShadow: focused
-              ? "3px 3px 0px #0d0d0f"
-              : "2px 2px 0px rgba(13,13,15,0.1)",
+              ? "3px 3px 0px var(--line-strong)"
+              : "2px 2px 0px var(--shadow)",
             padding: "24px 16px 12px",
-            color: "#0d0d0f",
+            color: "var(--text)",
             fontSize: 14,
             fontFamily: "Inter, sans-serif",
             outline: "none",
@@ -82,13 +82,13 @@ function FloatingLabelInput({
           onBlur={() => setFocused(false)}
           style={{
             width: "100%",
-            background: "#f8f4ec",
-            border: `2px solid ${focused ? "#0d0d0f" : "rgba(13,13,15,0.2)"}`,
+            background: "var(--surface)",
+            border: `2px solid ${focused ? "var(--line-strong)" : "var(--line)"}`,
             boxShadow: focused
-              ? "3px 3px 0px #0d0d0f"
-              : "2px 2px 0px rgba(13,13,15,0.1)",
+              ? "3px 3px 0px var(--line-strong)"
+              : "2px 2px 0px var(--shadow)",
             padding: "22px 16px 8px",
-            color: "#0d0d0f",
+            color: "var(--text)",
             fontSize: 14,
             fontFamily: "Inter, sans-serif",
             outline: "none",
@@ -169,19 +169,19 @@ export default function Contact() {
     <div
       id="contact"
       className="relative w-full paper-bg"
-      style={{ borderBottom: "3px solid #0d0d0f" }}
+      style={{ borderBottom: "3px solid var(--line-strong)" }}
     >
       {/* ── Chapter title bar ── */}
       <div
         className="w-full flex items-center overflow-hidden"
-        style={{ borderBottom: "3px solid #0d0d0f" }}
+        style={{ borderBottom: "3px solid var(--line-strong)" }}
       >
         <div
           className="px-8 py-4 flex-shrink-0"
-          style={{ borderRight: "3px solid #0d0d0f", background: "#0d0d0f" }}
+          style={{ borderRight: "3px solid var(--line-strong)", background: "var(--reverse-bg)" }}
         >
           <span
-            className="font-manga text-white tracking-widest"
+            className="font-manga text-[color:var(--reverse-text)] tracking-widest"
             style={{ fontSize: 13 }}
           >
             CHAPTER 10
@@ -194,7 +194,7 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="font-manga tracking-wide"
-            style={{ fontSize: "clamp(22px, 4vw, 42px)", color: "#0d0d0f" }}
+            style={{ fontSize: "clamp(22px, 4vw, 42px)", color: "var(--text)" }}
           >
             LET'S TALK
           </motion.h2>
@@ -211,8 +211,8 @@ export default function Contact() {
           transition={{ duration: 0.7 }}
           className="relative flex flex-col justify-between p-8 md:p-12"
           style={{
-            borderRight: "3px solid #0d0d0f",
-            background: "#0d0d0f",
+            borderRight: "3px solid var(--line-strong)",
+            background: "var(--reverse-bg)",
             minWidth: "340px",
             maxWidth: "420px",
           }}
@@ -221,12 +221,12 @@ export default function Contact() {
           <div
             className="absolute top-4 left-4"
             style={{
-              border: "1.5px solid rgba(255,255,255,0.15)",
+              border: "1.5px solid var(--reverse-line)",
               padding: "2px 8px",
             }}
           >
             <span
-              className="font-manga text-white opacity-40"
+              className="font-manga text-[color:var(--reverse-text)] opacity-40"
               style={{ fontSize: 9, letterSpacing: "0.15em" }}
             >
               PANEL A
@@ -242,10 +242,10 @@ export default function Contact() {
               transition={{ delay: 0.2, duration: 0.6 }}
             >
               <h3
-                className="font-manga text-white leading-none"
+                className="font-manga text-[color:var(--reverse-text)] leading-none"
                 style={{
                   fontSize: "clamp(48px, 6vw, 80px)",
-                  WebkitTextStroke: "1.5px rgba(255,255,255,0.6)",
+                  WebkitTextStroke: "1.5px var(--reverse-text-muted)",
                   textShadow: "4px 4px 0px rgba(0,0,0,0.5)",
                   letterSpacing: "0.04em",
                   lineHeight: 0.9,
@@ -266,7 +266,7 @@ export default function Contact() {
               className="font-body"
               style={{
                 fontSize: 13,
-                color: "rgba(255,255,255,0.4)",
+                color: "var(--reverse-text-muted)",
                 lineHeight: 1.7,
               }}
             >
@@ -277,8 +277,8 @@ export default function Contact() {
             <div
               className="inline-flex items-center gap-2 px-3 py-2 self-start"
               style={{
-                border: "1.5px solid rgba(255,255,255,0.15)",
-                background: "rgba(255,255,255,0.05)",
+                border: "1.5px solid var(--reverse-line)",
+                background: "var(--reverse-line)",
               }}
             >
               <span
@@ -286,7 +286,7 @@ export default function Contact() {
                 style={{ background: "#4ade80" }}
               />
               <span
-                className="font-manga text-white opacity-60"
+                className="font-manga text-[color:var(--reverse-text)] opacity-60"
                 style={{ fontSize: 10, letterSpacing: "0.18em" }}
               >
                 AVAILABLE NOW
@@ -297,7 +297,7 @@ export default function Contact() {
           {/* Social links */}
           <div className="flex flex-col gap-4 mt-8">
             <span
-              className="font-manga text-white opacity-30"
+              className="font-manga text-[color:var(--reverse-text)] opacity-30"
               style={{ fontSize: 10, letterSpacing: "0.2em" }}
             >
               FIND ME ON
@@ -314,29 +314,29 @@ export default function Contact() {
                   style={{
                     width: 40,
                     height: 40,
-                    border: "2px solid rgba(255,255,255,0.15)",
-                    background: "rgba(255,255,255,0.04)",
-                    boxShadow: "2px 2px 0px rgba(255,255,255,0.06)",
+                    border: "2px solid var(--reverse-line)",
+                    background: "var(--reverse-line)",
+                    boxShadow: "2px 2px 0px var(--reverse-line)",
                     cursor: "none",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "white";
-                    e.currentTarget.style.borderColor = "white";
+                    e.currentTarget.style.background = "var(--reverse-text)";
+                    e.currentTarget.style.borderColor = "var(--reverse-text)";
                     e.currentTarget.querySelector("svg").style.color =
-                      "#0d0d0f";
+                      "var(--reverse-bg)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                    e.currentTarget.style.background = "var(--reverse-line)";
                     e.currentTarget.style.borderColor =
-                      "rgba(255,255,255,0.15)";
+                      "var(--reverse-line)";
                     e.currentTarget.querySelector("svg").style.color =
-                      "rgba(255,255,255,0.5)";
+                      "var(--reverse-text-muted)";
                   }}
                 >
                   <Icon
                     size={15}
                     style={{
-                      color: "rgba(255,255,255,0.5)",
+                      color: "var(--reverse-text-muted)",
                       transition: "color 0.2s",
                     }}
                   />
@@ -347,7 +347,7 @@ export default function Contact() {
 
           {/* Panel number */}
           <div
-            className="absolute bottom-4 right-5 font-manga text-white"
+            className="absolute bottom-4 right-5 font-manga text-[color:var(--reverse-text)]"
             style={{ fontSize: 9, opacity: 0.1, letterSpacing: "0.12em" }}
           >
             10 / 01
@@ -361,19 +361,19 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ delay: 0.15, duration: 0.7 }}
           className="relative flex-1 flex flex-col justify-center p-8 md:p-12"
-          style={{ background: "#f8f4ec" }}
+          style={{ background: "var(--surface)" }}
         >
           {/* Panel label */}
           <div
             className="absolute top-4 left-4"
             style={{
-              border: "1.5px solid #0d0d0f",
+              border: "1.5px solid var(--line-strong)",
               padding: "2px 8px",
-              background: "#0d0d0f",
+              background: "var(--reverse-bg)",
             }}
           >
             <span
-              className="font-manga text-white"
+              className="font-manga text-[color:var(--reverse-text)]"
               style={{ fontSize: 9, letterSpacing: "0.15em" }}
             >
               PANEL B
@@ -383,13 +383,13 @@ export default function Contact() {
           {/* Form heading */}
           <div className="mb-8 pt-6">
             <span
-              className="font-manga text-[#0d0d0f] opacity-40"
+              className="font-manga text-[color:var(--text)] opacity-40"
               style={{ fontSize: 10, letterSpacing: "0.2em" }}
             >
               010 - CONTACT
             </span>
             <p
-              className="font-manga text-[#0d0d0f] mt-1"
+              className="font-manga text-[color:var(--text)] mt-1"
               style={{ fontSize: 18, letterSpacing: "0.08em" }}
             >
               Send a transmission.
@@ -424,25 +424,25 @@ export default function Contact() {
               style={{
                 fontSize: 14,
                 letterSpacing: "0.18em",
-                background: status === "sent" ? "#f8f4ec" : "#0d0d0f",
+                background: status === "sent" ? "var(--surface)" : "var(--reverse-bg)",
                 color:
                   status === "sent"
                     ? "#4ade80"
                     : status === "error"
                       ? "#f87171"
-                      : "white",
+                      : "var(--reverse-text)",
                 border:
                   status === "sent"
                     ? "2.5px solid #4ade80"
                     : status === "error"
                       ? "2.5px solid #f87171"
-                    : "2.5px solid #0d0d0f",
+                    : "2.5px solid var(--line-strong)",
                 boxShadow:
                   status === "sent"
                     ? "4px 4px 0px rgba(74,222,128,0.2)"
                     : status === "error"
                       ? "4px 4px 0px rgba(248,113,113,0.2)"
-                    : "4px 4px 0px rgba(13,13,15,0.3)",
+                    : "4px 4px 0px var(--shadow)",
                 cursor: "none",
               }}
             >
@@ -475,7 +475,7 @@ export default function Contact() {
 
           {/* Panel number */}
           <div
-            className="absolute bottom-4 right-5 font-manga text-[#0d0d0f]"
+            className="absolute bottom-4 right-5 font-manga text-[color:var(--text)]"
             style={{ fontSize: 9, opacity: 0.12, letterSpacing: "0.12em" }}
           >
             10 / 02
@@ -486,22 +486,22 @@ export default function Contact() {
       {/* ── Footer strip ── */}
       <div
         className="flex items-center justify-between px-8 py-4"
-        style={{ borderTop: "3px solid #0d0d0f", background: "#0d0d0f" }}
+        style={{ borderTop: "3px solid var(--line-strong)", background: "var(--reverse-bg)" }}
       >
         <span
-          className="font-manga text-white opacity-30"
+          className="font-manga text-[color:var(--reverse-text)] opacity-30"
           style={{ fontSize: 10, letterSpacing: "0.2em" }}
         >
           VOL.01 · FIN
         </span>
         <span
-          className="font-manga text-white opacity-20"
+          className="font-manga text-[color:var(--reverse-text)] opacity-20"
           style={{ fontSize: 10, letterSpacing: "0.2em" }}
         >
           DESIGNED & BUILT BY SHIVANSH · 2026
         </span>
         <span
-          className="font-manga text-white opacity-30"
+          className="font-manga text-[color:var(--reverse-text)] opacity-30"
           style={{ fontSize: 10, letterSpacing: "0.2em" }}
         >
           SHIVANSH · WORLD

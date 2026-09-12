@@ -144,13 +144,13 @@ export default function ContextAwareFX() {
             <div
               className="px-3 py-1"
               style={{
-                border: "1.5px solid #0d0d0f",
-                background: "#f0ebe0",
-                boxShadow: "3px 3px 0px rgba(13,13,15,0.12)",
+                border: "1.5px solid var(--line-strong)",
+                background: "var(--surface)",
+                boxShadow: "3px 3px 0px var(--shadow)",
               }}
             >
               <span
-                className="font-manga text-[#0d0d0f]"
+                className="font-manga text-[color:var(--text)]"
                 style={{ fontSize: 9, letterSpacing: "0.18em" }}
               >
                 {hoverFx.label}
@@ -190,7 +190,7 @@ export default function ContextAwareFX() {
                     y1={cy}
                     x2={cx + Math.cos(rad) * len}
                     y2={cy + Math.sin(rad) * len}
-                    stroke="rgba(13,13,15,0.7)"
+                    style={{ stroke: "var(--text)" }}
                     strokeWidth={i % 3 === 0 ? "2" : "1"}
                     strokeDasharray="80"
                     strokeDashoffset="80"
@@ -201,7 +201,7 @@ export default function ContextAwareFX() {
             <div
               className="fx-ring absolute inset-0 rounded-full"
               style={{
-                border: "2px solid rgba(13,13,15,0.35)",
+                border: "2px solid var(--text)",
                 transform: "scale(0.4)",
                 opacity: 0.6,
               }}
@@ -209,7 +209,7 @@ export default function ContextAwareFX() {
             <div
               className="fx-dot absolute left-1/2 top-1/2 h-3 w-3 rounded-full"
               style={{
-                background: "#0d0d0f",
+                background: "var(--text)",
                 transform: "translate(-50%, -50%) scale(0.6)",
                 opacity: 0.85,
               }}

@@ -65,7 +65,7 @@ const EXPERIENCE = [
     company: "CATI AI",
     fullCompany: "CATI AI — Voice AI Agent Platform",
     role: "Technical Intern",
-    period: "JUNE 2026 - JANUARY 2027",
+    period: "Part-time, 2026 - PRESENT",
     mode: "REMOTE",
     Icon: Bot,
     tagline: "Tool-calling infrastructure for a live voice AI agent.",
@@ -113,13 +113,13 @@ export default function Experience() {
     <section
       id="experience"
       className="relative w-full paper-bg overflow-hidden"
-      style={{ borderBottom: "3px solid #0d0d0f" }}
+      style={{ borderBottom: "3px solid var(--line-strong)" }}
     >
       <div
         className="absolute inset-0 opacity-20 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(135deg, rgba(13,13,15,0.16) 1px, transparent 1px)",
+            "linear-gradient(135deg, var(--line) 1px, transparent 1px)",
           backgroundSize: "18px 18px",
         }}
       />
@@ -127,13 +127,13 @@ export default function Experience() {
       {/* Chapter title bar */}
       <div
         className="relative z-10 w-full flex items-center overflow-hidden"
-        style={{ borderBottom: "3px solid #0d0d0f" }}
+        style={{ borderBottom: "3px solid var(--line-strong)" }}
       >
         <div
           className="px-8 py-4 flex-shrink-0"
-          style={{ borderRight: "3px solid #0d0d0f", background: "#0d0d0f" }}
+          style={{ borderRight: "3px solid var(--line-strong)", background: "var(--reverse-bg)" }}
         >
-          <span className="font-manga text-white tracking-widest" style={{ fontSize: 13 }}>
+          <span className="font-manga text-[color:var(--reverse-text)] tracking-widest" style={{ fontSize: 13 }}>
             CHAPTER 03
           </span>
         </div>
@@ -144,12 +144,12 @@ export default function Experience() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="font-manga tracking-wide"
-            style={{ fontSize: "clamp(22px, 4vw, 42px)", color: "#0d0d0f" }}
+            style={{ fontSize: "clamp(22px, 4vw, 42px)", color: "var(--text)" }}
           >
             EXPERIENCE ARC
           </motion.h2>
           <span
-            className="hidden md:block font-manga text-[#0d0d0f] opacity-30"
+            className="hidden md:block font-manga text-[color:var(--text)] opacity-30"
             style={{ fontSize: 11, letterSpacing: "0.2em" }}
           >
             {EXPERIENCE.length} QUESTS ACTIVE
@@ -162,7 +162,7 @@ export default function Experience() {
         {/* LEFT — company selector, tabs fill full height */}
         <div
           className="relative flex lg:flex-col lg:h-full overflow-x-auto lg:overflow-visible"
-          style={{ borderRight: "3px solid #0d0d0f", background: "#f0ebe0" }}
+          style={{ borderRight: "3px solid var(--line-strong)", background: "var(--bg)" }}
         >
           {EXPERIENCE.map((exp, i) => {
             const isActive = exp.id === activeId;
@@ -174,8 +174,8 @@ export default function Experience() {
                 whileHover={{ x: isActive ? 0 : 3 }}
                 className="group relative flex-shrink-0 lg:flex-1 lg:flex lg:flex-col justify-between text-left px-6 py-6 overflow-hidden transition-colors"
                 style={{
-                  borderBottom: isLast ? "none" : "1.5px solid rgba(13,13,15,0.15)",
-                  borderRight: "1.5px solid rgba(13,13,15,0.15)",
+                  borderBottom: isLast ? "none" : "1.5px solid var(--line)",
+                  borderRight: "1.5px solid var(--line)",
                   minWidth: 168,
                 }}
               >
@@ -184,7 +184,7 @@ export default function Experience() {
                   <motion.div
                     layoutId="exp-tab-bg"
                     className="absolute inset-0"
-                    style={{ background: "#0d0d0f" }}
+                    style={{ background: "var(--reverse-bg)" }}
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
@@ -195,7 +195,7 @@ export default function Experience() {
                   size={104}
                   style={{
                     opacity: isActive ? 0.1 : 0.05,
-                    color: isActive ? "#fff" : "#0d0d0f",
+                    color: isActive ? "var(--reverse-text)" : "var(--text)",
                   }}
                 />
 
@@ -205,7 +205,7 @@ export default function Experience() {
                     style={{
                       fontSize: 10,
                       letterSpacing: "0.2em",
-                      color: isActive ? "rgba(255,255,255,0.4)" : "rgba(13,13,15,0.4)",
+                      color: isActive ? "var(--reverse-text-muted)" : "var(--text-muted)",
                     }}
                   >
                     {String(i + 1).padStart(2, "0")}
@@ -213,7 +213,7 @@ export default function Experience() {
                   <ChevronRight
                     size={15}
                     style={{
-                      color: isActive ? "#fff" : "rgba(13,13,15,0.25)",
+                      color: isActive ? "var(--reverse-text)" : "var(--text-muted)",
                       opacity: isActive ? 1 : 0,
                       transform: isActive ? "translateX(0)" : "translateX(-4px)",
                       transition: "all 0.25s ease",
@@ -227,7 +227,7 @@ export default function Experience() {
                     style={{
                       fontSize: 24,
                       letterSpacing: "0.02em",
-                      color: isActive ? "#fff" : "#0d0d0f",
+                      color: isActive ? "var(--reverse-text)" : "var(--text)",
                     }}
                   >
                     {exp.code}
@@ -237,7 +237,7 @@ export default function Experience() {
                     style={{
                       fontSize: 9.5,
                       letterSpacing: "0.18em",
-                      color: isActive ? "rgba(255,255,255,0.4)" : "rgba(13,13,15,0.4)",
+                      color: isActive ? "var(--reverse-text-muted)" : "var(--text-muted)",
                     }}
                   >
                     INTERNSHIP
@@ -247,7 +247,7 @@ export default function Experience() {
                     style={{
                       fontSize: 12,
                       fontWeight: 600,
-                      color: isActive ? "rgba(255,255,255,0.85)" : "rgba(13,13,15,0.75)",
+                      color: isActive ? "var(--reverse-text)" : "var(--text-muted)",
                     }}
                   >
                     {exp.period}
@@ -256,7 +256,7 @@ export default function Experience() {
                     className="font-body block mt-0.5"
                     style={{
                       fontSize: 10.5,
-                      color: isActive ? "rgba(255,255,255,0.35)" : "rgba(13,13,15,0.4)",
+                      color: isActive ? "var(--reverse-text-muted)" : "var(--text-muted)",
                     }}
                   >
                     {exp.mode}
@@ -278,7 +278,7 @@ export default function Experience() {
             {/* header bar */}
             <div
               className="flex flex-wrap items-center justify-between gap-4 p-5 md:p-6"
-              style={{ background: "#0d0d0f" }}
+              style={{ background: "var(--reverse-bg)" }}
             >
               <div className="flex items-center gap-4">
                 <motion.div
@@ -287,20 +287,20 @@ export default function Experience() {
                   style={{
                     width: 48,
                     height: 48,
-                    border: "2px solid rgba(255,255,255,0.2)",
-                    background: "rgba(255,255,255,0.06)",
+                    border: "2px solid var(--reverse-line)",
+                    background: "var(--reverse-line)",
                   }}
                 >
-                  <active.Icon size={22} color="#fff" />
+                  <active.Icon size={22} color="var(--reverse-text)" />
                 </motion.div>
                 <div>
                   <h3
-                    className="font-manga text-white"
+                    className="font-manga text-[color:var(--reverse-text)]"
                     style={{ fontSize: "clamp(20px, 3vw, 30px)", letterSpacing: "0.03em" }}
                   >
                     {active.code} · {active.role}
                   </h3>
-                  <p className="font-body" style={{ fontSize: 12.5, color: "rgba(255,255,255,0.45)" }}>
+                  <p className="font-body" style={{ fontSize: 12.5, color: "var(--reverse-text-muted)" }}>
                     {active.tagline}
                   </p>
                 </div>
@@ -308,25 +308,25 @@ export default function Experience() {
 
               <span
                 className="inline-flex items-center gap-2 px-3 py-1.5 flex-shrink-0"
-                style={{ border: "1.5px solid rgba(255,255,255,0.25)" }}
+                style={{ border: "1.5px solid var(--reverse-line)" }}
               >
                 <span
                   className="w-1.5 h-1.5 rounded-full animate-pulse-dot"
                   style={{ background: "#4ade80" }}
                 />
-                <span className="font-manga text-white" style={{ fontSize: 10, letterSpacing: "0.16em" }}>
+                <span className="font-manga text-[color:var(--reverse-text)]" style={{ fontSize: 10, letterSpacing: "0.16em" }}>
                   {active.period} · {active.mode}
                 </span>
               </span>
             </div>
 
             {/* company + summary */}
-            <p className="font-body mt-4" style={{ fontSize: 12.5, color: "rgba(13,13,15,0.45)" }}>
+            <p className="font-body mt-4" style={{ fontSize: 12.5, color: "var(--text-muted)" }}>
               {active.fullCompany}
             </p>
             <p
               className="font-body mt-3"
-              style={{ fontSize: 15, lineHeight: 1.85, color: "rgba(13,13,15,0.68)", maxWidth: 640 }}
+              style={{ fontSize: 15, lineHeight: 1.85, color: "var(--text-muted)", maxWidth: 640 }}
             >
               {active.summary}
             </p>
@@ -339,16 +339,16 @@ export default function Experience() {
                   initial={{ opacity: 0, x: -16 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -3, boxShadow: "5px 5px 0px rgba(13,13,15,0.18)" }}
+                  whileHover={{ y: -3, boxShadow: "5px 5px 0px var(--shadow)" }}
                   transition={{ delay: index * 0.06, duration: 0.4 }}
                   className="flex items-center gap-4 p-4"
                   style={{
-                    borderTop: "1.5px solid rgba(13,13,15,0.18)",
-                    borderRight: "1.5px solid rgba(13,13,15,0.18)",
-                    borderBottom: "1.5px solid rgba(13,13,15,0.18)",
-                    borderLeft: a.rank === "S" ? "4px solid #0d0d0f" : "1.5px solid rgba(13,13,15,0.18)",
-                    background: "white",
-                    boxShadow: "3px 3px 0px rgba(13,13,15,0.1)",
+                    borderTop: "1.5px solid var(--line)",
+                    borderRight: "1.5px solid var(--line)",
+                    borderBottom: "1.5px solid var(--line)",
+                    borderLeft: a.rank === "S" ? "4px solid var(--line-strong)" : "1.5px solid var(--line)",
+                    background: "var(--surface-2)",
+                    boxShadow: "3px 3px 0px var(--shadow)",
                   }}
                 >
                   <span
@@ -357,10 +357,10 @@ export default function Experience() {
                       width: 30,
                       height: 30,
                       borderRadius: "50%",
-                      border: "2px solid #0d0d0f",
+                      border: "2px solid var(--line-strong)",
                       fontSize: 13,
-                      color: "#0d0d0f",
-                      boxShadow: a.rank === "S" ? "0 0 0 3px rgba(13,13,15,0.08)" : "none",
+                      color: "var(--text)",
+                      boxShadow: a.rank === "S" ? "0 0 0 3px var(--shadow)" : "none",
                     }}
                   >
                     {a.rank}
@@ -368,23 +368,23 @@ export default function Experience() {
 
                   <div
                     className="flex items-center justify-center flex-shrink-0"
-                    style={{ width: 38, height: 38, border: "1.5px solid rgba(13,13,15,0.2)" }}
+                    style={{ width: 38, height: 38, border: "1.5px solid var(--line)" }}
                   >
-                    <a.Icon size={17} color="#0d0d0f" />
+                    <a.Icon size={17} color="var(--text)" />
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <p className="font-body font-bold" style={{ fontSize: 13.5, color: "#0d0d0f" }}>
+                    <p className="font-body font-bold" style={{ fontSize: 13.5, color: "var(--text)" }}>
                       {a.title}
                     </p>
-                    <p className="font-body mt-0.5" style={{ fontSize: 12.5, lineHeight: 1.6, color: "rgba(13,13,15,0.6)" }}>
+                    <p className="font-body mt-0.5" style={{ fontSize: 12.5, lineHeight: 1.6, color: "var(--text-muted)" }}>
                       {a.desc}
                     </p>
                   </div>
 
                   <span
                     className="font-manga flex-shrink-0 px-3 py-1"
-                    style={{ fontSize: 10, letterSpacing: "0.1em", border: "1.5px solid #0d0d0f", color: "#0d0d0f" }}
+                    style={{ fontSize: 10, letterSpacing: "0.1em", border: "1.5px solid var(--line-strong)", color: "var(--text)" }}
                   >
                     {a.metric}
                   </span>
@@ -395,15 +395,15 @@ export default function Experience() {
             {/* dev note */}
             <div
               className="mt-6 p-4 flex items-start gap-3"
-              style={{ border: "1.5px dashed rgba(13,13,15,0.3)", background: "rgba(13,13,15,0.02)" }}
+              style={{ border: "1.5px dashed var(--line)", background: "transparent" }}
             >
               <span
                 className="font-manga flex-shrink-0"
-                style={{ fontSize: 10, letterSpacing: "0.15em", color: "rgba(13,13,15,0.4)" }}
+                style={{ fontSize: 10, letterSpacing: "0.15em", color: "var(--text-muted)" }}
               >
                 NOTE
               </span>
-              <p className="font-body italic" style={{ fontSize: 12.5, color: "rgba(13,13,15,0.55)" }}>
+              <p className="font-body italic" style={{ fontSize: 12.5, color: "var(--text-muted)" }}>
                 {active.note}
               </p>
             </div>

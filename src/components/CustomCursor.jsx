@@ -101,21 +101,20 @@ export default function CustomCursor() {
           xmlns="http://www.w3.org/2000/svg"
           style={{
             transition: 'width 0.2s ease, height 0.2s ease',
-            filter: 'drop-shadow(1px 1px 0px rgba(13,13,15,0.3))',
+            filter: 'drop-shadow(1px 1px 0px var(--shadow))',
           }}
         >
           {/* Pen nib shape */}
           <path
             d="M12 2 L18 10 L12 22 L6 10 Z"
-            fill={isHovering ? '#0d0d0f' : '#0d0d0f'}
-            stroke="white"
+            style={{ fill: 'var(--text)', stroke: 'var(--bg)' }}
             strokeWidth={isHovering ? '1.5' : '1'}
           />
           {/* Nib center line */}
           <line
             x1="12" y1="6"
             x2="12" y2="18"
-            stroke="white"
+            style={{ stroke: 'var(--bg)' }}
             strokeWidth="0.8"
             opacity="0.5"
           />
@@ -123,7 +122,7 @@ export default function CustomCursor() {
           <circle
             cx="12" cy="21"
             r={isHovering ? '2' : '1.5'}
-            fill="white"
+            style={{ fill: 'var(--bg)' }}
           />
           {/* Ink drop on hover */}
           {isHovering && (
@@ -131,7 +130,7 @@ export default function CustomCursor() {
               cx="12" cy="21"
               r="3.5"
               fill="none"
-              stroke="#0d0d0f"
+              style={{ stroke: 'var(--text)' }}
               strokeWidth="1"
               opacity="0.4"
             />
@@ -151,7 +150,7 @@ export default function CustomCursor() {
             width: 5,
             height: 5,
             borderRadius: '50%',
-            background: '#0d0d0f',
+            background: 'var(--text)',
             transform: 'translate(-50%, -50%)',
             willChange: 'left, top, opacity',
             transition: 'opacity 0.1s ease',
@@ -166,146 +165,3 @@ export default function CustomCursor() {
     </>
   )
 }
-
-// ---------------------------------------------------------------
-// import { useEffect, useRef, useState } from 'react'
-
-// export default function CustomCursor() {
-//   const cursorRef = useRef(null)
-//   const bubbleRef = useRef(null)
-//   const mousePos = useRef({ x: -100, y: -100 })
-//   const animRef = useRef(null)
-//   const [isHovering, setIsHovering] = useState(false)
-
-//   useEffect(() => {
-//     const onMouseMove = (e) => {
-//       mousePos.current = { x: e.clientX, y: e.clientY }
-//     }
-
-//     const onEnter = () => setIsHovering(true)
-//     const onLeave = () => setIsHovering(false)
-
-//     document.addEventListener('mousemove', onMouseMove, { passive: true })
-
-//     const attach = () => {
-//       document.querySelectorAll('a, button, [data-cursor]').forEach(el => {
-//         el.addEventListener('mouseenter', onEnter)
-//         el.addEventListener('mouseleave', onLeave)
-//       })
-//     }
-
-//     attach()
-//     const observer = new MutationObserver(attach)
-//     observer.observe(document.body, { childList: true, subtree: true })
-
-//     const animate = () => {
-//       const { x, y } = mousePos.current
-//       if (cursorRef.current) {
-//         cursorRef.current.style.left = x + 'px'
-//         cursorRef.current.style.top = y + 'px'
-//       }
-//       animRef.current = requestAnimationFrame(animate)
-//     }
-
-//     animRef.current = requestAnimationFrame(animate)
-
-//     return () => {
-//       document.removeEventListener('mousemove', onMouseMove)
-//       cancelAnimationFrame(animRef.current)
-//       observer.disconnect()
-//     }
-//   }, [])
-
-//   return (
-//     <>
-//       <div
-//         ref={cursorRef}
-//         style={{
-//           position: 'fixed',
-//           pointerEvents: 'none',
-//           zIndex: 999999,
-//           transform: 'translate(-50%, -50%)',
-//           willChange: 'left, top',
-//         }}
-//       >
-//         {/* Base dot — always visible */}
-//         <div
-//           style={{
-//             width: 10,
-//             height: 10,
-//             borderRadius: '50%',
-//             background: '#0d0d0f',
-//             border: '2px solid white',
-//             position: 'absolute',
-//             top: '50%',
-//             left: '50%',
-//             transform: 'translate(-50%, -50%)',
-//             transition: 'transform 0.15s ease',
-//             boxShadow: '1px 1px 0px rgba(13,13,15,0.3)',
-//           }}
-//         />
-
-//         {/* Speech bubble — appears on hover */}
-//         {isHovering && (
-//           <div
-//             ref={bubbleRef}
-//             style={{
-//               position: 'absolute',
-//               bottom: 14,
-//               left: 10,
-//               background: 'white',
-//               border: '2px solid #0d0d0f',
-//               borderRadius: '10px 10px 10px 2px',
-//               padding: '4px 8px',
-//               whiteSpace: 'nowrap',
-//               boxShadow: '2px 2px 0px #0d0d0f',
-//               animation: 'bubblePop 0.15s ease forwards',
-//             }}
-//           >
-//             <span
-//               style={{
-//                 fontFamily: 'Bangers, cursive',
-//                 fontSize: 11,
-//                 letterSpacing: '0.1em',
-//                 color: '#0d0d0f',
-//               }}
-//             >
-//               ...
-//             </span>
-//             {/* Bubble tail */}
-//             <div style={{
-//               position: 'absolute',
-//               bottom: -7,
-//               left: 4,
-//               width: 0,
-//               height: 0,
-//               borderLeft: '5px solid transparent',
-//               borderRight: '3px solid transparent',
-//               borderTop: '7px solid #0d0d0f',
-//             }} />
-//             <div style={{
-//               position: 'absolute',
-//               bottom: -4,
-//               left: 5,
-//               width: 0,
-//               height: 0,
-//               borderLeft: '4px solid transparent',
-//               borderRight: '2px solid transparent',
-//               borderTop: '5px solid white',
-//               zIndex: 1,
-//             }} />
-//           </div>
-//         )}
-//       </div>
-
-//       <style>{`
-//         *, *::before, *::after { cursor: none !important; }
-//         @keyframes bubblePop {
-//           0% { transform: scale(0.5); opacity: 0; }
-//           70% { transform: scale(1.1); opacity: 1; }
-//           100% { transform: scale(1); opacity: 1; }
-//         }
-//       `}</style>
-//     </>
-//   )
-// }

@@ -11,7 +11,6 @@ function getTimeContext() {
     activity: 'DRINKING CHAI',
     mood: 'FOCUSED',
     emoji: '☕',
-    bgAccent: 'rgba(255,255,255,0.03)',
   }
 
   if (hour >= 9 && hour < 13) return {
@@ -21,7 +20,6 @@ function getTimeContext() {
     activity: 'DEEP WORK',
     mood: 'LOCKED IN',
     emoji: '⚡',
-    bgAccent: 'rgba(255,255,255,0.03)',
   }
 
   if (hour >= 13 && hour < 17) return {
@@ -31,7 +29,6 @@ function getTimeContext() {
     activity: 'PROBLEM SOLVING',
     mood: 'DETERMINED',
     emoji: '💻',
-    bgAccent: 'rgba(255,255,255,0.03)',
   }
 
   if (hour >= 17 && hour < 21) return {
@@ -41,7 +38,6 @@ function getTimeContext() {
     activity: 'CODE REVIEW',
     mood: 'REFLECTIVE',
     emoji: '🌙',
-    bgAccent: 'rgba(255,255,255,0.03)',
   }
 
   return {
@@ -51,7 +47,6 @@ function getTimeContext() {
     activity: 'DEBUGGING',
     mood: 'UNHINGED',
     emoji: '👾',
-    bgAccent: 'rgba(255,255,255,0.03)',
   }
 }
 
@@ -105,9 +100,9 @@ export default function TimeAware() {
               width: expanded ? 'auto' : 'auto',
             }}
             style={{
-              background: '#0d0d0f',
-              border: '2px solid rgba(255,255,255,0.15)',
-              boxShadow: '4px 4px 0px rgba(255,255,255,0.06)',
+              background: 'var(--reverse-bg)',
+              border: '2px solid var(--reverse-line)',
+              boxShadow: '4px 4px 0px var(--shadow)',
               overflow: 'hidden',
             }}
           >
@@ -116,17 +111,17 @@ export default function TimeAware() {
             <div className="flex items-center gap-3 px-4 py-3">
               {/* Live clock */}
               <span
-                className="font-manga text-white"
+                className="font-manga text-[color:var(--reverse-text)]"
                 style={{ fontSize: 13, letterSpacing: '0.1em', fontVariantNumeric: 'tabular-nums' }}
               >
                 {time}
               </span>
 
-              <div className="w-px h-3" style={{ background: 'rgba(255,255,255,0.15)' }} />
+              <div className="w-px h-3" style={{ background: 'var(--reverse-line)' }} />
 
               {/* Period */}
               <span
-                className="font-manga text-white opacity-40"
+                className="font-manga text-[color:var(--reverse-text)] opacity-40"
                 style={{ fontSize: 10, letterSpacing: '0.2em' }}
               >
                 {ctx.period}
@@ -147,20 +142,20 @@ export default function TimeAware() {
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.25, ease: 'easeInOut' }}
-                  style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+                  style={{ borderTop: '1px solid var(--reverse-line)' }}
                 >
                   <div className="px-4 py-4 flex flex-col gap-3">
 
                     {/* Greeting */}
                     <div>
                       <span
-                        className="font-manga text-white"
+                        className="font-manga text-[color:var(--reverse-text)]"
                         style={{ fontSize: 18, letterSpacing: '0.06em', display: 'block' }}
                       >
                         {ctx.greeting}
                       </span>
                       <span
-                        className="font-body text-white opacity-40"
+                        className="font-body text-[color:var(--reverse-text)] opacity-40"
                         style={{ fontSize: 11, fontStyle: 'italic', display: 'block', marginTop: 2 }}
                       >
                         {ctx.subtext}
@@ -170,7 +165,7 @@ export default function TimeAware() {
                     {/* Status rows */}
                     <div
                       className="flex flex-col"
-                      style={{ border: '1px solid rgba(255,255,255,0.08)' }}
+                      style={{ border: '1px solid var(--reverse-line)' }}
                     >
                       {[
                         { label: 'ACTIVITY', value: ctx.activity },
@@ -180,18 +175,18 @@ export default function TimeAware() {
                         <div
                           key={i}
                           className="flex items-center"
-                          style={{ borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}
+                          style={{ borderBottom: i < 2 ? '1px solid var(--reverse-line)' : 'none' }}
                         >
                           <div
                             className="px-3 py-2 flex-shrink-0"
                             style={{
-                              borderRight: '1px solid rgba(255,255,255,0.06)',
+                              borderRight: '1px solid var(--reverse-line)',
                               width: 90,
-                              background: 'rgba(255,255,255,0.02)',
+                              background: 'var(--reverse-line)',
                             }}
                           >
                             <span
-                              className="font-manga text-white opacity-30"
+                              className="font-manga text-[color:var(--reverse-text)] opacity-30"
                               style={{ fontSize: 9, letterSpacing: '0.15em' }}
                             >
                               {row.label}
@@ -199,7 +194,7 @@ export default function TimeAware() {
                           </div>
                           <div className="px-3 py-2">
                             <span
-                              className="font-manga text-white"
+                              className="font-manga text-[color:var(--reverse-text)]"
                               style={{ fontSize: 11, letterSpacing: '0.1em' }}
                             >
                               {row.value}
@@ -211,7 +206,7 @@ export default function TimeAware() {
 
                     {/* Bottom note */}
                     <span
-                      className="font-body text-white"
+                      className="font-body text-[color:var(--reverse-text)]"
                       style={{ fontSize: 10, opacity: 0.2, fontStyle: 'italic', letterSpacing: '0.02em' }}
                     >
                       * Based on Shivansh's local time

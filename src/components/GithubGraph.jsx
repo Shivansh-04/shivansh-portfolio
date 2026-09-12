@@ -1,215 +1,3 @@
-// import { useEffect, useState } from 'react'
-// import { motion } from 'framer-motion'
-
-// // Replace with your actual GitHub username
-// const GITHUB_USERNAME = 'Shivansh-04'
-
-// export default function GitHubGraph() {
-//   const [contributions, setContributions] = useState([])
-//   const [total, setTotal] = useState(0)
-//   const [loading, setLoading] = useState(true)
-//   const [error, setError] = useState(false)
-
-//   useEffect(() => {
-//     const fetchContributions = async () => {
-//       try {
-//         // Use GitHub contributions API via a proxy service
-//         const res = await fetch(
-//           `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`
-//         )
-//         const data = await res.json()
-
-//         if (data.contributions) {
-//           setContributions(data.contributions)
-//           setTotal(data.total?.lastYear || 0)
-//         }
-//         setLoading(false)
-//       } catch (err) {
-//         setError(true)
-//         setLoading(false)
-//       }
-//     }
-
-//     fetchContributions()
-//   }, [])
-
-//   // Get last 182 days (26 weeks)
-//   const recentDays = contributions.slice(-182)
-
-//   // Group into weeks
-//   const weeks = []
-//   for (let i = 0; i < recentDays.length; i += 7) {
-//     weeks.push(recentDays.slice(i, i + 7))
-//   }
-
-//   const getIntensity = (count) => {
-//     if (count === 0) return 0
-//     if (count <= 2) return 1
-//     if (count <= 5) return 2
-//     if (count <= 9) return 3
-//     return 4
-//   }
-
-//   const intensityStyles = {
-//     0: { background: 'rgba(13,13,15,0.06)', border: '1px solid rgba(13,13,15,0.08)' },
-//     1: { background: 'rgba(13,13,15,0.2)', border: '1px solid rgba(13,13,15,0.15)' },
-//     2: { background: 'rgba(13,13,15,0.45)', border: '1px solid rgba(13,13,15,0.3)' },
-//     3: { background: 'rgba(13,13,15,0.7)', border: '1px solid rgba(13,13,15,0.5)' },
-//     4: { background: '#0d0d0f', border: '1px solid #0d0d0f' },
-//   }
-
-//   return (
-//     <div
-//       className="relative w-full paper-bg"
-//       style={{ borderBottom: '3px solid #0d0d0f', borderTop: '3px solid #0d0d0f' }}
-//     >
-//       {/* Chapter bar */}
-//       <div
-//         className="w-full flex items-center overflow-hidden"
-//         style={{ borderBottom: '3px solid #0d0d0f' }}
-//       >
-//         <div
-//           className="px-8 py-4 flex-shrink-0"
-//           style={{ borderRight: '3px solid #0d0d0f', background: '#0d0d0f' }}
-//         >
-//           <span className="font-manga text-white tracking-widest" style={{ fontSize: 13 }}>
-//             ACTIVITY
-//           </span>
-//         </div>
-//         <div className="flex-1 px-8 py-4 flex items-center justify-between">
-//           <motion.h2
-//             initial={{ x: -40, opacity: 0 }}
-//             whileInView={{ x: 0, opacity: 1 }}
-//             viewport={{ once: true }}
-//             transition={{ duration: 0.6 }}
-//             className="font-manga tracking-wide"
-//             style={{ fontSize: 'clamp(18px, 3vw, 32px)', color: '#0d0d0f' }}
-//           >
-//             GITHUB CONTRIBUTION MAP
-//           </motion.h2>
-//           {!loading && !error && (
-//             <div
-//               className="flex-shrink-0 px-4 py-2"
-//               style={{ border: '2px solid #0d0d0f', background: '#0d0d0f' }}
-//             >
-//               <span className="font-manga text-white" style={{ fontSize: 13, letterSpacing: '0.1em' }}>
-//                 {total}+ COMMITS
-//               </span>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-
-//       {/* Graph */}
-//       <div className="p-8 md:p-12">
-//         {loading && (
-//           <div className="flex items-center gap-3">
-//             <div
-//               className="w-4 h-4 animate-spin"
-//               style={{ border: '2px solid rgba(13,13,15,0.2)', borderTopColor: '#0d0d0f', borderRadius: '50%' }}
-//             />
-//             <span className="font-manga text-[#0d0d0f] opacity-40" style={{ fontSize: 12, letterSpacing: '0.15em' }}>
-//               LOADING ACTIVITY...
-//             </span>
-//           </div>
-//         )}
-
-//         {error && (
-//           <div
-//             className="inline-flex items-center gap-3 px-5 py-3"
-//             style={{ border: '2px solid rgba(13,13,15,0.15)', background: 'rgba(13,13,15,0.03)' }}
-//           >
-//             <span className="font-manga text-[#0d0d0f] opacity-40" style={{ fontSize: 11, letterSpacing: '0.15em' }}>
-//               ACTIVITY DATA UNAVAILABLE
-//             </span>
-//           </div>
-//         )}
-
-//         {!loading && !error && (
-//           <motion.div
-//             initial={{ opacity: 0 }}
-//             whileInView={{ opacity: 1 }}
-//             viewport={{ once: true }}
-//             transition={{ duration: 0.6 }}
-//           >
-//             {/* Day labels */}
-//             <div className="flex gap-1 mb-2 ml-1">
-//               {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(day => (
-//                 <div key={day} style={{ width: 12, flexShrink: 0 }}>
-//                   <span
-//                     className="font-manga text-[#0d0d0f]"
-//                     style={{ fontSize: 7, opacity: 0.3, letterSpacing: '0.05em', writingMode: 'horizontal-tb' }}
-//                   >
-//                   </span>
-//                 </div>
-//               ))}
-//             </div>
-
-//             {/* Grid */}
-//             <div className="flex gap-1 overflow-x-auto pb-2">
-//               {weeks.map((week, wi) => (
-//                 <div key={wi} className="flex flex-col gap-1">
-//                   {week.map((day, di) => (
-//                     <motion.div
-//                       key={di}
-//                       title={`${day.date}: ${day.count} contributions`}
-//                       initial={{ scale: 0, opacity: 0 }}
-//                       whileInView={{ scale: 1, opacity: 1 }}
-//                       viewport={{ once: true }}
-//                       transition={{ delay: wi * 0.01 + di * 0.005, duration: 0.2 }}
-//                       style={{
-//                         width: 12,
-//                         height: 12,
-//                         borderRadius: 2,
-//                         flexShrink: 0,
-//                         ...intensityStyles[getIntensity(day.count)],
-//                       }}
-//                     />
-//                   ))}
-//                 </div>
-//               ))}
-//             </div>
-
-//             {/* Legend */}
-//             <div className="flex items-center gap-2 mt-4">
-//               <span className="font-manga text-[#0d0d0f] opacity-30" style={{ fontSize: 9, letterSpacing: '0.15em' }}>
-//                 LESS
-//               </span>
-//               {[0, 1, 2, 3, 4].map(level => (
-//                 <div
-//                   key={level}
-//                   style={{
-//                     width: 10,
-//                     height: 10,
-//                     borderRadius: 2,
-//                     ...intensityStyles[level],
-//                   }}
-//                 />
-//               ))}
-//               <span className="font-manga text-[#0d0d0f] opacity-30" style={{ fontSize: 9, letterSpacing: '0.15em' }}>
-//                 MORE
-//               </span>
-
-//               <div className="flex-1" />
-
-//               <span
-//                 className="font-manga text-[#0d0d0f] opacity-25"
-//                 style={{ fontSize: 9, letterSpacing: '0.15em' }}
-//               >
-//                 {GITHUB_USERNAME} · LAST 26 WEEKS
-//               </span>
-//             </div>
-//           </motion.div>
-//         )}
-//       </div>
-//     </div>
-//   )
-// }
-
-// src/components/GitHubGraph.jsx
-// Drop-in replacement — paste into src/components/ and import in App.jsx or wherever needed
-// Usage: <GitHubGraph /> (no props needed)
-
 import { useEffect, useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { animate, stagger } from 'animejs'
@@ -217,12 +5,14 @@ import { animate, stagger } from 'animejs'
 const GITHUB_USERNAME = 'Shivansh-04'
 
 // ── Intensity → manga ink shade ──────────────────────────────────────────────
+// Graded on --text so the heat map flips with the theme (dark ink on paper,
+// light ink on the ink theme) instead of vanishing into a dark background.
 const INTENSITY = {
-  0: { bg: 'rgba(13,13,15,0.05)', border: 'rgba(13,13,15,0.08)', label: 'IDLE' },
-  1: { bg: 'rgba(13,13,15,0.18)', border: 'rgba(13,13,15,0.15)', label: 'WARM UP' },
-  2: { bg: 'rgba(13,13,15,0.42)', border: 'rgba(13,13,15,0.3)', label: 'ACTIVE' },
-  3: { bg: 'rgba(13,13,15,0.72)', border: 'rgba(13,13,15,0.5)', label: 'LOCKED IN' },
-  4: { bg: '#0d0d0f', border: '#0d0d0f', label: 'ULTRA' },
+  0: { bg: 'color-mix(in srgb, var(--text) 8%, transparent)', border: 'color-mix(in srgb, var(--text) 12%, transparent)', label: 'IDLE' },
+  1: { bg: 'color-mix(in srgb, var(--text) 22%, transparent)', border: 'color-mix(in srgb, var(--text) 18%, transparent)', label: 'WARM UP' },
+  2: { bg: 'color-mix(in srgb, var(--text) 45%, transparent)', border: 'color-mix(in srgb, var(--text) 35%, transparent)', label: 'ACTIVE' },
+  3: { bg: 'color-mix(in srgb, var(--text) 72%, transparent)', border: 'color-mix(in srgb, var(--text) 55%, transparent)', label: 'LOCKED IN' },
+  4: { bg: 'var(--text)', border: 'var(--text)', label: 'ULTRA' },
 }
 
 function getLevel(count) {
@@ -272,22 +62,22 @@ function Tooltip({ day, visible, x, y }) {
         top: y - 40,
         zIndex: 99999,
         pointerEvents: 'none',
-        background: '#0d0d0f',
-        border: '2px solid #0d0d0f',
+        background: 'var(--reverse-bg)',
+        border: '2px solid var(--reverse-line)',
         padding: '6px 12px',
-        boxShadow: '3px 3px 0px rgba(13,13,15,0.3)',
+        boxShadow: '3px 3px 0px var(--shadow)',
         minWidth: 140,
       }}
     >
       <span
-        className="font-manga text-white block"
+        className="font-manga text-[color:var(--reverse-text)] block"
         style={{ fontSize: 11, letterSpacing: '0.1em' }}
       >
         {day.count} COMMIT{day.count !== 1 ? 'S' : ''}
       </span>
       <span
-        className="font-body text-white block"
-        style={{ fontSize: 10, opacity: 0.5, marginTop: 2 }}
+        className="font-body text-[color:var(--reverse-text-muted)] block"
+        style={{ fontSize: 10, marginTop: 2 }}
       >
         {day.date}
       </span>
@@ -297,7 +87,7 @@ function Tooltip({ day, visible, x, y }) {
         width: 0, height: 0,
         borderLeft: '6px solid transparent',
         borderRight: '4px solid transparent',
-        borderTop: '8px solid #0d0d0f',
+        borderTop: '8px solid var(--reverse-bg)',
       }} />
     </div>
   )
@@ -313,9 +103,9 @@ function StatCell({ label, value, sub, accent = false, index = 0 }) {
       transition={{ delay: index * 0.08, duration: 0.4 }}
       className="relative flex flex-col p-5"
       style={{
-        border: '2px solid #0d0d0f',
-        background: accent ? '#0d0d0f' : '#f8f4ec',
-        boxShadow: '3px 3px 0px rgba(13,13,15,0.15)',
+        border: '2px solid var(--line-strong)',
+        background: accent ? 'var(--reverse-bg)' : 'var(--surface)',
+        boxShadow: '3px 3px 0px var(--shadow)',
         minWidth: 120,
         flex: 1,
       }}
@@ -325,7 +115,7 @@ function StatCell({ label, value, sub, accent = false, index = 0 }) {
         style={{
           fontSize: 9,
           letterSpacing: '0.2em',
-          color: accent ? 'rgba(255,255,255,0.4)' : 'rgba(13,13,15,0.4)',
+          color: accent ? 'var(--reverse-text-muted)' : 'var(--text-muted)',
           marginBottom: 4,
         }}
       >
@@ -336,7 +126,7 @@ function StatCell({ label, value, sub, accent = false, index = 0 }) {
         style={{
           fontSize: 'clamp(22px, 3vw, 32px)',
           lineHeight: 1,
-          color: accent ? 'white' : '#0d0d0f',
+          color: accent ? 'var(--reverse-text)' : 'var(--text)',
         }}
       >
         {value}
@@ -347,7 +137,7 @@ function StatCell({ label, value, sub, accent = false, index = 0 }) {
           style={{
             fontSize: 10,
             fontStyle: 'italic',
-            color: accent ? 'rgba(255,255,255,0.35)' : 'rgba(13,13,15,0.4)',
+            color: accent ? 'var(--reverse-text-muted)' : 'var(--text-muted)',
           }}
         >
           {sub}
@@ -452,18 +242,18 @@ export default function GitHubGraph() {
     <div
       id="github"
       className="relative w-full paper-bg"
-      style={{ borderBottom: '3px solid #0d0d0f' }}
+      style={{ borderBottom: '3px solid var(--line-strong)' }}
     >
       {/* ── Chapter title bar ── */}
       <div
         className="w-full flex items-center overflow-hidden"
-        style={{ borderBottom: '3px solid #0d0d0f' }}
+        style={{ borderBottom: '3px solid var(--line-strong)' }}
       >
         <div
           className="px-8 py-4 flex-shrink-0"
-          style={{ borderRight: '3px solid #0d0d0f', background: '#0d0d0f' }}
+          style={{ borderRight: '3px solid var(--line-strong)', background: 'var(--reverse-bg)' }}
         >
-          <span className="font-manga text-white tracking-widest" style={{ fontSize: 13 }}>
+          <span className="font-manga text-[color:var(--reverse-text)] tracking-widest" style={{ fontSize: 13 }}>
             ACTIVITY LOG
           </span>
         </div>
@@ -475,13 +265,13 @@ export default function GitHubGraph() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="font-manga tracking-wide"
-            style={{ fontSize: 'clamp(18px, 3vw, 36px)', color: '#0d0d0f', whiteSpace: 'nowrap' }}
+            style={{ fontSize: 'clamp(18px, 3vw, 36px)', color: 'var(--text)', whiteSpace: 'nowrap' }}
           >
             GITHUB BATTLE RECORD
           </motion.h2>
 
           {/* View toggle */}
-          <div className="flex items-center flex-shrink-0" style={{ border: '2px solid #0d0d0f' }}>
+          <div className="flex items-center flex-shrink-0" style={{ border: '2px solid var(--line-strong)' }}>
             {['26w', '52w'].map(v => (
               <button
                 key={v}
@@ -490,10 +280,10 @@ export default function GitHubGraph() {
                 style={{
                   fontSize: 11,
                   letterSpacing: '0.15em',
-                  background: view === v ? '#0d0d0f' : 'transparent',
-                  color: view === v ? 'white' : 'rgba(13,13,15,0.5)',
+                  background: view === v ? 'var(--reverse-bg)' : 'transparent',
+                  color: view === v ? 'var(--reverse-text)' : 'var(--text-muted)',
                   cursor: 'none',
-                  borderRight: v === '26w' ? '2px solid #0d0d0f' : 'none',
+                  borderRight: v === '26w' ? '2px solid var(--line-strong)' : 'none',
                 }}
               >
                 {v}
@@ -505,12 +295,12 @@ export default function GitHubGraph() {
         {!loading && !error && (
           <div
             className="flex-shrink-0 px-6 py-4 flex flex-col items-center justify-center"
-            style={{ borderLeft: '3px solid #0d0d0f', background: '#0d0d0f' }}
+            style={{ borderLeft: '3px solid var(--line-strong)', background: 'var(--reverse-bg)' }}
           >
-            <span className="font-manga text-white" style={{ fontSize: 22, lineHeight: 1 }}>
+            <span className="font-manga text-[color:var(--reverse-text)]" style={{ fontSize: 22, lineHeight: 1 }}>
               {total}+
             </span>
-            <span className="font-manga text-white opacity-40" style={{ fontSize: 9, letterSpacing: '0.2em' }}>
+            <span className="font-manga text-[color:var(--reverse-text)] opacity-40" style={{ fontSize: 9, letterSpacing: '0.2em' }}>
               COMMITS
             </span>
           </div>
@@ -523,13 +313,13 @@ export default function GitHubGraph() {
           <div
             style={{
               width: 18, height: 18,
-              border: '2.5px solid rgba(13,13,15,0.2)',
-              borderTopColor: '#0d0d0f',
+              border: '2.5px solid var(--line)',
+              borderTopColor: 'var(--text)',
               borderRadius: '50%',
               animation: 'spin360 0.7s linear infinite',
             }}
           />
-          <span className="font-manga text-[#0d0d0f] opacity-40" style={{ fontSize: 13, letterSpacing: '0.2em' }}>
+          <span className="font-manga text-[color:var(--text)] opacity-40" style={{ fontSize: 13, letterSpacing: '0.2em' }}>
             FETCHING BATTLE DATA...
           </span>
           <style>{`@keyframes spin360 { to { transform: rotate(360deg); } }`}</style>
@@ -541,9 +331,9 @@ export default function GitHubGraph() {
         <div className="p-12">
           <div
             className="inline-flex items-center gap-3 px-6 py-4"
-            style={{ border: '2px solid rgba(13,13,15,0.2)', background: 'rgba(13,13,15,0.03)' }}
+            style={{ border: '2px solid var(--line)', background: 'var(--surface)' }}
           >
-            <span className="font-manga text-[#0d0d0f] opacity-40" style={{ fontSize: 12, letterSpacing: '0.2em' }}>
+            <span className="font-manga text-[color:var(--text)] opacity-40" style={{ fontSize: 12, letterSpacing: '0.2em' }}>
               BATTLE DATA UNAVAILABLE
             </span>
           </div>
@@ -560,7 +350,7 @@ export default function GitHubGraph() {
           {/* ── Stat strip ── */}
           <div
             className="flex flex-wrap"
-            style={{ borderBottom: '3px solid #0d0d0f' }}
+            style={{ borderBottom: '3px solid var(--line-strong)' }}
           >
             <StatCell label="CURRENT STREAK" value={`${currentStreak}d`} sub="days in a row" accent index={0} />
             <StatCell label="BEST STREAK" value={`${streakInfo.best}d`} sub={streakInfo.bestStart ? streakInfo.bestStart.slice(5) : '—'} index={1} />
@@ -570,14 +360,14 @@ export default function GitHubGraph() {
           </div>
 
           {/* ── Contribution grid + Peak Days side by side ── */}
-          <div className="flex flex-col md:flex-row" style={{ borderBottom: '3px solid #0d0d0f' }}>
+          <div className="flex flex-col md:flex-row" style={{ borderBottom: '3px solid var(--line-strong)' }}>
           <div className="flex-1 p-6 md:p-10 min-w-0">
             {/* Panel label */}
             <div className="flex items-center gap-3 mb-5">
-              <div style={{ border: '1.5px solid #0d0d0f', padding: '2px 10px', background: '#0d0d0f', display: 'inline-block' }}>
-                <span className="font-manga text-white" style={{ fontSize: 9, letterSpacing: '0.15em' }}>COMMIT MAP</span>
+              <div style={{ border: '1.5px solid var(--line-strong)', padding: '2px 10px', background: 'var(--reverse-bg)', display: 'inline-block' }}>
+                <span className="font-manga text-[color:var(--reverse-text)]" style={{ fontSize: 9, letterSpacing: '0.15em' }}>COMMIT MAP</span>
               </div>
-              <span className="font-manga text-[#0d0d0f] opacity-30" style={{ fontSize: 9, letterSpacing: '0.15em' }}>
+              <span className="font-manga text-[color:var(--text)] opacity-30" style={{ fontSize: 9, letterSpacing: '0.15em' }}>
                 {view === '26w' ? 'LAST 26 WEEKS' : 'LAST 52 WEEKS'}
               </span>
             </div>
@@ -588,7 +378,7 @@ export default function GitHubGraph() {
                 <div key={wi} style={{ width: 14, flexShrink: 0, textAlign: 'left' }}>
                   {monthLabels[wi] && (
                     <span
-                      className="font-manga text-[#0d0d0f]"
+                      className="font-manga text-[color:var(--text)]"
                       style={{ fontSize: 7, opacity: 0.45, letterSpacing: '0.04em', whiteSpace: 'nowrap' }}
                     >
                       {monthLabels[wi]}
@@ -605,7 +395,7 @@ export default function GitHubGraph() {
                 {DOW_LABELS.map((d, i) => (
                   <div key={d} style={{ width: 14, height: 14, display: 'flex', alignItems: 'center' }}>
                     {i % 2 !== 0 && (
-                      <span className="font-manga text-[#0d0d0f]" style={{ fontSize: 6, opacity: 0.3, letterSpacing: '0.03em' }}>
+                      <span className="font-manga text-[color:var(--text)]" style={{ fontSize: 6, opacity: 0.3, letterSpacing: '0.03em' }}>
                         {d.slice(0, 2)}
                       </span>
                     )}
@@ -644,11 +434,11 @@ export default function GitHubGraph() {
                               borderRadius: 2,
                               background: INTENSITY[level].bg,
                               border: isSelected
-                                ? '2px solid #0d0d0f'
+                                ? '2px solid var(--line-strong)'
                                 : isToday
-                                ? '2px solid rgba(13,13,15,0.6)'
+                                ? '2px solid var(--text-muted)'
                                 : `1px solid ${INTENSITY[level].border}`,
-                              boxShadow: isSelected ? '2px 2px 0px #0d0d0f' : 'none',
+                              boxShadow: isSelected ? '2px 2px 0px var(--line-strong)' : 'none',
                               cursor: 'none',
                               transition: 'border 0.1s, box-shadow 0.1s',
                             }}
@@ -664,7 +454,7 @@ export default function GitHubGraph() {
                               position: 'absolute', bottom: -5, left: '50%',
                               transform: 'translateX(-50%)',
                               width: 3, height: 3, borderRadius: '50%',
-                              background: '#0d0d0f', opacity: 0.6, display: 'block',
+                              background: 'var(--text)', opacity: 0.6, display: 'block',
                             }} />
                           )}
                         </div>
@@ -677,7 +467,7 @@ export default function GitHubGraph() {
 
             {/* Legend */}
             <div className="flex items-center gap-2 mt-4 flex-wrap">
-              <span className="font-manga text-[#0d0d0f] opacity-30" style={{ fontSize: 9, letterSpacing: '0.12em' }}>
+              <span className="font-manga text-[color:var(--text)] opacity-30" style={{ fontSize: 9, letterSpacing: '0.12em' }}>
                 LESS
               </span>
               {[0, 1, 2, 3, 4].map(level => (
@@ -692,27 +482,27 @@ export default function GitHubGraph() {
                   }}
                 />
               ))}
-              <span className="font-manga text-[#0d0d0f] opacity-30" style={{ fontSize: 9, letterSpacing: '0.12em' }}>
+              <span className="font-manga text-[color:var(--text)] opacity-30" style={{ fontSize: 9, letterSpacing: '0.12em' }}>
                 MORE
               </span>
               <div className="flex-1" />
-              <span className="font-manga text-[#0d0d0f] opacity-20" style={{ fontSize: 9, letterSpacing: '0.15em' }}>
+              <span className="font-manga text-[color:var(--text)] opacity-20" style={{ fontSize: 9, letterSpacing: '0.15em' }}>
                 {GITHUB_USERNAME} · HOVER TO INSPECT
               </span>
-              <span className="font-manga text-[#0d0d0f] opacity-25" style={{ fontSize: 9, letterSpacing: '0.12em' }}>·</span>
-              <div style={{ width: 12, height: 12, borderRadius: 2, border: '2px solid rgba(13,13,15,0.6)', background: 'rgba(13,13,15,0.05)' }} />
-              <span className="font-manga text-[#0d0d0f] opacity-25" style={{ fontSize: 9, letterSpacing: '0.12em' }}>TODAY</span>
+              <span className="font-manga text-[color:var(--text)] opacity-25" style={{ fontSize: 9, letterSpacing: '0.12em' }}>·</span>
+              <div style={{ width: 12, height: 12, borderRadius: 2, border: '2px solid var(--text-muted)', background: 'color-mix(in srgb, var(--text) 8%, transparent)' }} />
+              <span className="font-manga text-[color:var(--text)] opacity-25" style={{ fontSize: 9, letterSpacing: '0.12em' }}>TODAY</span>
             </div>
           </div>
 
             {/* Peak Days — right side, same row as grid */}
             <div
               className="flex-shrink-0 p-6 md:p-8 flex flex-col justify-center"
-              style={{ borderLeft: '3px solid #0d0d0f', minWidth: 220 }}
+              style={{ borderLeft: '3px solid var(--line-strong)', minWidth: 220 }}
             >
               <div className="flex items-center gap-3 mb-5">
-                <div style={{ border: '1.5px solid #0d0d0f', padding: '2px 10px', background: '#0d0d0f', display: 'inline-block' }}>
-                  <span className="font-manga text-white" style={{ fontSize: 9, letterSpacing: '0.15em' }}>PEAK DAYS</span>
+                <div style={{ border: '1.5px solid var(--line-strong)', padding: '2px 10px', background: 'var(--reverse-bg)', display: 'inline-block' }}>
+                  <span className="font-manga text-[color:var(--reverse-text)]" style={{ fontSize: 9, letterSpacing: '0.15em' }}>PEAK DAYS</span>
                 </div>
               </div>
               <div className="flex flex-col gap-2">
@@ -720,19 +510,19 @@ export default function GitHubGraph() {
                   const pct = (dowData[i] / maxDow) * 100
                   return (
                     <div key={label} className="flex items-center gap-3">
-                      <span className="font-manga text-[#0d0d0f]" style={{ fontSize: 9, letterSpacing: '0.08em', opacity: 0.45, width: 28, flexShrink: 0 }}>
+                      <span className="font-manga text-[color:var(--text)]" style={{ fontSize: 9, letterSpacing: '0.08em', opacity: 0.45, width: 28, flexShrink: 0 }}>
                         {label}
                       </span>
-                      <div className="flex-1 relative" style={{ height: 10, background: 'rgba(13,13,15,0.07)', border: '1px solid rgba(13,13,15,0.1)' }}>
+                      <div className="flex-1 relative" style={{ height: 10, background: 'var(--line)', border: '1px solid var(--line)' }}>
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${pct}%` }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.7, delay: i * 0.05, ease: 'easeOut' }}
-                          style={{ height: '100%', background: pct > 80 ? '#0d0d0f' : `rgba(13,13,15,${0.2 + pct * 0.006})` }}
+                          style={{ height: '100%', background: pct > 80 ? 'var(--text)' : 'var(--text-muted)' }}
                         />
                       </div>
-                      <span className="font-manga text-[#0d0d0f]" style={{ fontSize: 9, opacity: 0.3, width: 24, textAlign: 'right', flexShrink: 0 }}>
+                      <span className="font-manga text-[color:var(--text)]" style={{ fontSize: 9, opacity: 0.3, width: 24, textAlign: 'right', flexShrink: 0 }}>
                         {dowData[i]}
                       </span>
                     </div>
@@ -750,31 +540,31 @@ export default function GitHubGraph() {
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
-                style={{ borderBottom: '3px solid #0d0d0f' }}
+                style={{ borderBottom: '3px solid var(--line-strong)' }}
               >
-                <div className="flex items-center gap-6 px-8 py-4" style={{ background: '#0d0d0f' }}>
+                <div className="flex items-center gap-6 px-8 py-4" style={{ background: 'var(--reverse-bg)' }}>
                   <div
                     style={{
-                      border: '1.5px solid rgba(255,255,255,0.15)',
+                      border: '1.5px solid var(--reverse-line)',
                       padding: '2px 10px',
                     }}
                   >
-                    <span className="font-manga text-white opacity-40" style={{ fontSize: 9, letterSpacing: '0.2em' }}>
+                    <span className="font-manga text-[color:var(--reverse-text)] opacity-40" style={{ fontSize: 9, letterSpacing: '0.2em' }}>
                       SELECTED
                     </span>
                   </div>
-                  <span className="font-manga text-white" style={{ fontSize: 18, letterSpacing: '0.08em' }}>
+                  <span className="font-manga text-[color:var(--reverse-text)]" style={{ fontSize: 18, letterSpacing: '0.08em' }}>
                     {selectedDay.count} COMMIT{selectedDay.count !== 1 ? 'S' : ''}
                   </span>
-                  <span className="font-body text-white opacity-40" style={{ fontSize: 13 }}>
+                  <span className="font-body text-[color:var(--reverse-text-muted)]" style={{ fontSize: 13 }}>
                     {selectedDay.date}
                   </span>
-                  <span className="font-manga text-white opacity-30" style={{ fontSize: 11, letterSpacing: '0.15em' }}>
+                  <span className="font-manga text-[color:var(--reverse-text)] opacity-30" style={{ fontSize: 11, letterSpacing: '0.15em' }}>
                     ★ {INTENSITY[getLevel(selectedDay.count)].label}
                   </span>
                   <button
                     onClick={() => setSelectedDay(null)}
-                    className="ml-auto font-manga text-white opacity-30 hover:opacity-60 transition-opacity"
+                    className="ml-auto font-manga text-[color:var(--reverse-text)] opacity-30 hover:opacity-60 transition-opacity"
                     style={{ fontSize: 11, letterSpacing: '0.1em', cursor: 'none' }}
                   >
                     CLOSE ×
@@ -787,16 +577,16 @@ export default function GitHubGraph() {
           {/* ── Footer strip ── */}
           <div
             className="flex items-center justify-between px-8 py-3"
-            style={{ borderTop: '2px solid rgba(13,13,15,0.12)', background: 'rgba(13,13,15,0.03)' }}
+            style={{ borderTop: '2px solid var(--line)', background: 'var(--surface)' }}
           >
-            <span className="font-manga text-[#0d0d0f] opacity-25" style={{ fontSize: 9, letterSpacing: '0.2em' }}>
+            <span className="font-manga text-[color:var(--text)] opacity-25" style={{ fontSize: 9, letterSpacing: '0.2em' }}>
               DATA VIA GITHUB CONTRIBUTIONS API
             </span>
             <a
               href={`https://github.com/${GITHUB_USERNAME}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-manga text-[#0d0d0f] opacity-40 hover:opacity-80 transition-opacity"
+              className="font-manga text-[color:var(--text)] opacity-40 hover:opacity-80 transition-opacity"
               style={{ fontSize: 10, letterSpacing: '0.15em', cursor: 'none' }}
             >
               @{GITHUB_USERNAME} →

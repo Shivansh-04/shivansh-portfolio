@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { animate, stagger } from "animejs";
-import GlitchText from "../components/ReactBits/glitchTxt";
+// import GlitchText from "../components/ReactBits/glitchTxt";
 import FlowingMenu from "../components/ReactBits/FlowingMenu";
 
 const PHOTO_SRC = "/hero.png";
@@ -206,14 +206,14 @@ export default function Hero() {
                 lineHeight: 0.9,
               }}
             >
-              <GlitchText
+              {/* <GlitchText
                 speed={0.9}
                 enableShadows={true}
                 enableOnHover={false}
                 className="hero-glitch"
-              >
+              > */}
                 SHIVANSH
-              </GlitchText>
+              {/* </GlitchText> */}
             </h1>
 
             {/* Subtitle */}

@@ -68,9 +68,9 @@ const STATS = [
 ];
 
 const RANK_STYLES = {
-  S: { bg: "#0d0d0f", text: "#f8f4ec", glow: "rgba(13,13,15,0.15)" },
-  A: { bg: "#292524", text: "#f8f4ec", glow: "rgba(41,37,36,0.2)" },
-  B: { bg: "#f0ebe0", text: "#0d0d0f", glow: "rgba(240,235,224,0.75)" },
+  S: { bg: "var(--reverse-bg)", text: "var(--reverse-text)" },
+  A: { bg: "var(--reverse-bg)", text: "var(--reverse-text)" },
+  B: { bg: "var(--surface-2)", text: "var(--text)" },
 };
 
 const SKILL_RENDER = [
@@ -114,17 +114,17 @@ function LiveSkillRender() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="relative w-full overflow-hidden rounded-[20px] border-[3px] border-[#0d0d0f] bg-[#f8f4ec] p-4"
-      style={{ boxShadow: "6px 6px 0 rgba(13,13,15,0.16)" }}
+      className="relative w-full overflow-hidden rounded-[20px] border-[3px] border-[color:var(--line-strong)] bg-[color:var(--surface)] p-4"
+      style={{ boxShadow: "6px 6px 0 var(--shadow)" }}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(13,13,15,0.08),_transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_var(--line),_transparent_55%)]" />
       <motion.div
         className="absolute inset-0 opacity-30"
         animate={{ rotate: [0, 360] }}
         transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
         style={{
           backgroundImage:
-            "linear-gradient(120deg, transparent 0%, rgba(13,13,15,0.07) 45%, transparent 100%)",
+            "linear-gradient(120deg, transparent 0%, var(--line) 45%, transparent 100%)",
           backgroundSize: "200% 200%",
         }}
       />
@@ -132,21 +132,21 @@ function LiveSkillRender() {
       <div className="relative flex items-start justify-between gap-2">
         <div>
           <span
-            className="block font-manga text-[#0d0d0f] opacity-35"
+            className="block font-manga text-[color:var(--text)] opacity-35"
             style={{ fontSize: 9, letterSpacing: "0.18em" }}
           >
             LIVE POWER CORE
           </span>
           <span
-            className="mt-1 block font-manga text-[#0d0d0f]"
+            className="mt-1 block font-manga text-[color:var(--text)]"
             style={{ fontSize: 18, letterSpacing: "0.05em", lineHeight: 1 }}
           >
             POWER SCAN
           </span>
         </div>
         <div
-          className="rounded-full border-[2px] border-[#0d0d0f] px-2.5 py-1 flex-shrink-0"
-          style={{ background: "#0d0d0f", color: "#f8f4ec" }}
+          className="rounded-full border-[2px] border-[color:var(--line-strong)] px-2.5 py-1 flex-shrink-0"
+          style={{ background: "var(--reverse-bg)", color: "var(--reverse-text)" }}
         >
           <span className="font-manga" style={{ fontSize: 10, letterSpacing: "0.14em" }}>
             A+
@@ -161,7 +161,7 @@ function LiveSkillRender() {
               getRadarPoint(scale * 100, index, SKILL_RENDER.length, size),
             ).join(" ");
             return (
-              <polygon key={scale} points={ring} fill="none" stroke="rgba(13,13,15,0.14)" strokeWidth="1" />
+              <polygon key={scale} points={ring} fill="none" stroke="var(--line)" strokeWidth="1" />
             );
           })}
 
@@ -172,15 +172,15 @@ function LiveSkillRender() {
               y1={size / 2}
               x2={getRadarPoint(100, index, SKILL_RENDER.length, size).split(",")[0]}
               y2={getRadarPoint(100, index, SKILL_RENDER.length, size).split(",")[1]}
-              stroke="rgba(13,13,15,0.12)"
+              stroke="var(--line)"
               strokeWidth="1"
             />
           ))}
 
           <motion.polygon
             points={polygon}
-            fill="rgba(13,13,15,0.16)"
-            stroke="#0d0d0f"
+            fill="var(--line)"
+            stroke="var(--text)"
             strokeWidth="2.5"
             initial={{ opacity: 0, scale: 0.75, transformOrigin: "center" }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -196,7 +196,7 @@ function LiveSkillRender() {
                 cx={cx}
                 cy={cy}
                 r="3.5"
-                fill="#0d0d0f"
+                fill="var(--text)"
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
@@ -214,10 +214,10 @@ function LiveSkillRender() {
               className="absolute -translate-x-1/2 -translate-y-1/2 text-center"
               style={{ left: pos.left, top: pos.top, width: 54 }}
             >
-              <span className="block font-manga text-[#0d0d0f]" style={{ fontSize: 8, letterSpacing: "0.06em" }}>
+              <span className="block font-manga text-[color:var(--text)]" style={{ fontSize: 8, letterSpacing: "0.06em" }}>
                 {stat.label}
               </span>
-              <span className="block font-manga text-[#0d0d0f] opacity-35" style={{ fontSize: 8 }}>
+              <span className="block font-manga text-[color:var(--text)] opacity-35" style={{ fontSize: 8 }}>
                 {stat.value}
               </span>
             </div>
@@ -233,8 +233,8 @@ function LiveSkillRender() {
         ].map(([label, value], index) => (
           <div
             key={label}
-            className="rounded-[12px] border-[2px] border-[#0d0d0f] px-2 py-1.5"
-            style={{ background: index === 1 ? "#0d0d0f" : "white", color: index === 1 ? "white" : "#0d0d0f" }}
+            className="rounded-[12px] border-[2px] border-[color:var(--line-strong)] px-2 py-1.5"
+            style={{ background: index === 1 ? "var(--reverse-bg)" : "var(--surface-2)", color: index === 1 ? "var(--reverse-text)" : "var(--text)" }}
           >
             <span className="block font-manga opacity-40" style={{ fontSize: 8, letterSpacing: "0.1em" }}>
               {label}
@@ -259,25 +259,25 @@ function SkillCard({ skill, index }) {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.06 * index, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -4, scale: 1.01, boxShadow: "6px 6px 0 rgba(13,13,15,0.16)" }}
-      className="group relative overflow-hidden rounded-[22px] border-[2px] border-[#0d0d0f] bg-[#f8f4ec] p-4 shadow-[4px_4px_0_rgba(13,13,15,0.16)]"
+      whileHover={{ y: -4, scale: 1.01, boxShadow: "6px 6px 0 var(--shadow)" }}
+      className="group relative overflow-hidden rounded-[22px] border-[2px] border-[color:var(--line-strong)] bg-[color:var(--surface)] p-4 shadow-[4px_4px_0_var(--shadow)]"
     >
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,_transparent_0%,_rgba(13,13,15,0.05)_100%)] opacity-60" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,_transparent_0%,_var(--line)_100%)] opacity-60" />
       <div className="relative flex items-center gap-3">
         <div
-          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-[2px] border-[#0d0d0f] font-manga"
+          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-[2px] border-[color:var(--line-strong)] font-manga"
           style={{ background: rankStyle.bg, color: rankStyle.text }}
         >
           {skill.rank}
         </div>
 
-        <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-[14px] border-[2px] border-[#0d0d0f] bg-white">
-          <Icon size={20} color="#0d0d0f" />
+        <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-[14px] border-[2px] border-[color:var(--line-strong)] bg-[color:var(--surface-2)]">
+          <Icon size={20} color="var(--text)" />
         </div>
 
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-3">
-            <span className="font-manga text-[#0d0d0f]" style={{ fontSize: 14, letterSpacing: "0.06em" }}>
+            <span className="font-manga text-[color:var(--text)]" style={{ fontSize: 14, letterSpacing: "0.06em" }}>
               {skill.name}
             </span>
             <motion.span
@@ -285,19 +285,19 @@ function SkillCard({ skill, index }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: barDelay, duration: 0.3 }}
-              style={{ fontSize: 12, color: "rgba(13,13,15,0.42)", letterSpacing: "0.1em" }}
+              style={{ fontSize: 12, color: "var(--text-muted)", letterSpacing: "0.1em" }}
             >
               {skill.level}/100
             </motion.span>
           </div>
 
           <div
-            className="mt-2 h-2.5 w-full overflow-hidden rounded-full border border-[rgba(13,13,15,0.18)]"
-            style={{ background: "rgba(13,13,15,0.08)" }}
+            className="mt-2 h-2.5 w-full overflow-hidden rounded-full border border-[color:var(--line)]"
+            style={{ background: "var(--line)" }}
           >
             <motion.div
               className="h-full rounded-full"
-              style={{ background: "#0d0d0f" }}
+              style={{ background: "var(--text)" }}
               initial={{ width: "0%" }}
               animate={{ width: `${skill.level}%` }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: barDelay }}
@@ -348,8 +348,8 @@ export default function Skills() {
     <div
       ref={sectionRef}
       id="skills"
-      className="relative w-full overflow-hidden bg-[#f0ebe0]"
-      style={{ borderBottom: "3px solid #0d0d0f" }}
+      className="relative w-full overflow-hidden bg-[color:var(--bg)]"
+      style={{ borderBottom: "3px solid var(--line-strong)" }}
     >
       <div ref={burstRef} className="pointer-events-none absolute inset-x-0 top-0 h-44 opacity-50" style={{ zIndex: 0 }}>
         <svg width="100%" height="100%" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMid slice">
@@ -366,7 +366,7 @@ export default function Skills() {
                 y1={cy}
                 x2={cx + Math.cos(rad) * len}
                 y2={cy + Math.sin(rad) * len}
-                stroke="rgba(13,13,15,0.12)"
+                stroke="var(--line)"
                 strokeWidth={i % 3 === 0 ? "2" : "1"}
                 strokeDasharray="480"
                 strokeDashoffset="480"
@@ -376,20 +376,20 @@ export default function Skills() {
         </svg>
       </div>
 
-      <div className="relative z-10 w-full overflow-hidden" style={{ borderBottom: "3px solid #0d0d0f" }}>
+      <div className="relative z-10 w-full overflow-hidden" style={{ borderBottom: "3px solid var(--line-strong)" }}>
         <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4 md:px-8 md:py-5">
           <div className="flex items-center gap-3">
-            <div className="rounded-full border-[2px] border-[#0d0d0f] bg-[#0d0d0f] px-3 py-1">
-              <span className="font-manga text-white" style={{ fontSize: 10, letterSpacing: "0.2em" }}>
+            <div className="rounded-full border-[2px] border-[color:var(--line-strong)] bg-[color:var(--reverse-bg)] px-3 py-1">
+              <span className="font-manga text-[color:var(--reverse-text)]" style={{ fontSize: 10, letterSpacing: "0.2em" }}>
                 CHAPTER 05
               </span>
             </div>
-            <h2 className="font-manga tracking-wide text-[#0d0d0f]" style={{ fontSize: "clamp(22px, 4vw, 40px)" }}>
+            <h2 className="font-manga tracking-wide text-[color:var(--text)]" style={{ fontSize: "clamp(22px, 4vw, 40px)" }}>
               SKILL MATRIX
             </h2>
           </div>
-          <div className="rounded-full border-[2px] border-[#0d0d0f] bg-[#f8f4ec] px-4 py-2">
-            <span className="font-manga text-[#0d0d0f]" style={{ fontSize: 11, letterSpacing: "0.18em" }}>
+          <div className="rounded-full border-[2px] border-[color:var(--line-strong)] bg-[color:var(--surface)] px-4 py-2">
+            <span className="font-manga text-[color:var(--text)]" style={{ fontSize: 11, letterSpacing: "0.18em" }}>
               OVERALL · A+
             </span>
           </div>
@@ -397,7 +397,7 @@ export default function Skills() {
       </div>
 
       <div className="relative z-10 grid gap-0 xl:grid-cols-[10%_70%_20%]">
-        <div className="border-b-[2px] xl:border-b-0 xl:border-r-[2px] border-[#0d0d0f]">
+        <div className="border-b-[2px] xl:border-b-0 xl:border-r-[2px] border-[color:var(--line-strong)]">
           <div className="flex flex-row xl:flex-col overflow-x-auto xl:overflow-visible">
             {STATS.map((cat, i) => (
               <motion.button
@@ -406,11 +406,11 @@ export default function Skills() {
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setActiveCategory(i)}
                 className={`relative flex flex-col items-start px-4 py-4 xl:py-5 text-left flex-shrink-0 ${
-                  i < STATS.length - 1 ? "border-r-[2px] xl:border-r-0 xl:border-b-[2px] border-[#0d0d0f]" : ""
+                  i < STATS.length - 1 ? "border-r-[2px] xl:border-r-0 xl:border-b-[2px] border-[color:var(--line-strong)]" : ""
                 }`}
                 style={{
-                  background: activeCategory === i ? "#0d0d0f" : "transparent",
-                  color: activeCategory === i ? "white" : "#0d0d0f",
+                  background: activeCategory === i ? "var(--reverse-bg)" : "transparent",
+                  color: activeCategory === i ? "var(--reverse-text)" : "var(--text)",
                   cursor: "pointer",
                 }}
               >
@@ -421,26 +421,26 @@ export default function Skills() {
                   {cat.category}
                 </span>
                 {activeCategory === i && (
-                  <motion.div layoutId="category-indicator" className="absolute right-0 top-0 bottom-0 w-1" style={{ background: "white" }} />
+                  <motion.div layoutId="category-indicator" className="absolute right-0 top-0 bottom-0 w-1" style={{ background: "var(--reverse-text)" }} />
                 )}
               </motion.button>
             ))}
           </div>
         </div>
 
-        <div className="border-b-[2px] xl:border-b-0 xl:border-r-[2px] border-[#0d0d0f] p-6 md:p-8">
-          <div className="mb-6 rounded-[20px] border-[2px] border-[#0d0d0f] bg-[#0d0d0f] px-5 py-4">
+        <div className="border-b-[2px] xl:border-b-0 xl:border-r-[2px] border-[color:var(--line-strong)] p-6 md:p-8">
+          <div className="mb-6 rounded-[20px] border-[2px] border-[color:var(--line-strong)] bg-[color:var(--reverse-bg)] px-5 py-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <span className="block font-manga text-white" style={{ fontSize: 12, letterSpacing: "0.16em" }}>
+                <span className="block font-manga text-[color:var(--reverse-text)]" style={{ fontSize: 12, letterSpacing: "0.16em" }}>
                   {active.category} · {active.skills.length} SKILLS
                 </span>
-                <p className="mt-1 text-sm text-white/70" style={{ fontStyle: "italic" }}>
+                <p className="mt-1 text-sm text-[color:var(--reverse-text-muted)]" style={{ fontStyle: "italic" }}>
                   {active.summary}
                 </p>
               </div>
-              <div className="rounded-full border border-white/20 bg-white/10 px-3 py-1">
-                <span className="font-manga text-white" style={{ fontSize: 10, letterSpacing: "0.16em" }}>
+              <div className="rounded-full border border-[color:var(--reverse-line)] bg-[color:var(--reverse-line)] px-3 py-1">
+                <span className="font-manga text-[color:var(--reverse-text)]" style={{ fontSize: 10, letterSpacing: "0.16em" }}>
                   SHIVANSH · LVL 3
                 </span>
               </div>
@@ -462,12 +462,12 @@ export default function Skills() {
             </motion.div>
           </AnimatePresence>
 
-          <div className="mt-6 rounded-[20px] border-[1.5px] border-[rgba(13,13,15,0.18)] bg-[rgba(13,13,15,0.04)] px-4 py-3">
+          <div className="mt-6 rounded-[20px] border-[1.5px] border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3">
             <div className="flex items-center gap-2">
-              <span className="font-manga text-[#0d0d0f] opacity-35" style={{ fontSize: 10, letterSpacing: "0.2em" }}>
+              <span className="font-manga text-[color:var(--text)] opacity-35" style={{ fontSize: 10, letterSpacing: "0.2em" }}>
                 DEV NOTE
               </span>
-              <span className="text-[12px] text-[rgba(13,13,15,0.55)]" style={{ fontStyle: "italic" }}>
+              <span className="text-[12px] text-[color:var(--text-muted)]" style={{ fontStyle: "italic" }}>
                 These stats reflect hands-on build experience, not just tutorials.
               </span>
             </div>

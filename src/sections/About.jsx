@@ -13,25 +13,25 @@ export default function About() {
       id="about"
       className="relative w-full paper-bg"
       style={{
-        borderTop: "3px solid #0d0d0f",
-        borderBottom: "3px solid #0d0d0f",
+        borderTop: "3px solid var(--line-strong)",
+        borderBottom: "3px solid var(--line-strong)",
       }}
     >
       {/* Chapter title card */}
       <div
         className="w-full flex items-center gap-0 overflow-hidden"
-        style={{ borderBottom: "3px solid #0d0d0f" }}
+        style={{ borderBottom: "3px solid var(--line-strong)" }}
       >
         <div
           className="px-8 py-4 flex items-center gap-4"
           style={{
-            borderRight: "3px solid #0d0d0f",
-            background: "#0d0d0f",
+            borderRight: "3px solid var(--line-strong)",
+            background: "var(--reverse-bg)",
             minWidth: "fit-content",
           }}
         >
           <span
-            className="font-manga text-white tracking-widest"
+            className="font-manga text-[color:var(--reverse-text)] tracking-widest"
             style={{ fontSize: 13 }}
           >
             CHAPTER 02
@@ -46,7 +46,7 @@ export default function About() {
             className="font-manga tracking-wide"
             style={{
               fontSize: "clamp(24px, 4vw, 42px)",
-              color: "#0d0d0f",
+              color: "var(--text)",
               whiteSpace: "nowrap",
             }}
           >
@@ -67,8 +67,8 @@ export default function About() {
           style={{
             width: "100%",
             maxWidth: "420px",
-            borderRight: "3px solid #0d0d0f",
-            background: "#f8f4ec",
+            borderRight: "3px solid var(--line-strong)",
+            background: "var(--surface)",
             minHeight: "420px",
           }}
         >
@@ -76,13 +76,13 @@ export default function About() {
           <div
             className="absolute top-4 left-4 z-10"
             style={{
-              border: "1.5px solid #0d0d0f",
+              border: "1.5px solid var(--line-strong)",
               padding: "2px 10px",
-              background: "#0d0d0f",
+              background: "var(--reverse-bg)",
             }}
           >
             <span
-              className="font-manga text-white"
+              className="font-manga text-[color:var(--reverse-text)]"
               style={{ fontSize: 10, letterSpacing: "0.15em" }}
             >
               PANEL A
@@ -94,7 +94,7 @@ export default function About() {
             className="absolute inset-0 opacity-30"
             style={{
               backgroundImage:
-                "radial-gradient(circle, #0d0d0f 1px, transparent 1px)",
+                "radial-gradient(circle, var(--text) 1px, transparent 1px)",
               backgroundSize: "12px 12px",
             }}
           />
@@ -111,7 +111,7 @@ export default function About() {
           <div className="absolute top-4 right-3 z-20">
             <div className="speech-bubble" style={{ maxWidth: 140 }}>
               <p
-                className="font-manga text-[#0d0d0f]"
+                className="font-manga text-[color:var(--text)]"
                 style={{ fontSize: 13, lineHeight: 1.4 }}
               >
                 Let's build something.
@@ -127,19 +127,19 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.15 }}
           className="relative flex-1 flex flex-col p-8 md:p-12"
-          style={{ background: "#f0ebe0", gap: 24 }}
+          style={{ background: "var(--bg)", gap: 24 }}
         >
           {/* Panel label */}
           <div
             className="absolute top-4 left-4 z-10"
             style={{
-              border: "1.5px solid #0d0d0f",
+              border: "1.5px solid var(--line-strong)",
               padding: "2px 10px",
-              background: "#0d0d0f",
+              background: "var(--reverse-bg)",
             }}
           >
             <span
-              className="font-manga text-white"
+              className="font-manga text-[color:var(--reverse-text)]"
               style={{ fontSize: 10, letterSpacing: "0.15em" }}
             >
               PANEL B
@@ -150,7 +150,7 @@ export default function About() {
             {/* Section label */}
             <div>
               <span
-                className="font-manga text-[#0d0d0f] opacity-30"
+                className="font-manga text-[color:var(--text)] opacity-30"
                 style={{ fontSize: 11, letterSpacing: "0.2em" }}
               >
                 001 — ABOUT
@@ -162,7 +162,7 @@ export default function About() {
               <p
                 className="font-body"
                 style={{
-                  color: "rgba(13,13,15,0.75)",
+                  color: "var(--text-muted)",
                   lineHeight: 1.85,
                   fontSize: 15,
                 }}
@@ -174,7 +174,7 @@ export default function About() {
               <p
                 className="font-body"
                 style={{
-                  color: "rgba(13,13,15,0.5)",
+                  color: "var(--text-muted)",
                   lineHeight: 1.85,
                   fontSize: 15,
                 }}
@@ -185,9 +185,9 @@ export default function About() {
             </div>
 
             {/* Currently working on — ink panel style */}
-            <div className="ink-panel p-5" style={{ background: "#0d0d0f" }}>
+            <div className="ink-panel p-5" style={{ background: "var(--reverse-bg)" }}>
               <span
-                className="font-manga text-white opacity-50 block mb-2"
+                className="font-manga text-[color:var(--reverse-text)] opacity-50 block mb-2"
                 style={{ fontSize: 10, letterSpacing: "0.2em" }}
               >
                 CURRENTLY WORKING ON
@@ -197,7 +197,7 @@ export default function About() {
                   className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse-dot"
                   style={{ background: "#4ade80" }}
                 />
-                <p className="font-body text-white text-[14px] leading-snug">
+                <p className="font-body text-[color:var(--reverse-text)] text-[14px] leading-snug">
                   SurakshaSetu — AI-powered crime reporting platform
                 </p>
               </div>
@@ -215,10 +215,10 @@ export default function About() {
                   whileHover={{ y: -2 }}
                   className="flex items-center gap-2 px-3 py-1.5 font-body text-[12px]"
                   style={{
-                    border: "1.5px solid #0d0d0f",
-                    background: "white",
-                    color: "#0d0d0f",
-                    boxShadow: "2px 2px 0px #0d0d0f",
+                    border: "1.5px solid var(--line-strong)",
+                    background: "var(--surface-2)",
+                    color: "var(--text)",
+                    boxShadow: "2px 2px 0px var(--line-strong)",
                     cursor: "default",
                   }}
                 >
@@ -232,7 +232,7 @@ export default function About() {
           {/* Bottom-right panel decoration */}
           <div
             className="absolute bottom-4 right-4 font-manga opacity-10"
-            style={{ fontSize: 11, color: "#0d0d0f", letterSpacing: "0.1em" }}
+            style={{ fontSize: 11, color: "var(--text)", letterSpacing: "0.1em" }}
           >
             PANEL B · 02
           </div>

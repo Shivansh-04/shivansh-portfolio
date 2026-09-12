@@ -10,7 +10,7 @@ const BADGES = [
     subtitle: "200+ problems solved",
     detail: "Consistent problem solving across LeetCode and CodeChef.",
     Icon: Target,
-    tone: "#0d0d0f",
+    tone: "var(--reverse-bg)",
     invert: true,
   },
   {
@@ -19,7 +19,7 @@ const BADGES = [
     subtitle: "MERN builds in production",
     detail: "Portfolio projects move beyond tutorials into complete product thinking.",
     Icon: Rocket,
-    tone: "#f8f4ec",
+    tone: "var(--surface)",
     invert: false,
   },
   {
@@ -28,7 +28,7 @@ const BADGES = [
     subtitle: "GSoC preparation in motion",
     detail: "Reading codebases, building context, and preparing for open source contribution.",
     Icon: Sparkles,
-    tone: "#0d0d0f",
+    tone: "var(--reverse-bg)",
     invert: true,
   },
 ];
@@ -40,9 +40,9 @@ const STAMPS = [
 ];
 
 function BadgeCard({ badge }) {
-  const text = badge.invert ? "white" : "#0d0d0f";
-  const sub = badge.invert ? "rgba(255,255,255,0.5)" : "rgba(13,13,15,0.45)";
-  const border = badge.invert ? "rgba(255,255,255,0.14)" : "#0d0d0f";
+  const text = badge.invert ? "var(--reverse-text)" : "var(--text)";
+  const sub = badge.invert ? "var(--reverse-text-muted)" : "var(--text-muted)";
+  const border = badge.invert ? "var(--reverse-line)" : "var(--line-strong)";
 
   return (
     <div
@@ -51,9 +51,7 @@ function BadgeCard({ badge }) {
         background: badge.tone,
         color: text,
         border: `2px solid ${border}`,
-        boxShadow: badge.invert
-          ? "4px 4px 0px rgba(255,255,255,0.08)"
-          : "4px 4px 0px rgba(13,13,15,0.18)",
+        boxShadow: "4px 4px 0px var(--shadow)",
         opacity: 1,
         transform: "scale(1) rotate(0deg)",
       }}
@@ -63,7 +61,7 @@ function BadgeCard({ badge }) {
         style={{
           border: `1.5px solid ${border}`,
           padding: "2px 8px",
-          background: badge.invert ? "rgba(255,255,255,0.08)" : "#0d0d0f",
+          background: badge.invert ? "var(--reverse-line)" : "var(--reverse-bg)",
           opacity: 1,
           transform: "scale(1)",
         }}
@@ -73,7 +71,7 @@ function BadgeCard({ badge }) {
           style={{
             fontSize: 9,
             letterSpacing: "0.18em",
-            color: "white",
+            color: "var(--reverse-text)",
             opacity: badge.invert ? 0.75 : 1,
           }}
         >
@@ -84,7 +82,7 @@ function BadgeCard({ badge }) {
       <div
         className="achievement-ring pointer-events-none absolute inset-0"
         style={{
-          border: `2px solid ${badge.invert ? "rgba(255,255,255,0.18)" : "rgba(13,13,15,0.18)"}`,
+          border: `2px solid ${badge.invert ? "var(--reverse-line)" : "var(--line)"}`,
           opacity: 0,
           transform: "scale(0.75)",
         }}
@@ -125,7 +123,7 @@ function BadgeCard({ badge }) {
             className="mt-auto pt-4"
             style={{
               borderTop: `1px solid ${
-                badge.invert ? "rgba(255,255,255,0.12)" : "rgba(13,13,15,0.12)"
+                badge.invert ? "var(--reverse-line)" : "var(--line)"
               }`,
             }}
           >
@@ -134,7 +132,7 @@ function BadgeCard({ badge }) {
               style={{
                 fontSize: 12,
                 lineHeight: 1.7,
-                color: badge.invert ? "rgba(255,255,255,0.7)" : "rgba(13,13,15,0.65)",
+                color: badge.invert ? "var(--reverse-text-muted)" : "var(--text-muted)",
                 opacity: 1,
               }}
             >
@@ -149,7 +147,7 @@ function BadgeCard({ badge }) {
             width: 52,
             height: 52,
             border: `2px solid ${border}`,
-            background: badge.invert ? "rgba(255,255,255,0.08)" : "white",
+            background: badge.invert ? "var(--reverse-line)" : "var(--surface-2)",
             opacity: 1,
             transform: "scale(1)",
           }}
@@ -305,7 +303,7 @@ export default function AchievementWall() {
       id="achievements"
       ref={sectionRef}
       className="relative w-full paper-bg overflow-hidden"
-      style={{ borderBottom: "3px solid #0d0d0f" }}
+      style={{ borderBottom: "3px solid var(--line-strong)" }}
     >
       <div
         ref={linesRef}
@@ -326,7 +324,7 @@ export default function AchievementWall() {
                 y1={cy}
                 x2={cx + Math.cos(rad) * len}
                 y2={cy + Math.sin(rad) * len}
-                stroke="rgba(13,13,15,0.14)"
+                stroke="var(--line)"
                 strokeWidth={i % 4 === 0 ? "2" : "1"}
                 strokeDasharray="700"
                 strokeDashoffset="700"
@@ -338,14 +336,14 @@ export default function AchievementWall() {
 
       <div
         className="relative z-10 w-full flex items-center overflow-hidden"
-        style={{ borderBottom: "3px solid #0d0d0f" }}
+        style={{ borderBottom: "3px solid var(--line-strong)" }}
       >
         <div
           className="px-8 py-4 flex-shrink-0"
-          style={{ borderRight: "3px solid #0d0d0f", background: "#0d0d0f" }}
+          style={{ borderRight: "3px solid var(--line-strong)", background: "var(--reverse-bg)" }}
         >
           <span
-            className="font-manga text-white tracking-widest"
+            className="font-manga text-[color:var(--reverse-text)] tracking-widest"
             style={{ fontSize: 13 }}
           >
             BONUS STAGE
@@ -358,7 +356,7 @@ export default function AchievementWall() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="font-manga tracking-wide"
-            style={{ fontSize: "clamp(22px, 4vw, 42px)", color: "#0d0d0f" }}
+            style={{ fontSize: "clamp(22px, 4vw, 42px)", color: "var(--text)" }}
           >
             ACHIEVEMENTS & BADGE WALL
           </motion.h2>
@@ -367,15 +365,15 @@ export default function AchievementWall() {
 
       <div
         className="relative z-10 grid grid-cols-1 md:grid-cols-3"
-        style={{ borderBottom: "3px solid #0d0d0f" }}
+        style={{ borderBottom: "3px solid var(--line-strong)" }}
       >
         {BADGES.map((badge, index) => (
           <div
             key={badge.code}
             className="h-full"
             style={{
-              borderRight: index < BADGES.length - 1 ? "1.5px solid #0d0d0f" : "none",
-              borderLeft: index === 0 ? "3px solid #0d0d0f" : "none",
+              borderRight: index < BADGES.length - 1 ? "1.5px solid var(--line-strong)" : "none",
+              borderLeft: index === 0 ? "3px solid var(--line-strong)" : "none",
             }}
           >
             <BadgeCard badge={badge} />
@@ -391,17 +389,17 @@ export default function AchievementWall() {
           transition={{ duration: 0.5 }}
           className="stamp-board relative p-6 md:p-8"
           style={{
-            borderRight: "3px solid #0d0d0f",
-            background: "#0d0d0f",
+            borderRight: "3px solid var(--line-strong)",
+            background: "var(--reverse-bg)",
             opacity: 1,
           }}
         >
           <div
             className="absolute top-4 left-4"
-            style={{ border: "1.5px solid rgba(255,255,255,0.18)", padding: "2px 8px" }}
+            style={{ border: "1.5px solid var(--reverse-line)", padding: "2px 8px" }}
           >
             <span
-              className="font-manga text-white opacity-50"
+              className="font-manga text-[color:var(--reverse-text)] opacity-50"
               style={{ fontSize: 9, letterSpacing: "0.18em" }}
             >
               STAMP BOARD
@@ -410,7 +408,7 @@ export default function AchievementWall() {
 
           <div className="pt-8">
             <h3
-              className="font-manga text-white"
+              className="font-manga text-[color:var(--reverse-text)]"
               style={{ fontSize: "clamp(26px, 3vw, 38px)", letterSpacing: "0.05em" }}
             >
               PROGRESS LOOKS BETTER WHEN IT FEELS EARNED.
@@ -420,7 +418,7 @@ export default function AchievementWall() {
               style={{
                 fontSize: 13,
                 lineHeight: 1.8,
-                color: "rgba(255,255,255,0.52)",
+                color: "var(--reverse-text-muted)",
                 maxWidth: 420,
               }}
             >
@@ -436,9 +434,9 @@ export default function AchievementWall() {
               key={stamp.label}
               className="stamp-item relative flex flex-col items-start justify-between p-6"
               style={{
-                borderLeft: index === 0 ? "none" : "1.5px solid #0d0d0f",
+                borderLeft: index === 0 ? "none" : "1.5px solid var(--line-strong)",
                 borderTop: "none",
-                background: index % 2 === 0 ? "#f8f4ec" : "white",
+                background: index % 2 === 0 ? "var(--surface)" : "var(--surface-2)",
                 minHeight: 220,
                 opacity: 1,
                 transform: "translateY(0px) scale(1)",
@@ -449,23 +447,23 @@ export default function AchievementWall() {
                 style={{
                   width: 48,
                   height: 48,
-                  border: "2px solid #0d0d0f",
-                  background: "#0d0d0f",
-                  boxShadow: "3px 3px 0px rgba(13,13,15,0.16)",
+                  border: "2px solid var(--line-strong)",
+                  background: "var(--reverse-bg)",
+                  boxShadow: "3px 3px 0px var(--shadow)",
                 }}
               >
-                <stamp.Icon size={20} color="white" />
+                <stamp.Icon size={20} color="var(--reverse-text)" />
               </div>
 
               <div className="mt-10">
                 <span
-                  className="font-manga text-[#0d0d0f] block"
+                  className="font-manga text-[color:var(--text)] block"
                   style={{ fontSize: 10, letterSpacing: "0.2em", opacity: 0.35 }}
                 >
                   {stamp.label}
                 </span>
                 <span
-                  className="font-manga text-[#0d0d0f] block mt-2"
+                  className="font-manga text-[color:var(--text)] block mt-2"
                   style={{ fontSize: "clamp(38px, 4vw, 54px)", lineHeight: 1 }}
                 >
                   {stamp.value}

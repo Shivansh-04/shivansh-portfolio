@@ -13,6 +13,7 @@ import ContextAwareFX from "./components/ContextAwareFX";
 import SecretTerminal from "./components/SecretTerminal";
 import IntroAnimation from "./components/IntroAnimation";
 import ToBeContinued from "./components/ToBeContinued";
+import ThemeToggle from "./components/ThemeToggle";
 
 import Hero from "./sections/Hero";
 import About from "./sections/About";
@@ -22,24 +23,25 @@ import Projects from "./sections/Projects";
 import OpenSource from "./sections/OpenSource";
 import Contact from "./sections/Contact";
 
+const getInitialTheme = () => {
+  if (typeof window === "undefined") return "paper";
+  const stored = localStorage.getItem("theme");
+  if (stored === "paper" || stored === "ink") return stored;
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches
+    ? "ink"
+    : "paper";
+};
+
 export default function App() {
   const [introComplete, setIntroComplete] = useState(false);
-  const [isDark, setIsDark] = useState(false);
-
-  const toggleTheme = () => {
-    const next = !isDark;
-
-    setIsDark(next);
-
-    document.documentElement.setAttribute(
-      "data-theme",
-      next ? "dark" : "paper"
-    );
-  };
+  const [theme, setTheme] = useState(getInitialTheme);
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", "paper");
-  }, []);
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === "ink" ? "paper" : "ink"));
 
   return (
     <>
@@ -58,6 +60,7 @@ export default function App() {
 
         <CustomCursor />
         <ContextAwareFX />
+        <ThemeToggle theme={theme} onToggle={toggleTheme} />
         {/* <SecretTerminal /> */}
         {/* <ScrollProgress /> */}
         {/* <MangaProgress /> */}
